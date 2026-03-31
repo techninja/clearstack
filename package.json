@@ -9,24 +9,19 @@
     "dev": "node --watch --env-file=.env server.js",
     "postinstall": "node scripts/vendor-deps.js",
     "test": "npm run test:node && npm run test:browser",
-    "test:node": "node --test 'src/**/*.test.js' 'server.test.js'",
-    "test:browser": "web-test-runner",
-    "test:watch": "web-test-runner --watch",
+    "test:node": "node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js",
+    "test:browser": "web-test-runner --config .configs/web-test-runner.config.js",
+    "test:watch": "web-test-runner --config .configs/web-test-runner.config.js --watch",
     "spec": "node scripts/spec.js",
     "spec:code": "node scripts/spec.js code",
     "spec:docs": "node scripts/spec.js docs",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write 'src/**/*.js' 'scripts/**/*.js' 'server.js' 'server.test.js'",
-    "format:check": "prettier --check 'src/**/*.js' 'scripts/**/*.js' 'server.js' 'server.test.js'",
-    "typecheck": "tsc --project jsconfig.json"
+    "lint": "eslint --config .configs/eslint.config.js .",
+    "lint:fix": "eslint --config .configs/eslint.config.js . --fix",
+    "format": "prettier --config .configs/.prettierrc --write src scripts server.js tests",
+    "format:check": "prettier --config .configs/.prettierrc --check src scripts server.js tests",
+    "typecheck": "tsc --project .configs/jsconfig.json"
   },
-  "keywords": [
-    "hybrids",
-    "web-components",
-    "no-build",
-    "es-modules"
-  ],
+  "keywords": ["hybrids", "web-components", "no-build", "es-modules"],
   "license": "MIT",
   "dependencies": {
     "@inquirer/prompts": "^8.3.2",

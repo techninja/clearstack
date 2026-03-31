@@ -26,12 +26,11 @@ const IGNORE = (process.env.SPEC_IGNORE_DIRS || 'node_modules,public/vendor,.git
 
 // Shared command strings — macOS needs find instead of shell globs
 const CMD = {
-  lint: 'npx eslint . --fix',
-  format: 'npx prettier --write src scripts server.js server.test.js eslint.config.js',
-  types: 'npx tsc --project jsconfig.json',
-  testNode:
-    'node --test $(find . -name "*.test.js" -not -path "./node_modules/*" -not -path "./public/*" -not -path "./src/components/*")',
-  testBrowser: 'npx web-test-runner',
+  lint: 'npx eslint --config .configs/eslint.config.js . --fix',
+  format: 'npx prettier --config .configs/.prettierrc --write src scripts server.js tests',
+  types: 'npx tsc --project .configs/jsconfig.json',
+  testNode: 'node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js',
+  testBrowser: 'npx web-test-runner --config .configs/web-test-runner.config.js',
 };
 
 const sub = process.argv[2];

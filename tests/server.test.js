@@ -4,7 +4,7 @@
 
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { start } from './server.js';
+import { start } from '../server.js';
 
 const PORT = 3001;
 const BASE = `http://localhost:${PORT}`;
