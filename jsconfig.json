@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "paths": {
+      "hybrids": ["./node_modules/hybrids/types/index.d.ts"]
+    }
+  },
+  "include": [
+    "src/**/*.js",
+    "server.js",
+    "scripts/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "public/vendor",
+    "**/*.test.js"
+  ]
+}

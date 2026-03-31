@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "p1": { "id": "p1", "name": "Website Redesign", "description": "Modernize the marketing site", "status": "active", "createdAt": "2024-01-15T09:00:00Z" },
+    "p2": { "id": "p2", "name": "API Migration", "description": "Move from REST v1 to v2", "status": "active", "createdAt": "2024-02-20T14:30:00Z" }
+  },
+  "tasks": {
+    "t1": { "id": "t1", "projectId": "p1", "title": "Design homepage mockup", "status": "done", "priority": "high", "sortOrder": 0, "createdAt": "2024-01-16T10:00:00Z" },
+    "t2": { "id": "t2", "projectId": "p1", "title": "Implement nav component", "status": "doing", "priority": "med", "sortOrder": 1, "createdAt": "2024-01-17T11:00:00Z" },
+    "t3": { "id": "t3", "projectId": "p2", "title": "Write OpenAPI spec", "status": "todo", "priority": "high", "sortOrder": 0, "createdAt": "2024-02-21T09:00:00Z" },
+    "t4": { "id": "t4", "projectId": "p2", "title": "Set up test harness", "status": "todo", "priority": "low", "sortOrder": 1, "createdAt": "2024-02-22T13:00:00Z" }
+  }
+}

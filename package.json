@@ -1,0 +1,48 @@
+{
+  "name": "hybrids-spec",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Specification and proof-of-concept for a no-build Hybrids.js web component framework",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch --env-file=.env server.js",
+    "postinstall": "node scripts/vendor-deps.js",
+    "test": "npm run test:node && npm run test:browser",
+    "test:node": "node --test 'src/**/*.test.js' 'server.test.js'",
+    "test:browser": "web-test-runner",
+    "test:watch": "web-test-runner --watch",
+    "spec": "node scripts/spec.js",
+    "spec:code": "node scripts/spec.js code",
+    "spec:docs": "node scripts/spec.js docs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write 'src/**/*.js' 'scripts/**/*.js' 'server.js' 'server.test.js'",
+    "format:check": "prettier --check 'src/**/*.js' 'scripts/**/*.js' 'server.js' 'server.test.js'",
+    "typecheck": "tsc --project jsconfig.json"
+  },
+  "keywords": [
+    "hybrids",
+    "web-components",
+    "no-build",
+    "es-modules"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/prompts": "^8.3.2",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "hybrids": "^9.1.22"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^4.0.0",
+    "@web/test-runner": "^0.20.0",
+    "@web/test-runner-playwright": "^0.11.0",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^62.8.1",
+    "playwright": "^1.50.0",
+    "prettier": "^3.8.1",
+    "typescript": "^6.0.2"
+  }
+}

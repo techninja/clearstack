@@ -1,0 +1,35 @@
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-layout-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.page-layout-brand {
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.page-layout-title {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.page-layout-content {
+  flex: 1;
+  padding: var(--space-lg);
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}

@@ -1,0 +1,19 @@
+project-view {
+  display: block;
+
+  & .project-view-nav {
+    margin-bottom: var(--space-md);
+    font-size: var(--text-sm);
+  }
+
+  & .project-view-tasks {
+    margin-top: var(--space-lg);
+  }
+
+  & .project-view-tasks-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+}

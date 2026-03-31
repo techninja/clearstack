@@ -1,0 +1,35 @@
+form-field {
+  display: block;
+
+  & .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  & .form-field-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  & .required .form-field-label::after {
+    content: ' *';
+    color: var(--color-danger);
+  }
+
+  & input,
+  & select,
+  & textarea {
+    width: 100%;
+  }
+
+  & input[type='checkbox'] {
+    width: auto;
+  }
+
+  & .form-field-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+}

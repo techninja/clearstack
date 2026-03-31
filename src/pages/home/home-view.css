@@ -1,0 +1,21 @@
+home-view {
+  display: block;
+
+  & .home-view-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+  }
+
+  & .home-view-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+
+    & a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}

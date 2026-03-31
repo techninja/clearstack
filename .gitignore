@@ -1,0 +1,6 @@
+node_modules/
+public/vendor/
+data/db.json
+.env.local
+
+.DS_Store

@@ -1,0 +1,68 @@
+/**
+ * Project detail page — header, task list, and add task form.
+ * Route: /project/:projectId
+ * @module pages/project
+ */
+
+import { html, define, store, router } from 'hybrids';
+import TaskModel from '../../store/TaskModel.js';
+import { pageLayout } from '../../components/templates/page-layout/page-layout.js';
+import '../../components/organisms/project-header/project-header.js';
+import '../../components/organisms/task-list/task-list.js';
+import '../../components/organisms/schema-form/schema-form.js';
+
+/**
+ * @typedef {Object} ProjectViewHost
+ * @property {string} projectId - Set by router params
+ * @property {boolean} addingTask
+ */
+
+/** @param {ProjectViewHost & HTMLElement} host */
+function toggleAddTask(host) {
+  host.addingTask = !host.addingTask;
+}
+
+/** @param {ProjectViewHost & HTMLElement} host */
+function onTaskCreated(host) {
+  host.addingTask = false;
+  store.clear([TaskModel]);
+}
+
+/** @type {import('hybrids').Component<ProjectViewHost>} */
+export default define({
+  tag: 'project-view',
+  [router.connect]: { url: '/project/:projectId' },
+  projectId: '',
+  addingTask: false,
+  render: {
+    value: ({ projectId, addingTask }) =>
+      pageLayout(
+        'Project Detail',
+        html`
+          <div class="project-view">
+            <div class="project-view-nav">
+              <a href="${router.backUrl()}">← Back to projects</a>
+            </div>
+            <project-header project-id="${projectId}"></project-header>
+            <div class="project-view-tasks">
+              <div class="project-view-tasks-header">
+                <h3>Tasks</h3>
+                <button class="btn btn-primary" onclick="${toggleAddTask}">+ Add Task</button>
+              </div>
+              ${addingTask &&
+              html`
+                <schema-form
+                  endpoint="/api/tasks"
+                  defaults="${JSON.stringify({ projectId })}"
+                  onsubmit="${onTaskCreated}"
+                  oncancel="${toggleAddTask}"
+                ></schema-form>
+              `}
+              <task-list project-id="${projectId}"></task-list>
+            </div>
+          </div>
+        `,
+      ),
+    shadow: false,
+  },
+});

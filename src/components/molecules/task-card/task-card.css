@@ -1,0 +1,62 @@
+task-card {
+  display: block;
+
+  & .task-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: box-shadow 0.15s ease;
+    &:hover {
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  & .task-card-grip {
+    cursor: grab;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  & .task-card-title {
+    flex: 1;
+    font-size: var(--text-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & .task-card-delete {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    &:hover {
+      color: var(--color-danger);
+      background: var(--color-bg);
+    }
+  }
+
+  & .task-card-confirm {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+}
+
+.btn-xs {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.75rem;
+}
