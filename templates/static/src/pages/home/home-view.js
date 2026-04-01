@@ -26,7 +26,8 @@ export default define({
       <div class="home-view">
         <h1>{{name}}</h1>
         <p>Your Clearstack project is ready. Start building!</p>
-        ${store.ready(state) && html`
+        ${store.ready(state) &&
+        html`
           <p>Count: ${state.count}</p>
           <button class="btn btn-primary" onclick="${increment}">Increment</button>
           <p class="hint">State persists in localStorage — refresh to verify.</p>

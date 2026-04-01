@@ -8,6 +8,7 @@
     "noEmit": true,
     "strict": false,
     "skipLibCheck": true,
+    "types": ["node"],
     "paths": {
       "hybrids": ["../node_modules/hybrids/types/index.d.ts"]
     }
