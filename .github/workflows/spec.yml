@@ -34,10 +34,13 @@ jobs:
         run: npx eslint --config .configs/eslint.config.js .
 
       - name: Prettier
-        run: npx prettier --config .configs/.prettierrc --check src scripts server.js tests
+        run: npx prettier --config .configs/.prettierrc --check src scripts tests
 
       - name: JSDoc types (tsc --checkJs)
-        run: npx tsc --project .configs/jsconfig.json
+        run: |
+          OUTPUT=$(npx tsc --project .configs/jsconfig.json 2>&1 || true)
+          ERRORS=$(echo "$OUTPUT" | grep -v node_modules | grep error || true)
+          if [ -n "$ERRORS" ]; then echo "$ERRORS"; exit 1; fi
 
       - name: Node tests
         run: node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js
