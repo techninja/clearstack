@@ -19,7 +19,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch --env-file=.env src/server.js",
-    "postinstall": "node scripts/vendor-deps.js && node scripts/build-icons.js",
+    "setup": "node scripts/vendor-deps.js && node scripts/build-icons.js",
     "test": "npm run test:node && npm run test:browser",
     "test:node": "node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js",
     "test:browser": "web-test-runner --config .configs/web-test-runner.config.js",
