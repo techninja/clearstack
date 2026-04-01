@@ -7,6 +7,7 @@
 @import '../components/atoms/app-badge/app-badge.css';
 @import '../components/atoms/app-icon/app-icon.css';
 @import '../components/atoms/theme-toggle/theme-toggle.css';
+@import '../components/atoms/canvas-toolbar/canvas-toolbar.css';
 
 /* Molecules */
 @import '../components/molecules/task-card/task-card.css';
@@ -17,6 +18,7 @@
 @import '../components/organisms/task-list/task-list.css';
 @import '../components/organisms/project-header/project-header.css';
 @import '../components/organisms/schema-form/schema-form.css';
+@import '../components/organisms/project-canvas/project-canvas.css';
 
 /* Templates */
 @import '../components/templates/page-layout/page-layout.css';

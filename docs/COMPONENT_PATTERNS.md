@@ -160,6 +160,34 @@ look identical to `app-button`. Use the atom when you need its component
 API; use a plain button when you need reliable click handling in nested
 templates.
 
+### SVG Content via innerHTML
+
+Hybrids' `html` template doesn't support dynamic SVG content well. For
+canvas/whiteboard components that build SVG from data, use `innerHTML`
+on a wrapper div:
+
+```javascript
+render: {
+  value: (host) => html`
+    <div class="canvas" innerHTML="${buildSvgString(host.objects)}"></div>
+  `,
+}
+```
+
+Event listeners must be re-attached in `observe` since `innerHTML`
+replaces the DOM. Use a flag to avoid duplicate binding, and attach
+persistent listeners (like `keydown`) to the host element instead.
+
+### Coordinate Transforms for Rotated Objects
+
+When objects have rotation via an outer `<g transform="rotate(...)">`:
+
+- **Move:** Shift both the inner translate AND the rotation center by the
+  same screen-space delta. No trigonometry needed.
+- **Resize:** Unrotate the drag delta to align with the object's local axes.
+- **Rotation center:** Store `rotationCx`/`rotationCy` on the object data
+  so it persists across renders and reloads.
+
 ### Light DOM (Default)
 
 All components in this framework use **light DOM** (`shadow: false`). This

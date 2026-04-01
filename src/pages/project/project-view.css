@@ -1,13 +1,14 @@
 project-view {
   display: block;
 
-  & .project-view-nav {
-    margin-bottom: var(--space-md);
-    font-size: var(--text-sm);
+  & .project-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
   }
 
-  & .project-view-tasks {
-    margin-top: var(--space-lg);
+  & .project-view-nav {
+    font-size: var(--text-sm);
   }
 
   & .project-view-tasks-header {

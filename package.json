@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch --env-file=.env server.js",
-    "postinstall": "node scripts/vendor-deps.js",
+    "postinstall": "node scripts/vendor-deps.js && node scripts/build-icons.js",
     "test": "npm run test:node && npm run test:browser",
     "test:node": "node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js",
     "test:browser": "web-test-runner --config .configs/web-test-runner.config.js",
@@ -21,16 +21,24 @@
     "format:check": "prettier --config .configs/.prettierrc --check src scripts server.js tests",
     "typecheck": "tsc --project .configs/jsconfig.json"
   },
-  "keywords": ["hybrids", "web-components", "no-build", "es-modules"],
+  "keywords": [
+    "hybrids",
+    "web-components",
+    "no-build",
+    "es-modules"
+  ],
   "license": "MIT",
   "dependencies": {
     "@inquirer/prompts": "^8.3.2",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "hybrids": "^9.1.22"
+    "hybrids": "^9.1.22",
+    "lucide-static": "^1.7.0",
+    "ws": "^8.20.0"
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
+    "@types/ws": "^8.18.1",
     "@web/test-runner": "^0.20.0",
     "@web/test-runner-playwright": "^0.11.0",
     "eslint": "^10.1.0",

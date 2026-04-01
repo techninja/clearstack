@@ -192,3 +192,35 @@ render: ({ items }) => html`<ul>${filterActive(items).map(...)}</ul>`,
 /** @param {User} user */
 export const fullName = (user) => `${user.firstName} ${user.lastName}`;
 ```
+
+---
+
+## File Size: Soft Warnings Before Hard Limits
+
+The 150-line limit is a hard gate in CI, but treat **~120 lines as a yellow
+light.** When a file passes 120 lines:
+
+1. Add a `// SPLIT CANDIDATE:` comment noting where a logical split could happen
+2. Continue working — don't split mid-feature
+3. Split when the file hits 150 or when the feature is complete
+
+This prevents premature extraction while keeping the eventual split obvious.
+
+```javascript
+// SPLIT CANDIDATE: moveObj/resizeObj could extract to canvasTransform.js
+function moveObj(o, dx, dy) { ... }
+```
+
+---
+
+## Session Retrospective
+
+At the end of each implementation session, ask:
+
+1. **What patterns did we discover?** Document in the relevant spec doc.
+2. **What broke that we didn't expect?** Add to BUILD_LOG discoveries.
+3. **What tests would catch the bugs we found?** Write them before committing.
+4. **Did any files grow past the yellow light?** Split or add split markers.
+5. **Did the spec need correction?** Update it — the spec improves through use.
+
+This practice is what keeps the spec alive and accurate.
