@@ -9,6 +9,7 @@ import { entityRouter } from './api/entities.js';
 import { eventsRouter } from './api/events.js';
 import { attachCanvasWS } from './api/canvas-ws.js';
 
+/** @type {any} */
 const app = express();
 
 // Parse JSON request bodies

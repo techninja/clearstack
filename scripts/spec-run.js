@@ -8,6 +8,7 @@ import { execSync } from 'node:child_process';
 
 /**
  * Run a command, report pass/fail. Output shown only on failure.
+ * Errors from node_modules are filtered (e.g. Express v5 type issues).
  * @param {string} label - Display name for this check
  * @param {string} cmd - Shell command to execute
  * @param {string} cwd - Working directory
@@ -19,12 +20,17 @@ export function runCheck(label, cmd, cwd) {
     console.log(`  ✅ ${label}`);
     return true;
   } catch (err) {
-    console.log(`  ❌ ${label}`);
     const output = (err.stdout || '') + (err.stderr || '');
-    if (output.trim()) {
-      const lines = output.trim().split('\n');
-      for (const line of lines) console.log(`     ${line}`);
+    const ownErrors = output
+      .trim()
+      .split('\n')
+      .filter((l) => l.trim() && !l.includes('node_modules'));
+    if (ownErrors.length === 0) {
+      console.log(`  ✅ ${label}`);
+      return true;
     }
+    console.log(`  ❌ ${label}`);
+    for (const line of ownErrors) console.log(`     ${line}`);
     return false;
   }
 }

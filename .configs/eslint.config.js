@@ -58,7 +58,7 @@ export default [
     },
   },
   {
-    ignores: ['node_modules/', 'public/vendor/', 'scaffolder/templates/'],
+    ignores: ['node_modules/', 'public/vendor/', 'templates/'],
   },
   prettier,
 ];
