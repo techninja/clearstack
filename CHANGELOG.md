@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-04-01
+
+- Fix readme name and generation
+
+
 ## [0.2.0] - 2026-04-01
 
 - Merge pull request #2 from techninja/scaffolder
