@@ -35,6 +35,21 @@ A project/task tracker that exercises every pattern in the spec: API-backed enti
 | [BACKEND_API_SPEC.md](./docs/BACKEND_API_SPEC.md) | REST CRUD, JSON Schema via HEAD, entity management |
 | [TESTING.md](./docs/TESTING.md) | Testing philosophy, tools, patterns, phase checkpoints |
 | [BUILD_LOG.md](./docs/BUILD_LOG.md) | How this project was built — LLM-human collaboration proof |
+| [QUICKSTART.md](./docs/QUICKSTART.md) | Scaffolder setup, development workflow, updating, compliance |
+
+## Start a New Project
+
+The `hybrids-spec` scaffolder generates a spec-compliant project from templates and keeps it in sync as the spec evolves.
+
+```bash
+npx hybrids-spec init       # interactive project scaffolder
+npx hybrids-spec update     # sync spec docs from upstream
+npx hybrids-spec check      # run spec compliance checks
+```
+
+Two modes: **fullstack** (Express + WebSocket + JSON DB + SSE) or **static** (localStorage, no server).
+
+See [QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 
 ## Rules That Matter
 
