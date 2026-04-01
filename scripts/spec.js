@@ -11,12 +11,10 @@
 
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { config } from 'dotenv';
 import { checkFiles, printResults } from './spec-check.js';
 import { runCheck } from './spec-run.js';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
-config({ path: resolve(ROOT, '.env') });
 
 const CODE_MAX = parseInt(process.env.SPEC_CODE_MAX_LINES) || 150;
 const DOCS_MAX = parseInt(process.env.SPEC_DOCS_MAX_LINES) || 500;
@@ -27,7 +25,7 @@ const IGNORE = (process.env.SPEC_IGNORE_DIRS || 'node_modules,public/vendor,.git
 // Shared command strings — macOS needs find instead of shell globs
 const CMD = {
   lint: 'npx eslint --config .configs/eslint.config.js . --fix',
-  format: 'npx prettier --config .configs/.prettierrc --write src scripts server.js tests',
+  format: 'npx prettier --config .configs/.prettierrc --write src scripts tests',
   types: 'npx tsc --project .configs/jsconfig.json',
   testNode: 'node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js',
   testBrowser: 'npx web-test-runner --config .configs/web-test-runner.config.js',

@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in hybrids-spec! This project is both a specification
+Thanks for your interest in Clearstack! This project is both a specification
 and its working proof — contributions to either are welcome.
 
 ## Before You Start
@@ -13,7 +13,7 @@ and its working proof — contributions to either are welcome.
 
 ```bash
 git clone <repo-url>
-cd hybrids-spec
+cd clearstack
 npm install        # installs deps, vendors hybrids, builds icons
 npm run dev        # starts server with --watch and .env loading
 npm run spec       # interactive spec compliance checker

@@ -1,40 +1,54 @@
 {
-  "name": "hybrids-spec",
-  "version": "1.0.0",
+  "name": "clearstack",
+  "version": "0.1.0",
   "type": "module",
-  "description": "Specification and proof-of-concept for a no-build Hybrids.js web component framework",
-  "main": "server.js",
+  "description": "A no-build web component framework specification — scaffold, validate, and evolve spec-compliant projects",
+  "bin": {
+    "clearstack": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "templates/",
+    "docs/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techninja/clearstack.git"
+  },
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch --env-file=.env server.js",
+    "start": "node src/server.js",
+    "dev": "node --watch --env-file=.env src/server.js",
     "postinstall": "node scripts/vendor-deps.js && node scripts/build-icons.js",
     "test": "npm run test:node && npm run test:browser",
     "test:node": "node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js",
     "test:browser": "web-test-runner --config .configs/web-test-runner.config.js",
     "test:watch": "web-test-runner --config .configs/web-test-runner.config.js --watch",
-    "spec": "node scripts/spec.js",
-    "spec:code": "node scripts/spec.js code",
-    "spec:docs": "node scripts/spec.js docs",
+    "spec": "node --env-file=.env scripts/spec.js",
+    "spec:code": "node --env-file=.env scripts/spec.js code",
+    "spec:docs": "node --env-file=.env scripts/spec.js docs",
     "lint": "eslint --config .configs/eslint.config.js .",
     "lint:fix": "eslint --config .configs/eslint.config.js . --fix",
-    "format": "prettier --config .configs/.prettierrc --write src scripts server.js tests",
-    "format:check": "prettier --config .configs/.prettierrc --check src scripts server.js tests",
-    "typecheck": "tsc --project .configs/jsconfig.json"
+    "format": "prettier --config .configs/.prettierrc --write src scripts tests",
+    "format:check": "prettier --config .configs/.prettierrc --check src scripts tests",
+    "typecheck": "tsc --project .configs/jsconfig.json",
+    "sync-docs": "node scripts/sync-docs.js",
+    "release": "node scripts/release.js",
+    "release:minor": "node scripts/release.js minor",
+    "release:major": "node scripts/release.js major",
+    "prepublishOnly": "node scripts/sync-docs.js"
   },
   "keywords": [
-    "hybrids",
     "web-components",
     "no-build",
-    "es-modules"
+    "es-modules",
+    "specification",
+    "scaffold",
+    "hybrids"
   ],
   "license": "MIT",
   "dependencies": {
-    "@inquirer/prompts": "^8.3.2",
-    "dotenv": "^17.3.1",
-    "express": "^5.2.1",
-    "hybrids": "^9.1.22",
-    "lucide-static": "^1.7.0",
-    "ws": "^8.20.0"
+    "@inquirer/prompts": "^8.3.2"
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
@@ -44,8 +58,12 @@
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsdoc": "^62.8.1",
+    "express": "^5.2.1",
+    "hybrids": "^9.1.22",
+    "lucide-static": "^1.7.0",
     "playwright": "^1.50.0",
     "prettier": "^3.8.1",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "ws": "^8.20.0"
   }
 }

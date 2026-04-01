@@ -14,11 +14,11 @@
   },
   "include": [
     "../src/**/*.js",
-    "../server.js",
     "../scripts/**/*.js"
   ],
   "exclude": [
     "../node_modules",
+    "../node_modules/**",
     "../public/vendor",
     "../**/*.test.js"
   ]
