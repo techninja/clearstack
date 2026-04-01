@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-04-01
+
+- Let's play guess how many times I have to build this...
+
+
 ## [0.2.2] - 2026-04-01
 
 - Publish with provenance
