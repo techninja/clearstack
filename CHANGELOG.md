@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-04-01
+
+- Missing type defs and immediate linting issue
+
+
 ## [0.2.5] - 2026-04-01
 
 - Update for better packaging, build gitignore
