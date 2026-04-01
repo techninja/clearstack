@@ -24,9 +24,9 @@
     "test:node": "node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js",
     "test:browser": "web-test-runner --config .configs/web-test-runner.config.js",
     "test:watch": "web-test-runner --config .configs/web-test-runner.config.js --watch",
-    "spec": "node scripts/spec.js",
-    "spec:code": "node scripts/spec.js code",
-    "spec:docs": "node scripts/spec.js docs",
+    "spec": "node --env-file=.env scripts/spec.js",
+    "spec:code": "node --env-file=.env scripts/spec.js code",
+    "spec:docs": "node --env-file=.env scripts/spec.js docs",
     "lint": "eslint --config .configs/eslint.config.js .",
     "lint:fix": "eslint --config .configs/eslint.config.js . --fix",
     "format": "prettier --config .configs/.prettierrc --write src scripts tests",
@@ -48,8 +48,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@inquirer/prompts": "^8.3.2",
-    "dotenv": "^17.3.1"
+    "@inquirer/prompts": "^8.3.2"
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",

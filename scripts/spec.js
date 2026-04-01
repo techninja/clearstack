@@ -11,12 +11,10 @@
 
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { config } from 'dotenv';
 import { checkFiles, printResults } from './spec-check.js';
 import { runCheck } from './spec-run.js';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
-config({ path: resolve(ROOT, '.env') });
 
 const CODE_MAX = parseInt(process.env.SPEC_CODE_MAX_LINES) || 150;
 const DOCS_MAX = parseInt(process.env.SPEC_DOCS_MAX_LINES) || 500;

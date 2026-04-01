@@ -167,7 +167,7 @@ These are the significant corrections:
 | Build phases | 8 + whiteboard |
 | Bugs found & fixed | ~25 significant |
 | Bugs requiring >4 iterations | 3 (drag reorder, event bubbling, SVG transforms) |
-| External dependencies | 5 runtime (hybrids, express, ws, dotenv, lucide-static) |
+| External dependencies | 4 runtime (hybrids, express, ws, lucide-static) |
 | Build tools | 0 |
 
 ---
