@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.5] - 2026-04-01
+
+- Update for better packaging, build gitignore
+
+
 ## [0.2.4] - 2026-04-01
 
 - No postinstall please
