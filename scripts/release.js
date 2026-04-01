@@ -25,9 +25,12 @@ const out = (cmd) => execSync(cmd, { cwd: ROOT, encoding: 'utf-8' }).trim();
 const pkgPath = resolve(ROOT, 'package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
 const [major, minor, patch] = pkg.version.split('.').map(Number);
-const next = bump === 'major' ? `${major + 1}.0.0`
-  : bump === 'minor' ? `${major}.${minor + 1}.0`
-  : `${major}.${minor}.${patch + 1}`;
+const next =
+  bump === 'major'
+    ? `${major + 1}.0.0`
+    : bump === 'minor'
+      ? `${major}.${minor + 1}.0`
+      : `${major}.${minor}.${patch + 1}`;
 
 pkg.version = next;
 writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
