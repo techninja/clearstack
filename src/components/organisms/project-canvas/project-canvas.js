@@ -106,9 +106,13 @@ export default define({
       });
       svg.addEventListener('mousemove', (e) => onMove(host, e, svg));
       svg.addEventListener('mouseup', (e) => onUp(host, e, svg));
-      setupTouch(svg, (o) => {
-        host.panTransform = `translate(${o.x},${o.y})`;
-      });
+      setupTouch(
+        svg,
+        (o) => {
+          host.panTransform = `translate(${o.x},${o.y})`;
+        },
+        () => host.tool !== 'select' || host.selectedId !== '',
+      );
     },
     shadow: false,
   },

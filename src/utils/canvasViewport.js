@@ -1,14 +1,18 @@
 /**
  * Canvas viewport — pan offset and touch event translation.
- * Two-finger drag pans the canvas. Single touch draws/selects.
+ * Two-finger drag pans the canvas.
+ * Single touch only interacts when a tool is active or object is selected.
  * @module utils/canvasViewport
  */
 
 /** @type {{ x: number, y: number }} */
 const offset = { x: 0, y: 0 };
 
-/** @type {{ x: number, y: number, dist: number }|null} */
+/** @type {{ x: number, y: number }|null} */
 let pinch = null;
+
+/** @type {boolean} */
+let singleActive = false;
 
 /**
  * Get the current pan offset.
@@ -20,23 +24,25 @@ export function getOffset() {
 
 /**
  * Set up touch handlers on an SVG element.
- * Single touch → dispatches equivalent mouse events.
- * Two-finger touch → pans the viewport.
  * @param {SVGSVGElement} svg
  * @param {(offset: { x: number, y: number }) => void} onPan
+ * @param {() => boolean} shouldInteract - Returns true if single touch should draw/select
  */
-export function setupTouch(svg, onPan) {
+export function setupTouch(svg, onPan, shouldInteract) {
   svg.addEventListener(
     'touchstart',
     (e) => {
       if (e.touches.length === 2) {
         e.preventDefault();
+        singleActive = false;
         const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
         const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-        pinch = { x: mx, y: my, dist: 0 };
+        pinch = { x: mx, y: my };
         return;
       }
-      if (e.touches.length === 1) {
+      if (e.touches.length === 1 && shouldInteract()) {
+        e.preventDefault();
+        singleActive = true;
         dispatchMouse(svg, 'mousedown', e.touches[0]);
       }
     },
@@ -57,7 +63,7 @@ export function setupTouch(svg, onPan) {
         onPan(offset);
         return;
       }
-      if (e.touches.length === 1) {
+      if (e.touches.length === 1 && singleActive) {
         e.preventDefault();
         dispatchMouse(svg, 'mousemove', e.touches[0]);
       }
@@ -70,14 +76,14 @@ export function setupTouch(svg, onPan) {
       pinch = null;
       return;
     }
-    if (e.changedTouches.length === 1) {
+    if (singleActive && e.changedTouches.length === 1) {
       dispatchMouse(svg, 'mouseup', e.changedTouches[0]);
+      singleActive = false;
     }
   });
 }
 
 /**
- * Dispatch a synthetic mouse event from a touch point.
  * @param {SVGSVGElement} svg
  * @param {string} type
  * @param {Touch} touch
