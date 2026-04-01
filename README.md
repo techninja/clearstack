@@ -34,6 +34,7 @@ A project/task tracker that exercises every pattern in the spec: API-backed enti
 | [SERVER_AND_DEPS.md](./docs/SERVER_AND_DEPS.md) | Express server, import maps, vendor dependency loading |
 | [BACKEND_API_SPEC.md](./docs/BACKEND_API_SPEC.md) | REST CRUD, JSON Schema via HEAD, entity management |
 | [TESTING.md](./docs/TESTING.md) | Testing philosophy, tools, patterns, phase checkpoints |
+| [BUILD_LOG.md](./docs/BUILD_LOG.md) | How this project was built — LLM-human collaboration proof |
 
 ## Rules That Matter
 
