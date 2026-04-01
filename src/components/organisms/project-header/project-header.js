@@ -1,6 +1,5 @@
 /**
- * Project header organism — displays project details or edit form.
- * Composes: app-badge, app-button, schema-form. Binds to: ProjectModel store.
+ * Project header organism — condensed single-line project info with edit.
  * @module components/organisms/project-header
  */
 
@@ -9,7 +8,6 @@ import ProjectModel from '../../../store/ProjectModel.js';
 import { statusColor, statusTitle } from '../../../utils/statusColors.js';
 import { formatDate } from '../../../utils/formatDate.js';
 import '../../atoms/app-badge/app-badge.js';
-import '../../atoms/app-button/app-button.js';
 import '../schema-form/schema-form.js';
 
 /**
@@ -33,22 +31,24 @@ export default define({
         ${store.ready(project) &&
         !editing &&
         html`
-          <div class="project-header-top">
-            <h1 class="project-header-name">${project.name}</h1>
+          <div class="project-header-row">
+            <h2 class="project-header-name">${project.name}</h2>
+            <span class="project-header-sep">—</span>
+            <span class="project-header-desc">${project.description}</span>
+            <span class="project-header-meta">${formatDate(project.createdAt)}</span>
             <app-badge
               label="${statusTitle(project.status)}"
               color="${statusColor(project.status)}"
             ></app-badge>
-            <app-button
-              label="Edit"
-              variant="secondary"
-              onpress="${(host) => {
+            <button
+              class="btn btn-secondary btn-xs"
+              onclick="${(host) => {
                 host.editing = true;
               }}"
-            ></app-button>
+            >
+              Edit
+            </button>
           </div>
-          <p class="project-header-desc">${project.description}</p>
-          <span class="project-header-meta">Created ${formatDate(project.createdAt)}</span>
         `}
         ${editing &&
         html`

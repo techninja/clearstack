@@ -1,5 +1,5 @@
 /**
- * Project detail page — header, task list, and add task form.
+ * Project detail page — header, whiteboard, and task list.
  * Route: /project/:projectId
  * @module pages/project
  */
@@ -8,6 +8,7 @@ import { html, define, store, router } from 'hybrids';
 import TaskModel from '../../store/TaskModel.js';
 import { pageLayout } from '../../components/templates/page-layout/page-layout.js';
 import '../../components/organisms/project-header/project-header.js';
+import '../../components/organisms/project-canvas/project-canvas.js';
 import '../../components/organisms/task-list/task-list.js';
 import '../../components/organisms/schema-form/schema-form.js';
 
@@ -37,13 +38,14 @@ export default define({
   render: {
     value: ({ projectId, addingTask }) =>
       pageLayout(
-        'Project Detail',
+        'Project',
         html`
           <div class="project-view">
             <div class="project-view-nav">
               <a href="${router.backUrl()}">← Back to projects</a>
             </div>
             <project-header project-id="${projectId}"></project-header>
+            <project-canvas project-id="${projectId}"></project-canvas>
             <div class="project-view-tasks">
               <div class="project-view-tasks-header">
                 <h3>Tasks</h3>

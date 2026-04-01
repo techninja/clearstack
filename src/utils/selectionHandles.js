@@ -24,16 +24,22 @@ export function selectionHandles(obj, svg) {
         const bb = el.getBBox();
         b = { x: bb.x, y: bb.y, w: bb.width, h: bb.height };
         if (obj.shapeTransform) b = applyShapeTransform(b, obj.shapeTransform);
-      } catch { /* not rendered */ }
+      } catch {
+        /* not rendered */
+      }
     }
   }
   if (!b) return '';
   const { x, y, w, h } = b;
+  const touch = 'ontouchstart' in globalThis;
+  const hs = touch ? 20 : 10; // handle size
+  const ho = hs / 2 + 2; // handle offset from corner
+  const ds = touch ? 26 : 18; // delete button size
   const rcx = obj.rotationCx !== undefined ? obj.rotationCx : x + w / 2;
   const rcy = obj.rotationCy !== undefined ? obj.rotationCy : y + h / 2;
   const rot = obj.rotation ? `transform="rotate(${obj.rotation} ${rcx} ${rcy})"` : '';
   const handle = (dir, hx, hy) =>
-    `<rect class="sel-handle" data-handle="${dir}" x="${hx}" y="${hy}" width="10" height="10" rx="2" />`;
+    `<rect class="sel-handle" data-handle="${dir}" x="${hx}" y="${hy}" width="${hs}" height="${hs}" rx="2" />`;
   return `<g ${rot}>
     <rect class="sel-rotate" x="${x - 32}" y="${y - 32}" width="${w + 64}" height="${h + 64}"
       fill="transparent" stroke="none" data-rotate="${obj.id}" />
@@ -42,13 +48,13 @@ export function selectionHandles(obj, svg) {
     <rect class="sel-box" x="${x - 4}" y="${y - 4}" width="${w + 8}" height="${h + 8}"
       fill="none" stroke="var(--color-primary)" stroke-width="1" stroke-dasharray="4"
       style="pointer-events:none" />
-    ${handle('nw', x - 7, y - 7)}
-    ${handle('ne', x + w - 3, y - 7)}
-    ${handle('sw', x - 7, y + h - 3)}
-    ${handle('se', x + w - 3, y + h - 3)}
-    <g class="sel-delete" transform="translate(${x + w + 6}, ${y - 18})">
-      <rect width="18" height="18" rx="4" fill="var(--color-danger)" />
-      <path d="M5 5L13 13M13 5L5 13" stroke="white" stroke-width="2" />
+    ${handle('nw', x - ho, y - ho)}
+    ${handle('ne', x + w - hs + ho, y - ho)}
+    ${handle('sw', x - ho, y + h - hs + ho)}
+    ${handle('se', x + w - hs + ho, y + h - hs + ho)}
+    <g class="sel-delete" transform="translate(${x + w + 6}, ${y - ds - 4})">
+      <rect width="${ds}" height="${ds}" rx="4" fill="var(--color-danger)" />
+      <path d="M${ds * 0.28} ${ds * 0.28}L${ds * 0.72} ${ds * 0.72}M${ds * 0.72} ${ds * 0.28}L${ds * 0.28} ${ds * 0.72}" stroke="white" stroke-width="2" />
     </g>
   </g>`;
 }

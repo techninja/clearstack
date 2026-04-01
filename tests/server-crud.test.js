@@ -5,12 +5,14 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { start } from '../server.js';
+import { reload } from '../src/api/db.js';
 
 const PORT = 3002;
 const BASE = `http://localhost:${PORT}`;
 let server;
 
 before(async () => {
+  reload();
   server = start(PORT);
   await new Promise((r) => setTimeout(r, 100));
 });

@@ -111,13 +111,39 @@ These are the significant corrections:
 - **Expected:** sortOrder field sorts numerically
 - **Actual:** `localeCompare` on numbers gives wrong order
 - **Fix:** Detect numeric values and use `a - b` comparison
-- **Documented in:** Fixed in entities.js sort logic
 
-### Hybrids renders undefined as "undefined" string in attributes
-- **Expected:** `undefined` removes the attribute
-- **Actual:** Hybrids sets the DOM property, browser coerces to string
-- **Fix:** Set validation attributes imperatively via observe()
-- **Documented in:** Fixed in form-field render/observe pattern
+### SVG transforms: two-group rotation approach
+- **Expected:** Embed rotation in shapeTransform string
+- **Actual:** Rotation center in local coords doesn't match screen position
+- **Fix:** Outer `<g>` for rotation (screen-space center), inner `<g>` for translate+scale
+- **Documented in:** COMPONENT_PATTERNS.md → Coordinate Transforms
+
+### Move after rotation: unrotate is wrong for translate
+- **Expected:** Unrotate screen delta for the inner translate
+- **Actual:** Causes magnified/skewed movement
+- **Fix:** Move both rotation center AND inner translate by raw screen delta
+- **Key insight:** `rotate(deg, cx, cy)` = `translate(cx,cy) rotate(deg) translate(-cx,-cy)`. Shifting cx,cy and translate by the same delta cancels out.
+
+### Resize after rotation: unrotate IS needed
+- **Expected:** Same approach as move
+- **Actual:** Handles are visually rotated, so screen drag doesn't align with object axes
+- **Fix:** Unrotate resize deltas only, not move deltas
+
+### SVG innerHTML destroys event listeners
+- **Expected:** Event listeners persist across renders
+- **Actual:** `innerHTML` replaces the DOM, losing all listeners
+- **Fix:** Re-bind mouse listeners in `observe`, attach keyboard to host element
+- **Documented in:** COMPONENT_PATTERNS.md → SVG Content via innerHTML
+
+### Path d-string manipulation breaks arc commands
+- **Expected:** Regex replace on coordinate pairs works for all paths
+- **Actual:** Arc commands have flags (0/1) that get mangled
+- **Fix:** Use `shapeTransform` for complex shapes, only rewrite d for M/L paths
+
+### Canvas pan offset not applied to drawing coordinates
+- **Expected:** Drawing at the visual position works after panning
+- **Actual:** Coordinates calculated from SVG rect, not accounting for pan
+- **Fix:** Shared `canvasPos()` utility subtracts pan offset from all tools
 
 ---
 
@@ -125,17 +151,23 @@ These are the significant corrections:
 
 | Metric | Value |
 |---|---|
-| Total source files | ~92 |
+| Total source files | 108 |
+| Utility modules | 25 |
+| Component files | 13 |
+| Style sheets | 6 |
+| API modules | 6 |
+| Page views | 2 |
+| Test files | 14 |
+| Node tests | 65 |
+| Browser tests | 41 |
+| Spec documents | 10 |
 | Max lines per file | 150 (enforced) |
 | Max lines per doc | 500 (enforced) |
-| Spec documents | 9 |
-| Node tests | ~55 |
-| Browser tests | ~35 |
 | Automated checks | 7 (line counts, lint, format, types, tests) |
-| Build phases | 8 |
-| Bugs found & fixed | ~15 significant |
-| Bugs requiring >4 iterations | 2 (drag reorder, event bubbling) |
-| External dependencies | 4 runtime (hybrids, express, ws, dotenv) |
+| Build phases | 8 + whiteboard |
+| Bugs found & fixed | ~25 significant |
+| Bugs requiring >4 iterations | 3 (drag reorder, event bubbling, SVG transforms) |
+| External dependencies | 5 runtime (hybrids, express, ws, dotenv, lucide-static) |
 | Build tools | 0 |
 
 ---

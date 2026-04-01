@@ -1,0 +1,83 @@
+canvas-toolbar {
+  display: block;
+
+  & .canvas-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  & .canvas-tool {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    font-size: var(--text-lg);
+    cursor: pointer;
+    transition: background 0.1s ease;
+    &:hover {
+      background: var(--color-bg);
+    }
+    &.active {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+  }
+
+  & .shapes-wrap {
+    position: relative;
+  }
+
+  & .shapes-picker {
+    position: absolute;
+    left: calc(100% + var(--space-sm));
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+  }
+
+  & .shape-item {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    font-size: var(--text-lg);
+    cursor: pointer;
+    &:hover {
+      background: var(--color-bg);
+    }
+    &.active {
+      border-color: var(--color-primary);
+      background: var(--color-bg);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  canvas-toolbar .shapes-picker {
+    left: 0;
+    top: calc(100% + var(--space-xs));
+    transform: none;
+  }
+}

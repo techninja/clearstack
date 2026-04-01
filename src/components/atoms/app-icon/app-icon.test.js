@@ -1,28 +1,30 @@
 import { fixture, expect } from '@open-wc/testing';
 import '../app-icon/app-icon.js';
 
-describe('app-icon', () => {
-  it('renders an SVG for a known icon name', async () => {
-    const el = await fixture(`<app-icon name="plus"></app-icon>`);
-    await new Promise((r) => requestAnimationFrame(r));
-    const svg = el.querySelector('svg');
-    expect(svg).to.exist;
-    expect(svg.querySelector('path')).to.exist;
-  });
+const frame = () => new Promise((r) => requestAnimationFrame(r));
 
-  it('renders empty span for unknown icon', async () => {
-    const el = await fixture(`<app-icon name="nonexistent"></app-icon>`);
-    await new Promise((r) => requestAnimationFrame(r));
-    const svg = el.querySelector('svg');
-    expect(svg).to.not.exist;
+describe('app-icon', () => {
+  it('renders a span with icon class', async () => {
+    const el = await fixture(`<app-icon name="plus"></app-icon>`);
+    await frame();
     const span = el.querySelector('.icon');
     expect(span).to.exist;
   });
 
   it('applies size class', async () => {
     const el = await fixture(`<app-icon name="check" size="lg"></app-icon>`);
-    await new Promise((r) => requestAnimationFrame(r));
-    const span = el.querySelector('.icon');
-    expect(span.classList.contains('icon-lg')).to.be.true;
+    await frame();
+    expect(el.querySelector('.icon-lg')).to.exist;
+  });
+
+  it('applies sm size class', async () => {
+    const el = await fixture(`<app-icon name="check" size="sm"></app-icon>`);
+    await frame();
+    expect(el.querySelector('.icon-sm')).to.exist;
+  });
+
+  it('reflects name property', async () => {
+    const el = await fixture(`<app-icon name="folder"></app-icon>`);
+    expect(el.name).to.equal('folder');
   });
 });

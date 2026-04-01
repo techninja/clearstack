@@ -7,6 +7,7 @@
 import express from 'express';
 import { entityRouter } from './src/api/entities.js';
 import { eventsRouter } from './src/api/events.js';
+import { attachCanvasWS } from './src/api/canvas-ws.js';
 
 const app = express();
 
@@ -40,6 +41,8 @@ export function start(port = 3000) {
   const server = app.listen(port, () => {
     console.log(`http://localhost:${port}`);
   });
+
+  attachCanvasWS(server);
 
   server.on('error', (/** @type {NodeJS.ErrnoException} */ err) => {
     if (err.code === 'EADDRINUSE') {
