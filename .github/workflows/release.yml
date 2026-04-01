@@ -13,7 +13,6 @@ jobs:
   release:
     name: Publish to npm + GitHub Release
     runs-on: ubuntu-latest
-    environment: npm
 
     steps:
       - uses: actions/checkout@v4
