@@ -1,4 +1,4 @@
-# hybrids-spec
+# Clearstack
 
 A no-build web component framework specification — and its working proof — built entirely through LLM-human collaboration.
 
@@ -39,12 +39,12 @@ A project/task tracker that exercises every pattern in the spec: API-backed enti
 
 ## Start a New Project
 
-The `hybrids-spec` scaffolder generates a spec-compliant project from templates and keeps it in sync as the spec evolves.
+The Clearstack scaffolder generates a spec-compliant project from templates and keeps it in sync as the spec evolves.
 
 ```bash
-npx hybrids-spec init       # interactive project scaffolder
-npx hybrids-spec update     # sync spec docs from upstream
-npx hybrids-spec check      # run spec compliance checks
+npx clearstack init       # interactive project scaffolder
+npx clearstack update     # sync spec docs + configs from upstream
+npx clearstack check      # run spec compliance checks
 ```
 
 Two modes: **fullstack** (Express + WebSocket + JSON DB + SSE) or **static** (localStorage, no server).
