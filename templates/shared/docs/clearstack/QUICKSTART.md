@@ -4,156 +4,142 @@ Get a spec-compliant project running, develop against it, and keep it in sync as
 
 ## Prerequisites
 
-- Node.js ≥ 20
-- npm ≥ 10
+- Node.js ≥ 22
+- npm, pnpm, or yarn
 
-## 1. Scaffold a New Project
+## 1. Install Clearstack
+
+Clearstack is a dev dependency — it lives in your project and manages spec docs, configs, and compliance checks.
 
 ```bash
-npx clearstack init
+npm install --save-dev @techninja/clearstack
+# or
+pnpm add -D @techninja/clearstack
+```
+
+## 2. Scaffold Your Project
+
+From your project root:
+
+```bash
+npx clearstack init        # interactive
+npx clearstack init -y     # non-interactive (defaults)
 ```
 
 The interactive prompt asks for:
 
 | Prompt | Default | Notes |
 |---|---|---|
-| Project name | `my-app` | Creates a directory with this name |
+| Project name | current directory name | Used in package.json and templates |
 | Description | `A Clearstack project` | Goes into package.json |
-| Mode | — | **Fullstack**: Express + WebSocket + JSON DB + SSE. **Static**: localStorage only, no server |
+| Mode | — | **Fullstack**: Express + WebSocket + JSON DB + SSE. **Static**: localStorage only |
 | Port | `3000` | Fullstack only. Set in `.env` |
-| Include examples? | Yes | Starter components demonstrating spec patterns |
 
-This generates a complete project directory:
+If a `package.json` already exists, Clearstack merges into it — your existing fields (`author`, `license`, `engines`, `keywords`, etc.) are preserved.
+
+## 3. What Gets Created
 
 ```
-my-app/
-├── .configs/          # eslint, prettier, jsconfig, web-test-runner
-├── .github/           # CI workflow, PR + issue templates
-├── docs/              # Spec docs (upstream-managed)
-│   ├── clearstack/    # Clearstack spec docs (synced on update)
-│   └── app-spec/      # Your project-specific specs (never overwritten)
-├── public/            # Static assets, index.html, import map
-├── scripts/           # vendor-deps, build-icons, spec checker
+your-project/
+├── .configs/              # ⟳ Managed — synced on update
+│   ├── eslint.config.js
+│   ├── .prettierrc
+│   ├── jsconfig.json
+│   └── web-test-runner.config.js
+├── .github/               # CI workflow, PR + issue templates
+├── docs/
+│   ├── clearstack/        # ⟳ Managed — spec docs, synced on update
+│   └── app-spec/          # ✏️ Yours — project-specific specs
+├── public/                # ✏️ Yours — static assets, index.html, import map
+├── scripts/               # ✏️ Yours — vendor-deps, build-icons
 ├── src/
-│   ├── components/    # atoms/, molecules/, organisms/, pages/
-│   ├── store/         # Hybrids store models
-│   ├── styles/        # Global CSS with native nesting
-│   ├── router/        # Client-side routing
-│   └── utils/         # Shared helpers
-├── tests/             # Node + browser tests
-├── data/              # JSON DB (fullstack only)
-├── src/server.js       # Express server (fullstack only)
-├── .env               # PORT, spec thresholds
-└── package.json
+│   ├── api/               # ✏️ Yours — server routes (fullstack only)
+│   ├── components/        # ✏️ Yours — atoms/, molecules/, organisms/
+│   ├── pages/             # ✏️ Yours — route-level views
+│   ├── store/             # ✏️ Yours — Hybrids store models
+│   ├── styles/            # ✏️ Yours — global CSS
+│   ├── router/            # ✏️ Yours — client-side routing
+│   ├── utils/             # ✏️ Yours — shared helpers
+│   └── server.js          # ✏️ Yours — Express entry (fullstack only)
+├── data/                  # ✏️ Yours — JSON DB seed (fullstack only)
+├── .env                   # ✏️ Yours — PORT, spec thresholds
+└── package.json           # ✏️ Yours (spec scripts merged in)
 ```
 
-## 2. Install and Run
+**⟳ Managed** files are updated when you run `clearstack update`. Review changes via `git diff`.
+
+**✏️ Yours** files are scaffolded once and never touched by updates. They're your code.
+
+## 4. Install and Run
 
 ```bash
-cd my-app
 npm install
 ```
 
-`postinstall` automatically runs `vendor-deps.js` (copies hybrids to `public/vendor/`) and `build-icons.js` (extracts Lucide SVGs to `public/icons.json`).
+`postinstall` runs `vendor-deps.js` (copies hybrids to `public/vendor/`) and `build-icons.js` (extracts Lucide SVGs to `public/icons.json`).
 
-### Fullstack mode
+### Fullstack
 
 ```bash
-npm run dev            # node --watch src/server.js
-# → http://localhost:3000
+npm run dev            # node --watch --env-file=.env src/server.js
 ```
 
-### Static mode
+### Static
 
 ```bash
 npx serve public       # or any static file server
 ```
 
-## 3. Development Workflow
+## 5. Development Rules
 
-### Create a component
-
-Every component is a plain ES module that exports a Hybrids descriptor. Place it in the appropriate atomic design tier:
-
-```
-src/components/atoms/       # buttons, icons, badges
-src/components/molecules/   # form fields, cards
-src/components/organisms/   # lists, editors, canvases
-src/components/pages/       # route-level views
-```
-
-Register it in `src/components/index.js` and add a `<script>` or import map entry in `public/index.html` if needed.
-
-### Key rules while coding
-
-- **≤150 lines per `.js` / `.css` file.** Add `// SPLIT CANDIDATE:` at 120 lines. When you hit the limit, extract a module.
+- **≤150 lines per `.js` / `.css` file.** Add `// SPLIT CANDIDATE:` at ~120 lines.
 - **Light DOM by default.** No `shadowRoot`. Shared styles in `src/styles/` apply everywhere.
 - **JSDoc for types.** `@typedef`, `@param`, `@returns` — validated by `tsc --checkJs`.
 - **No build step.** Every file runs as-is in the browser via ES modules and import maps.
 
-### Run checks during development
+## 6. Project-Specific Specs
+
+`docs/app-spec/` is yours. Upstream updates never touch it. Use it for:
+
+- Entity schemas and relationships
+- Project-specific component patterns
+- API documentation beyond the base spec
+- Architecture decisions (ADRs)
+- Deviations from the base spec (with rationale)
+
+See [docs/app-spec/README.md](./app-spec/README.md) for examples.
+
+## 7. Updating
+
+When Clearstack releases a new version:
 
 ```bash
+npm update @techninja/clearstack    # bump the package
+npm run spec:update                 # sync docs + configs
+git diff docs/ .configs/            # review what changed
+```
+
+This updates:
+- `docs/clearstack/*.md` — spec documentation
+- `.configs/*` — linter, formatter, type checker, test runner configs
+
+This never touches:
+- `docs/app-spec/` — your project specs
+- `src/` — your code
+- `scripts/` — your build scripts
+- `.env` — your thresholds and settings
+
+## 8. Spec Compliance
+
+```bash
+npm run spec           # full check via clearstack binary
+npm run spec:code      # code files ≤150 lines
+npm run spec:docs      # doc files ≤500 lines
 npm run lint:fix       # ESLint auto-fix
 npm run format         # Prettier auto-format
 npm run typecheck      # JSDoc type validation
 npm test               # Node + browser tests
-npm run spec           # Full interactive spec compliance check
 ```
-
-Or run individual spec checks:
-
-```bash
-npm run spec:code      # Code files ≤150 lines
-npm run spec:docs      # Doc files ≤500 lines
-```
-
-## 4. Project-Specific Specs
-
-The `docs/app-spec/` directory is yours. Upstream updates never touch it. Use it for:
-
-- Entity schemas and relationships
-- Project-specific patterns or conventions
-- API documentation beyond the base spec
-- Architecture decisions (ADRs)
-- Deviations from the spec (with rationale)
-
-See [docs/app-spec/README.md](./app-spec/README.md) for the full guide.
-
-## 5. Update Spec Docs
-
-When the spec evolves upstream, pull the latest docs into your project:
-
-```bash
-npx clearstack update
-```
-
-This:
-- Copies updated spec docs from the package into your `docs/clearstack/` directory
-- Syncs `.configs/` to latest standards
-- Skips `docs/app-spec/` entirely — your project-specific specs are safe
-- Writes a `.specversion` file so you can track which version you're on
-- Prints which files changed so you can review with `git diff docs/ .configs/`
-
-Review the diff, adjust your code if needed, then commit.
-
-## 6. Check Spec Compliance
-
-Run the full compliance suite at any time:
-
-```bash
-npx clearstack check
-```
-
-This runs from the scaffolder package itself (no local scripts needed). It checks:
-
-1. **Code line counts** — all `.js` / `.css` files ≤150 lines
-2. **Doc line counts** — all `.md` files ≤500 lines
-3. **ESLint** — linting with the spec's config
-4. **Prettier** — formatting with the spec's config
-5. **JSDoc types** — `tsc --checkJs` against jsconfig
-
-The same checks run in CI via the GitHub Actions workflow scaffolded into `.github/`.
 
 ### Configuring thresholds
 
@@ -167,24 +153,25 @@ SPEC_DOCS_EXTENSIONS=.md
 SPEC_IGNORE_DIRS=node_modules,public/vendor,.git,.configs
 ```
 
-## 7. CI Pipeline
+## 9. CI Pipeline
 
-The scaffolded `.github/workflows/` runs all spec checks on every PR. A PR cannot merge unless all checks pass. The workflow runs:
+The scaffolded `.github/workflows/spec.yml` runs all checks on every PR:
 
 ```
-npm run spec:code → npm run spec:docs → npm run lint → npm run format → npm run typecheck → npm test
+spec:code → spec:docs → lint → format → typecheck → test
 ```
 
 ## Summary
 
 | Task | Command |
 |---|---|
+| Install Clearstack | `npm install -D @techninja/clearstack` |
 | Scaffold a project | `npx clearstack init` |
 | Install dependencies | `npm install` |
-| Start dev server | `npm run dev` (fullstack) / `npx serve public` (static) |
+| Start dev server | `npm run dev` / `npx serve public` |
 | Lint + format | `npm run lint:fix && npm run format` |
 | Type check | `npm run typecheck` |
 | Run tests | `npm test` |
-| Full spec check | `npm run spec` or `npx clearstack check` |
-| Update spec docs | `npx clearstack update` |
+| Full spec check | `npm run spec` |
+| Update spec + configs | `npm run spec:update` |
 | Review spec changes | `git diff docs/ .configs/` |

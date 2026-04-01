@@ -13,10 +13,10 @@ This entire repository — the specification, the file structure, every componen
 ## Quick Start
 
 ```bash
+npm install -D @techninja/clearstack
+npx clearstack init       # scaffold a spec-compliant project
 npm install
-npm start         # http://localhost:3000
-npm test          # node + browser tests
-npm run spec      # interactive spec compliance checker
+npm run dev               # http://localhost:3000
 ```
 
 ## What's In The Box
@@ -37,14 +37,16 @@ A project/task tracker that exercises every pattern in the spec: API-backed enti
 | [BUILD_LOG.md](./docs/BUILD_LOG.md) | How this project was built — LLM-human collaboration proof |
 | [QUICKSTART.md](./docs/QUICKSTART.md) | Scaffolder setup, development workflow, updating, compliance |
 
-## Start a New Project
+## Using Clearstack
 
-The Clearstack scaffolder generates a spec-compliant project from templates and keeps it in sync as the spec evolves.
+Install as a dev dependency, scaffold, and keep in sync:
 
 ```bash
-npx clearstack init       # interactive project scaffolder
-npx clearstack update     # sync spec docs + configs from upstream
-npx clearstack check      # run spec compliance checks
+npm install -D @techninja/clearstack    # add to your project
+npx clearstack init                     # scaffold (interactive)
+npx clearstack init -y                  # scaffold (defaults)
+npm run spec                            # check compliance
+npm run spec:update                     # sync docs + configs on upgrade
 ```
 
 Two modes: **fullstack** (Express + WebSocket + JSON DB + SSE) or **static** (localStorage, no server).
@@ -71,9 +73,10 @@ npm run lint        # ESLint check
 npm run lint:fix    # ESLint auto-fix
 npm run format      # Prettier auto-format
 npm run typecheck   # JSDoc type validation via tsc
-npm run spec        # Interactive spec compliance checker
+npm run spec        # Spec compliance check
 npm run spec:code   # Check code files ≤150 lines
 npm run spec:docs   # Check doc files ≤500 lines
+npm run spec:update # Sync docs + configs from upstream
 ```
 
 ## License
