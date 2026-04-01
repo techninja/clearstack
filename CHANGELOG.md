@@ -6,6 +6,30 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-01
+
+- Merge pull request #2 from techninja/scaffolder
+- Linting
+- Release helper, let's goooo
+- Kick dotenv to the curb
+- Naughty zoot!
+- Type cleanup, config adjustments
+- Hello Clearstack! Refactor for rename, better scaffolding, install as a dep!
+- WIP scaffolder first draft
+- Merge pull request #1 from techninja/whiteboard
+- Mobile fix for touch drag and select
+- Add initial GH templates
+- Add base changelog
+- Whiteboard feature
+- Link to build log
+- Add websockets, icons
+- Document build log after first step completion
+- Gate for PR and main build on spec
+- Cleanup root refactor and license fix
+- Initial base commit with self proving spec
+- Initial commit
+
+
 ### Added
 - Collaborative SVG whiteboard per project with real-time WebSocket sync
 - Drawing tools: pen, rectangle, circle, line, text
