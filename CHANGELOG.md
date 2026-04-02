@@ -6,6 +6,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.9] - 2026-04-02
+
+- Try to fix the publish!
+- Make it public
+- Fix bin location
+
+
 ## [0.2.8] - 2026-04-02
 
 - Simplify test and setup entries
