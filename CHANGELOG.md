@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.13] - 2026-04-02
+
+- This one might shine a light
+- Update for non-deprecated Node 24 action runners
+
+
 ## [0.2.12] - 2026-04-02
 
 - Publishing to NPM used to be easy...
