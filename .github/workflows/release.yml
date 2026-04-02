@@ -31,17 +31,8 @@ jobs:
         run: npm ci
 
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ''
         run: |
-          echo "npm version: $(npm --version)"
-          echo "node version: $(node --version)"
-          echo "NPM_CONFIG_USERCONFIG: $NPM_CONFIG_USERCONFIG"
-          cat "$NPM_CONFIG_USERCONFIG" 2>/dev/null || echo "no npmrc"
-          echo "---"
-          npm config list
-          echo "---"
-          echo "OIDC token available: $(test -n "$ACTIONS_ID_TOKEN_REQUEST_URL" && echo yes || echo no)"
+          sed -i '/_authToken/d' "$NPM_CONFIG_USERCONFIG"
           npm publish --provenance --access public
 
       - name: Generate changelog from commits
