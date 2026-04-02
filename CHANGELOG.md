@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.11] - 2026-04-02
+
+- Grasping at straws in the dark
+
+
 ## [0.2.10] - 2026-04-02
 
 - Fix CI for spec test
