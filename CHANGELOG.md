@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.15] - 2026-04-02
+
+- Bigger bonk? :boom:
+
+
 ## [0.2.14] - 2026-04-02
 
 - Bonk! :hammer:
