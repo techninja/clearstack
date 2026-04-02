@@ -172,26 +172,26 @@ These are the significant corrections:
 
 ## Metrics
 
-| Metric                       | Value                                            |
-| ---------------------------- | ------------------------------------------------ |
-| Total source files           | 108                                              |
-| Utility modules              | 25                                               |
-| Component files              | 13                                               |
-| Style sheets                 | 6                                                |
-| API modules                  | 6                                                |
-| Page views                   | 2                                                |
-| Test files                   | 14                                               |
-| Node tests                   | 65                                               |
-| Browser tests                | 41                                               |
-| Spec documents               | 10                                               |
-| Max lines per file           | 150 (enforced)                                   |
-| Max lines per doc            | 500 (enforced)                                   |
-| Automated checks             | 7 (line counts, lint, format, types, tests)      |
-| Build phases                 | 8 + whiteboard                                   |
-| Bugs found & fixed           | ~25 significant                                  |
+| Metric | Value |
+|---|---|
+| Total source files | 108 |
+| Utility modules | 25 |
+| Component files | 13 |
+| Style sheets | 6 |
+| API modules | 6 |
+| Page views | 2 |
+| Test files | 14 |
+| Node tests | 65 |
+| Browser tests | 41 |
+| Spec documents | 10 |
+| Max lines per file | 150 (enforced) |
+| Max lines per doc | 500 (enforced) |
+| Automated checks | 7 (line counts, lint, format, types, tests) |
+| Build phases | 8 + whiteboard |
+| Bugs found & fixed | ~25 significant |
 | Bugs requiring >4 iterations | 3 (drag reorder, event bubbling, SVG transforms) |
-| External dependencies        | 4 runtime (hybrids, express, ws, lucide-static)  |
-| Build tools                  | 0                                                |
+| External dependencies | 4 runtime (hybrids, express, ws, lucide-static) |
+| Build tools | 0 |
 
 ---
 

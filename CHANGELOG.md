@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.17] - 2026-04-02
+
+- Add Style and Markdown linting, templates, fixes
+- Refactor for scaffolding tests
+
+
 ## [0.2.16] - 2026-04-02
 
 - Trusting some random gist

@@ -71,25 +71,25 @@ The `Allow` header is also set for HTTP compliance.
 The frontend can fetch the schema at runtime and generate form fields
 automatically. The schema provides:
 
-| JSON Schema keyword       | Form behavior                                  |
-| ------------------------- | ---------------------------------------------- |
-| `type: "string"`          | `<input type="text">`                          |
-| `format: "email"`         | `<input type="email">`                         |
-| `format: "date-time"`     | `<input type="datetime-local">`                |
-| `enum: [...]`             | `<select>` with options                        |
-| `minLength` / `maxLength` | Validation constraints                         |
-| `readOnly: true`          | Field displayed but not editable               |
-| `required: [...]`         | Native `required` attribute + visual indicator |
+| JSON Schema keyword | Form behavior |
+|---|---|
+| `type: "string"` | `<input type="text">` |
+| `format: "email"` | `<input type="email">` |
+| `format: "date-time"` | `<input type="datetime-local">` |
+| `enum: [...]` | `<select>` with options |
+| `minLength` / `maxLength` | Validation constraints |
+| `readOnly: true` | Field displayed but not editable |
+| `required: [...]` | Native `required` attribute + visual indicator |
 
 JSON Schema constraints map directly to HTML validation attributes:
 
 | JSON Schema | HTML attribute |
-| ----------- | -------------- |
-| `minLength` | `minlength`    |
-| `maxLength` | `maxlength`    |
-| `minimum`   | `min`          |
-| `maximum`   | `max`          |
-| `pattern`   | `pattern`      |
+|---|---|
+| `minLength` | `minlength` |
+| `maxLength` | `maxlength` |
+| `minimum` | `min` |
+| `maximum` | `max` |
+| `pattern` | `pattern` |
 
 The browser's native constraint validation API enforces these — no custom
 JS validation needed for client-side checks.
@@ -116,13 +116,13 @@ The `schema-form` component maps `fields` entries to the corresponding
 
 ### Error Response Contract
 
-| Status | Body                | Meaning                                             |
-| ------ | ------------------- | --------------------------------------------------- |
-| `422`  | `{ error, fields }` | Validation failed — `fields` maps names to messages |
-| `404`  | `{ error }`         | Entity or collection not found                      |
-| `201`  | Entity JSON         | Created successfully                                |
-| `200`  | Entity JSON         | Updated successfully                                |
-| `204`  | Empty               | Deleted successfully                                |
+| Status | Body | Meaning |
+|---|---|---|
+| `422` | `{ error, fields }` | Validation failed — `fields` maps names to messages |
+| `404` | `{ error }` | Entity or collection not found |
+| `201` | Entity JSON | Created successfully |
+| `200` | Entity JSON | Updated successfully |
+| `204` | Empty | Deleted successfully |
 
 This allows a single generic `schema-form` component to render any entity's
 create/edit form without entity-specific template code.
@@ -135,12 +135,12 @@ create/edit form without entity-specific template code.
 
 Query params for filtering, sorting, pagination:
 
-| Param    | Example            | Purpose                         |
-| -------- | ------------------ | ------------------------------- |
-| `limit`  | `?limit=20`        | Page size (default: 20)         |
-| `offset` | `?offset=40`       | Skip N records                  |
-| `sort`   | `?sort=-createdAt` | Sort field, `-` prefix for desc |
-| `filter` | `?role=admin`      | Field equality filter           |
+| Param | Example | Purpose |
+|---|---|---|
+| `limit` | `?limit=20` | Page size (default: 20) |
+| `offset` | `?offset=40` | Skip N records |
+| `sort` | `?sort=-createdAt` | Sort field, `-` prefix for desc |
+| `filter` | `?role=admin` | Field equality filter |
 
 Response:
 
@@ -201,11 +201,11 @@ event: update
 data: {"type":"user","id":"2","action":"deleted"}
 ```
 
-| Field    | Value                                             |
-| -------- | ------------------------------------------------- |
-| `type`   | Entity name (lowercase, singular): `user`, `post` |
-| `id`     | Entity ID that changed                            |
-| `action` | `created`, `updated`, or `deleted`                |
+| Field | Value |
+|---|---|
+| `type` | Entity name (lowercase, singular): `user`, `post` |
+| `id` | Entity ID that changed |
+| `action` | `created`, `updated`, or `deleted` |
 
 ### Frontend Integration
 
@@ -227,44 +227,11 @@ required.
 const db = new Map();
 
 // Seed with dummy users
-db.set(
-  'users',
-  new Map([
-    [
-      '1',
-      {
-        id: '1',
-        firstName: 'Jane',
-        lastName: 'Doe',
-        email: 'jane@example.com',
-        role: 'admin',
-        createdAt: '2024-01-15T09:00:00Z',
-      },
-    ],
-    [
-      '2',
-      {
-        id: '2',
-        firstName: 'John',
-        lastName: 'Smith',
-        email: 'john@example.com',
-        role: 'editor',
-        createdAt: '2024-02-20T14:30:00Z',
-      },
-    ],
-    [
-      '3',
-      {
-        id: '3',
-        firstName: 'Alex',
-        lastName: 'Chen',
-        email: 'alex@example.com',
-        role: 'viewer',
-        createdAt: '2024-03-10T11:15:00Z',
-      },
-    ],
-  ]),
-);
+db.set('users', new Map([
+  ['1', { id: '1', firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', role: 'admin', createdAt: '2024-01-15T09:00:00Z' }],
+  ['2', { id: '2', firstName: 'John', lastName: 'Smith', email: 'john@example.com', role: 'editor', createdAt: '2024-02-20T14:30:00Z' }],
+  ['3', { id: '3', firstName: 'Alex', lastName: 'Chen', email: 'alex@example.com', role: 'viewer', createdAt: '2024-03-10T11:15:00Z' }],
+]));
 ```
 
 ### Schema Registry (server-side)
@@ -278,9 +245,7 @@ schemas.set('users', {
   title: 'User',
   type: 'object',
   required: ['firstName', 'lastName', 'email'],
-  properties: {
-    /* ... as above ... */
-  },
+  properties: { /* ... as above ... */ },
 });
 ```
 
@@ -298,15 +263,15 @@ router that works for any entity registered in the schema map.
 
 ## Frontend ↔ Backend Contract
 
-| Frontend (Hybrids Store)          | Backend (Express)          |
-| --------------------------------- | -------------------------- |
-| `[store.connect].get(id)`         | `GET /api/:entity/:id`     |
-| `[store.connect].set(id, values)` | `PUT /api/:entity/:id`     |
-| `[store.connect].list(params)`    | `GET /api/:entity?...`     |
-| `store.set(model, null)` (delete) | `DELETE /api/:entity/:id`  |
-| Schema fetch for forms            | `OPTIONS /api/:entity`     |
-| Schema fetch for item             | `OPTIONS /api/:entity/:id` |
-| Realtime invalidation             | `GET /api/events` (SSE)    |
+| Frontend (Hybrids Store) | Backend (Express) |
+|---|---|
+| `[store.connect].get(id)` | `GET /api/:entity/:id` |
+| `[store.connect].set(id, values)` | `PUT /api/:entity/:id` |
+| `[store.connect].list(params)` | `GET /api/:entity?...` |
+| `store.set(model, null)` (delete) | `DELETE /api/:entity/:id` |
+| Schema fetch for forms | `OPTIONS /api/:entity` |
+| Schema fetch for item | `OPTIONS /api/:entity/:id` |
+| Realtime invalidation | `GET /api/events` (SSE) |
 
 This contract means adding a new entity type requires:
 
