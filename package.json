@@ -28,6 +28,9 @@
     "release": "node scripts/release.js",
     "prepublishOnly": "node scripts/sync-docs.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "web-components",
     "no-build",
