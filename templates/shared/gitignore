@@ -1,5 +1,5 @@
 node_modules/
-public/vendor/
-public/icons.json
+src/public/vendor/
+src/public/icons.json
 data/db.json
 .env.local

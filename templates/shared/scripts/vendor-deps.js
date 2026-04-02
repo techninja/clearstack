@@ -10,7 +10,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
-const VENDOR_DIR = resolve(ROOT, 'public/vendor');
+const VENDOR_DIR = resolve(ROOT, 'src/public/vendor');
 
 /** @type {{ name: string, src: string }[]} */
 const DEPS = [{ name: 'hybrids', src: 'node_modules/hybrids/src' }];
@@ -21,5 +21,5 @@ for (const dep of DEPS) {
   const src = resolve(ROOT, dep.src);
   const dest = resolve(VENDOR_DIR, dep.name);
   cpSync(src, dest, { recursive: true });
-  console.log(`✓ Vendored: ${dep.name} → public/vendor/${dep.name}/`);
+  console.log(`✓ Vendored: ${dep.name} → src/public/vendor/${dep.name}/`);
 }

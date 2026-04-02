@@ -15,20 +15,17 @@ const app = express();
 // Parse JSON request bodies
 app.use(express.json());
 
-// Static: app shell + vendored deps
-app.use(express.static('public'));
-
-// Static: application ES modules served as-is
-app.use('/src', express.static('src'));
-
-// API
+// API (before static so /api routes don't hit the SPA fallback)
 app.use('/api', eventsRouter);
 app.use('/api', entityRouter);
 
+// Static: serve src/ as root — public/, styles/, components/ all resolve
+app.use(express.static('src'));
+
 // SPA fallback — serve index.html for any non-file route
 app.use((req, res, next) => {
-  if (req.method === 'GET' && !req.path.includes('.')) {
-    return res.sendFile('index.html', { root: 'public' });
+  if (req.method === 'GET' && !req.path.includes('.') && !req.path.startsWith('/api')) {
+    return res.sendFile('index.html', { root: 'src/public' });
   }
   next();
 });

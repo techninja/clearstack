@@ -19,7 +19,7 @@
   ],
   "exclude": [
     "../node_modules",
-    "../public/vendor",
+    "../src/public/vendor",
     "../**/*.test.js"
   ]
 }

@@ -10,16 +10,16 @@ import { eventsRouter } from './api/events.js';
 const app = express();
 
 app.use(express.json());
-app.use(express.static('public'));
-app.use('/src', express.static('src'));
 
 app.use('/api', eventsRouter);
 app.use('/api', entityRouter);
 
+app.use(express.static('src'));
+
 // SPA fallback
 app.use((req, res, next) => {
-  if (req.method === 'GET' && !req.path.includes('.')) {
-    return res.sendFile('index.html', { root: 'public' });
+  if (req.method === 'GET' && !req.path.includes('.') && !req.path.startsWith('/api')) {
+    return res.sendFile('index.html', { root: 'src/public' });
   }
   next();
 });

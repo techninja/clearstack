@@ -6,12 +6,14 @@ import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { start } from '../src/server.js';
 
-const PORT = 3001;
-const BASE = `http://localhost:${PORT}`;
+const PORT = 0;
+let BASE;
 let server;
 
 before(async () => {
   server = start(PORT);
+  const addr = server.address();
+  BASE = `http://localhost:${addr.port}`;
   await new Promise((r) => setTimeout(r, 100));
 });
 
@@ -25,13 +27,13 @@ describe('static serving', () => {
   });
 
   it('serves vendored hybrids', async () => {
-    const res = await fetch(`${BASE}/vendor/hybrids/index.js`);
+    const res = await fetch(`${BASE}/public/vendor/hybrids/index.js`);
     assert.equal(res.status, 200);
     assert.ok((await res.text()).includes('export'));
   });
 
   it('serves src/ files', async () => {
-    const res = await fetch(`${BASE}/src/styles/tokens.css`);
+    const res = await fetch(`${BASE}/styles/tokens.css`);
     assert.equal(res.status, 200);
   });
 });

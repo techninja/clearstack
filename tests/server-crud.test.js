@@ -7,13 +7,15 @@ import assert from 'node:assert/strict';
 import { start } from '../src/server.js';
 import { reload } from '../src/api/db.js';
 
-const PORT = 3002;
-const BASE = `http://localhost:${PORT}`;
+const PORT = 0;
+let BASE;
 let server;
 
 before(async () => {
   reload();
   server = start(PORT);
+  const addr = server.address();
+  BASE = `http://localhost:${addr.port}`;
   await new Promise((r) => setTimeout(r, 100));
 });
 
