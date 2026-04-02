@@ -213,6 +213,50 @@ function moveObj(o, dx, dy) { ... }
 
 ---
 
+## npm Scripts: One Entry Point Per Domain
+
+Every `package.json` script should be a single, discoverable entry point.
+Avoid the `name:variant` colon pattern that fragments a domain across
+multiple keys.
+
+### Rules
+
+- **One script per domain.** `test`, `spec`, `lint` — not `test:node`,
+  `test:browser`, `lint:fix`, `spec:code`, `spec:docs`.
+- **Arguments over aliases.** `pnpm spec check code` instead of
+  `pnpm spec:code`. The CLI handles routing.
+- **Interactive by default.** Running `pnpm spec` with no arguments shows
+  a menu of available actions. Users discover commands by using the tool.
+- **Direct invocation for power users.** Once you know the subcommand,
+  skip the menu: `pnpm spec check`, `pnpm spec update`.
+- **Self-documenting.** Each script's CLI should print usage when given
+  `help` or an unknown argument.
+
+### Why
+
+- Fewer script entries = less package.json bloat
+- Discoverability through interactive menus beats memorizing key names
+- Scripts grow via subcommands, not new `package.json` entries
+- Consistent with how real CLIs work (`git`, `docker`, `npm` itself)
+
+### Example
+
+```json
+{
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch --env-file=.env src/server.js",
+    "test": "node --test tests/*.test.js",
+    "spec": "clearstack"
+  }
+}
+```
+
+`pnpm spec` → interactive menu. `pnpm spec check` → run checks.
+`pnpm spec update` → sync docs. One entry, full access.
+
+---
+
 ## Session Retrospective
 
 At the end of each implementation session, ask:

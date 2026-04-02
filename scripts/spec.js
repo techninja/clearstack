@@ -12,7 +12,7 @@
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkFiles, printResults } from './spec-check.js';
-import { runCheck } from './spec-run.js';
+import { runCheck, countFiles } from './spec-run.js';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 
@@ -45,15 +45,19 @@ function runDocs() {
 
 /** Run all spec checks — line counts, lint, format, types, tests. */
 async function runAll() {
+  const jsFiles = countFiles(ROOT, ['.js']);
+  const testFiles = countFiles(ROOT, ['.js'], ['tests', 'src'], /\.test\.js$/);
+  const browserTests = countFiles(ROOT, ['.js'], ['src/components'], /\.test\.js$/);
+
   console.log('Running full spec compliance check...\n');
   const r = [
     runCode(),
     runDocs(),
-    runCheck('ESLint', CMD.lint, ROOT),
-    runCheck('Prettier', CMD.format, ROOT),
-    runCheck('JSDoc types (tsc)', CMD.types, ROOT),
-    runCheck('Node tests', CMD.testNode, ROOT),
-    runCheck('Browser tests', CMD.testBrowser, ROOT),
+    runCheck('ESLint', CMD.lint, ROOT, `${jsFiles} files`),
+    runCheck('Prettier', CMD.format, ROOT, `${jsFiles} files`),
+    runCheck('JSDoc types (tsc)', CMD.types, ROOT, `${jsFiles} files`),
+    runCheck('Node tests', CMD.testNode, ROOT, `${testFiles} test files`),
+    runCheck('Browser tests', CMD.testBrowser, ROOT, `${browserTests} test files`),
   ];
   const passed = r.filter(Boolean).length;
   console.log(`\n${'='.repeat(40)}`);

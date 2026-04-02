@@ -1,23 +1,25 @@
 /**
- * Run a shell command and report pass/fail.
- * Shows output only on failure — keeps the spec runner clean.
+ * Run a shell command and report pass/fail with file counts.
+ * Counts come from the filesystem, not tool output parsing.
  * @module scripts/spec-run
  */
 
 import { execSync } from 'node:child_process';
+import { findFiles } from './spec-check.js';
 
 /**
- * Run a command, report pass/fail. Output shown only on failure.
- * Errors from node_modules are filtered (e.g. Express v5 type issues).
+ * Run a command, report pass/fail. Errors from node_modules are filtered.
  * @param {string} label - Display name for this check
  * @param {string} cmd - Shell command to execute
  * @param {string} cwd - Working directory
- * @returns {boolean} true if command exited 0
+ * @param {string} [stats] - Optional stats string to append on pass
+ * @returns {boolean} true if passed
  */
-export function runCheck(label, cmd, cwd) {
+export function runCheck(label, cmd, cwd, stats) {
+  const suffix = stats ? ` (${stats})` : '';
   try {
     execSync(cmd, { cwd, stdio: 'pipe', encoding: 'utf-8' });
-    console.log(`  ✅ ${label}`);
+    console.log(`  ✅ ${label}${suffix}`);
     return true;
   } catch (err) {
     const output = (err.stdout || '') + (err.stderr || '');
@@ -26,11 +28,36 @@ export function runCheck(label, cmd, cwd) {
       .split('\n')
       .filter((l) => l.trim() && !l.includes('node_modules'));
     if (ownErrors.length === 0) {
-      console.log(`  ✅ ${label}`);
+      console.log(`  ✅ ${label}${suffix}`);
       return true;
     }
-    console.log(`  ❌ ${label}`);
+    console.log(`  ❌ ${label}${suffix}`);
     for (const line of ownErrors) console.log(`     ${line}`);
     return false;
   }
+}
+
+/**
+ * Count files matching extensions in a project.
+ * @param {string} root - Project root
+ * @param {string[]} extensions - File extensions
+ * @param {string[]} [dirs] - Subdirectories to search (relative to root)
+ * @param {RegExp} [filter] - Optional regex to further filter filenames
+ * @returns {number}
+ */
+export function countFiles(root, extensions, dirs, filter) {
+  const ignore = ['node_modules', 'public/vendor', '.git', '.configs', 'templates'];
+  let files;
+  if (dirs) {
+    files = dirs.reduce((acc, d) => {
+      try {
+        return acc.concat(findFiles(`${root}/${d}`, extensions, ignore, root));
+      } catch {
+        return acc;
+      }
+    }, []);
+  } else {
+    files = findFiles(root, extensions, ignore, root);
+  }
+  return filter ? files.filter((f) => filter.test(f)).length : files.length;
 }
