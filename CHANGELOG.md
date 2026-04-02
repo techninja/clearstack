@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.8] - 2026-04-02
+
+- Simplify test and setup entries
+- Fix static hosting, add tests
+
+
 ## [0.2.7] - 2026-04-02
 
 - Refactor for node script condensing and simplification
