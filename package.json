@@ -4,7 +4,7 @@
   "type": "module",
   "description": "A no-build web component framework specification — scaffold, validate, and evolve spec-compliant projects",
   "bin": {
-    "clearstack": "./bin/cli.js"
+    "clearstack": "bin/cli.js"
   },
   "files": [
     "bin/",
