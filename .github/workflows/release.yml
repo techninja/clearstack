@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
       - name: Sync spec docs into templates
@@ -31,11 +31,7 @@ jobs:
         run: npm ci
 
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ''
-        run: |
-          echo "registry=https://registry.npmjs.org/" > "$NPM_CONFIG_USERCONFIG"
-          npm publish --provenance --access public
+        run: NODE_AUTH_TOKEN="" npm publish
 
       - name: Generate changelog from commits
         id: changelog
