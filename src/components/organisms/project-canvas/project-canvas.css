@@ -31,6 +31,7 @@ project-canvas {
   & .canvas-area.tool-select {
     cursor: default;
   }
+
   & .canvas-area.tool-draw {
     cursor: crosshair;
   }
@@ -46,15 +47,19 @@ project-canvas {
   & .canvas-obj {
     pointer-events: none;
   }
+
   & .canvas-obj.selected {
     stroke: var(--color-primary) !important;
   }
+
   & [data-obj-id][stroke='transparent'] {
     cursor: pointer;
   }
+
   & .sel-body {
     cursor: move;
   }
+
   & .sel-box {
     pointer-events: none;
   }
@@ -64,24 +69,28 @@ project-canvas {
     stroke: var(--color-text-inverse);
     stroke-width: 1;
   }
+
   & .sel-handle[data-handle='nw'],
   & .sel-handle[data-handle='se'] {
     cursor: nwse-resize;
   }
+
   & .sel-handle[data-handle='ne'],
   & .sel-handle[data-handle='sw'] {
     cursor: nesw-resize;
   }
+
   & .sel-rotate {
     cursor: grab;
   }
+
   & .sel-delete {
     cursor: pointer;
   }
 }
 
 /* Mobile: toolbar on top, canvas fills remaining height */
-@media (max-width: 640px) {
+@media (width <= 640px) {
   project-canvas .project-canvas {
     flex-direction: column;
     height: 60vh;
@@ -92,8 +101,7 @@ project-canvas {
   }
 
   project-canvas canvas-toolbar .canvas-toolbar {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: center;
     gap: 2px;
   }

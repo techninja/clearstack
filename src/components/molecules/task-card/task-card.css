@@ -11,6 +11,7 @@ task-card {
     background: var(--color-surface);
     cursor: pointer;
     transition: box-shadow 0.15s ease;
+
     &:hover {
       box-shadow: var(--shadow-sm);
     }
@@ -20,6 +21,7 @@ task-card {
     cursor: grab;
     color: var(--color-text-muted);
     flex-shrink: 0;
+
     &:active {
       cursor: grabbing;
     }
@@ -41,6 +43,7 @@ task-card {
     padding: var(--space-xs);
     border-radius: var(--radius-sm);
     flex-shrink: 0;
+
     &:hover {
       color: var(--color-danger);
       background: var(--color-bg);

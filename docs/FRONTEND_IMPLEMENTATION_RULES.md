@@ -1,4 +1,5 @@
 # Frontend Implementation Rules
+
 ## Hybrids.js "No-Build" Web Component Specification
 
 > A concise, LLM-and-human-friendly specification for building web applications
@@ -235,5 +236,3 @@ app-button/
 
 If a component needs helpers that push it past 150 lines, extract them to
 `src/utils/` — not into sibling files within the component directory.
-
-

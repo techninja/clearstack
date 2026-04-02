@@ -10,38 +10,31 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Trusting some random gist
 
-
 ## [0.2.15] - 2026-04-02
 
 - Bigger bonk? :boom:
 
-
 ## [0.2.14] - 2026-04-02
 
 - Bonk! :hammer:
-
 
 ## [0.2.13] - 2026-04-02
 
 - This one might shine a light
 - Update for non-deprecated Node 24 action runners
 
-
 ## [0.2.12] - 2026-04-02
 
 - Publishing to NPM used to be easy...
-
 
 ## [0.2.11] - 2026-04-02
 
 - Grasping at straws in the dark
 
-
 ## [0.2.10] - 2026-04-02
 
 - Fix CI for spec test
 - Release fix maybe
-
 
 ## [0.2.9] - 2026-04-02
 
@@ -49,12 +42,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Make it public
 - Fix bin location
 
-
 ## [0.2.8] - 2026-04-02
 
 - Simplify test and setup entries
 - Fix static hosting, add tests
-
 
 ## [0.2.7] - 2026-04-02
 
@@ -62,36 +53,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Simplify spec run to summary with error details
 - Ignore warnings in node modules
 
-
 ## [0.2.6] - 2026-04-01
 
 - Missing type defs and immediate linting issue
-
 
 ## [0.2.5] - 2026-04-01
 
 - Update for better packaging, build gitignore
 
-
 ## [0.2.4] - 2026-04-01
 
 - No postinstall please
-
 
 ## [0.2.3] - 2026-04-01
 
 - Let's play guess how many times I have to build this...
 
-
 ## [0.2.2] - 2026-04-01
 
 - Publish with provenance
 
-
 ## [0.2.1] - 2026-04-01
 
 - Fix readme name and generation
-
 
 ## [0.2.0] - 2026-04-01
 
@@ -116,8 +100,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Initial base commit with self proving spec
 - Initial commit
 
-
 ### Added
+
 - Collaborative SVG whiteboard per project with real-time WebSocket sync
 - Drawing tools: pen, rectangle, circle, line, text
 - 16 Lucide-powered diagram shape stamps (cloud, database, server, etc.)
@@ -135,6 +119,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - 16 new tests for canvas transforms, messages, and component rendering
 
 ### Changed
+
 - Project detail page: whiteboard front and center, condensed header row
 - `app-icon` rewritten to load from Lucide-generated `icons.json`
 - `page-layout` converted from component to template function (fixes host context)
@@ -143,6 +128,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - DB module exposes `reload()` for test isolation
 
 ### Fixed
+
 - Event handlers in content template properties now resolve correct host
 - `store.clear([Model])` used for list stores (was clearing singular only)
 - `store.ready(item)` guard on list items prevents pending-state crashes
@@ -155,6 +141,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [1.0.0] - 2025-03-30
 
 ### Added
+
 - Initial specification: 8 documents covering frontend, backend, testing
 - Project/task tracker proof-of-concept
 - Hybrids.js web components with light DOM, no build tools

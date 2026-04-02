@@ -1,4 +1,5 @@
 # JSDoc Typing Strategy
+
 ## Type Safety Without TypeScript
 
 > JSDoc annotations provide editor intellisense, LLM comprehension, and

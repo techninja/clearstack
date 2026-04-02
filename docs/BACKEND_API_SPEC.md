@@ -1,4 +1,5 @@
 # Backend API Specification
+
 ## REST Endpoints, JSON Schema Discovery & Realtime Sync
 
 > Defines the server-side data contract. The frontend consumes this API via
@@ -273,6 +274,7 @@ router that works for any entity registered in the schema map.
 | Realtime invalidation | `GET /api/events` (SSE) |
 
 This contract means adding a new entity type requires:
+
 - One JSON Schema definition (server)
 - One store model file (frontend)
 - Dummy seed data (server, for dev)

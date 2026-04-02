@@ -1,4 +1,5 @@
 # Testing
+
 ## Philosophy, Tools & Patterns
 
 > How we test in a no-build web component project.

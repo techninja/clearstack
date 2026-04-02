@@ -120,10 +120,12 @@ git diff docs/ .configs/            # review what changed
 ```
 
 This updates:
+
 - `docs/clearstack/*.md` — spec documentation
 - `.configs/*` — linter, formatter, type checker, test runner configs
 
 This never touches:
+
 - `docs/app-spec/` — your project specs
 - `src/` — your code
 - `scripts/` — your build scripts

@@ -24,9 +24,11 @@ canvas-toolbar {
     font-size: var(--text-lg);
     cursor: pointer;
     transition: background 0.1s ease;
+
     &:hover {
       background: var(--color-bg);
     }
+
     &.active {
       background: var(--color-primary);
       color: var(--color-text-inverse);
@@ -64,9 +66,11 @@ canvas-toolbar {
     background: var(--color-surface);
     font-size: var(--text-lg);
     cursor: pointer;
+
     &:hover {
       background: var(--color-bg);
     }
+
     &.active {
       border-color: var(--color-primary);
       background: var(--color-bg);
@@ -74,7 +78,7 @@ canvas-toolbar {
   }
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   canvas-toolbar .shapes-picker {
     left: 0;
     top: calc(100% + var(--space-xs));

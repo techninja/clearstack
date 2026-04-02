@@ -1,4 +1,5 @@
 # Conventions
+
 ## Naming Rules & Anti-Patterns
 
 > Quick reference for naming and what to avoid.
@@ -52,12 +53,14 @@ components. Page views and templates may drop the prefix when unambiguous.
 ### ❌ Never Do This
 
 **DOM queries inside components:**
+
 ```javascript
 // BAD — breaks encapsulation, ignores shadow DOM
 const el = document.querySelector('.my-thing');
 ```
 
 **Manual event listeners:**
+
 ```javascript
 // BAD — leaks memory, bypasses hybrids lifecycle
 connectedCallback() {
@@ -66,18 +69,21 @@ connectedCallback() {
 ```
 
 **Global mutable state:**
+
 ```javascript
 // BAD — invisible dependencies, untraceable bugs
 window.appState = { user: null };
 ```
 
 **Imperative DOM manipulation:**
+
 ```javascript
 // BAD — fights the reactive render cycle
 host.shadowRoot.querySelector('span').textContent = 'updated';
 ```
 
 **Business logic in render:**
+
 ```javascript
 // BAD — render should be pure projection of state
 render: ({ items }) => html`
@@ -86,11 +92,13 @@ render: ({ items }) => html`
 ```
 
 **Files over 150 lines:**
+
 ```
 // BAD — extract to utils/ or split into sub-components
 ```
 
 **Deep nesting (>3 component levels):**
+
 ```
 // BAD — flatten by composing at the page level
 <app-layout>
@@ -168,16 +176,19 @@ function toggle(host) {
 ### ✅ Always Do This
 
 **Declarative event binding:**
+
 ```javascript
 html`<button onclick="${handleClick}">Go</button>`
 ```
 
 **Store for shared state:**
+
 ```javascript
 state: store(AppState),
 ```
 
 **Pure functions for logic:**
+
 ```javascript
 // In src/utils/filterActive.js
 export const filterActive = (items) => items.filter(i => i.active);
@@ -188,6 +199,7 @@ render: ({ items }) => html`<ul>${filterActive(items).map(...)}</ul>`,
 ```
 
 **JSDoc on all exports:**
+
 ```javascript
 /** @param {User} user */
 export const fullName = (user) => `${user.firstName} ${user.lastName}`;

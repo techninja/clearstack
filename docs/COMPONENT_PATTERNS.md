@@ -1,4 +1,5 @@
 # Component Patterns
+
 ## Authoring, Styling, Templates & JSDoc Typing
 
 > How to write, style, and type components in this framework.

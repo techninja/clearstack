@@ -21,6 +21,7 @@ task-list {
     background: var(--color-primary);
     border-radius: 2px;
     position: relative;
+
     &::before {
       content: '';
       position: absolute;

@@ -54,8 +54,11 @@
     "express": "^5.2.1",
     "hybrids": "^9.1.22",
     "lucide-static": "^1.7.0",
+    "markdownlint-cli2": "^0.22.0",
     "playwright": "^1.50.0",
     "prettier": "^3.8.1",
+    "stylelint": "^17.6.0",
+    "stylelint-config-standard": "^40.0.0",
     "typescript": "^6.0.2",
     "ws": "^8.20.0"
   }

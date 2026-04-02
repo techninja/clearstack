@@ -25,8 +25,10 @@ const IGNORE = (process.env.SPEC_IGNORE_DIRS || 'node_modules,public/vendor,.git
 // Shared command strings — macOS needs find instead of shell globs
 const CMD = {
   lint: 'npx eslint --config .configs/eslint.config.js . --fix',
+  stylelint: 'npx stylelint --config .configs/.stylelintrc.json "src/**/*.css" --fix',
   format:
     'npx prettier --config .configs/.prettierrc --write src scripts tests templates/**/*.md templates/**/*.html templates/**/*.css templates/**/*.json',
+  mdlint: 'npx markdownlint-cli2 --config .configs/.markdownlint.jsonc --fix "docs/**/*.md" "*.md"',
   types: 'npx tsc --project .configs/jsconfig.json',
   testNode: 'node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js',
   testBrowser: 'npx web-test-runner --config .configs/web-test-runner.config.js',
@@ -50,12 +52,17 @@ async function runAll() {
   const testFiles = countFiles(ROOT, ['.js'], ['tests', 'src'], /\.test\.js$/);
   const browserTests = countFiles(ROOT, ['.js'], ['src/components'], /\.test\.js$/);
 
+  const cssFiles = countFiles(ROOT, ['.css']);
+  const mdFiles = countFiles(ROOT, ['.md']);
+
   console.log('Running full spec compliance check...\n');
   const r = [
     runCode(),
     runDocs(),
     runCheck('ESLint', CMD.lint, ROOT, `${jsFiles} files`),
+    runCheck('Stylelint', CMD.stylelint, ROOT, `${cssFiles} files`),
     runCheck('Prettier', CMD.format, ROOT, `${jsFiles} files`),
+    runCheck('Markdown', CMD.mdlint, ROOT, `${mdFiles} files`),
     runCheck('JSDoc types (tsc)', CMD.types, ROOT, `${jsFiles} files`),
     runCheck('Node tests', CMD.testNode, ROOT, `${testFiles} test files`),
     runCheck('Browser tests', CMD.testBrowser, ROOT, `${browserTests} test files`),
@@ -75,7 +82,9 @@ async function interactive() {
       { name: `Code line counts (≤${CODE_MAX})`, value: 'code' },
       { name: `Doc line counts (≤${DOCS_MAX})`, value: 'docs' },
       { name: 'ESLint', value: 'lint' },
+      { name: 'Stylelint', value: 'stylelint' },
       { name: 'Prettier', value: 'format' },
+      { name: 'Markdown lint', value: 'mdlint' },
       { name: 'JSDoc types (tsc --checkJs)', value: 'types' },
       { name: 'Node tests', value: 'test:node' },
       { name: 'Browser tests', value: 'test:browser' },
@@ -87,7 +96,9 @@ async function interactive() {
     code: () => runCode(),
     docs: () => runDocs(),
     lint: () => runCheck('ESLint', CMD.lint, ROOT),
+    stylelint: () => runCheck('Stylelint', CMD.stylelint, ROOT),
     format: () => runCheck('Prettier', CMD.format, ROOT),
+    mdlint: () => runCheck('Markdown', CMD.mdlint, ROOT),
     types: () => runCheck('JSDoc types', CMD.types, ROOT),
     'test:node': () => runCheck('Node tests', CMD.testNode, ROOT),
     'test:browser': () => runCheck('Browser tests', CMD.testBrowser, ROOT),

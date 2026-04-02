@@ -23,9 +23,11 @@ schema-form {
   & .schema-form-cols-1 {
     grid-template-columns: 1fr;
   }
+
   & .schema-form-cols-2 {
     grid-template-columns: 1fr 1fr;
   }
+
   & .schema-form-cols-3 {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -38,6 +40,7 @@ schema-form {
   & .schema-form-actions-right {
     justify-content: flex-end;
   }
+
   & .schema-form-actions-center {
     justify-content: center;
   }

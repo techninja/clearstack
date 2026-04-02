@@ -16,6 +16,7 @@ The rename from `hybrids-spec` to `clearstack` reflects that this is a full fram
 ## Changes
 
 ### Added
+
 - `bin/cli.js` — CLI entry point with `-y`/`--yes` non-interactive mode and `--mode`/`--port` flags
 - `lib/` — `init.js`, `update.js`, `check.js`, `copy.js`, `package-gen.js` at repo root (flattened from `scaffolder/`)
 - `templates/` — project templates at repo root (flattened from `scaffolder/templates/`)
@@ -26,6 +27,7 @@ The rename from `hybrids-spec` to `clearstack` reflects that this is a full fram
 - `src/server.js` — moved from root `server.js` into `src/`
 
 ### Changed
+
 - **Package identity**: root `package.json` is now the publishable `clearstack` npm package (`"bin"`, `"files"` pointing to `bin/`, `lib/`, `templates/`, `docs/`)
 - **POC deps moved to devDependencies**: `express`, `hybrids`, `lucide-static`, `ws` — they're for the proof-of-concept app, not the published package
 - **Published deps**: only `@inquirer/prompts` and `dotenv`
@@ -39,6 +41,7 @@ The rename from `hybrids-spec` to `clearstack` reflects that this is a full fram
 - **Template scripts**: removed `spec.js`, `spec-check.js`, `spec-run.js` from templates — the installed package binary handles spec enforcement
 
 ### Fixed
+
 - `lib/copy.js` — missing `resolve` import from `node:path`
 - `package-gen.js` — supports merging with existing `package.json` (preserves `private`, `author`, `license`, `engines`, `packageManager`, `keywords`)
 - `scripts/spec-run.js` — filters `node_modules` errors from tsc output (Express v5 ships broken JS that tsc follows via imports)
@@ -46,6 +49,7 @@ The rename from `hybrids-spec` to `clearstack` reflects that this is a full fram
 - `src/server.js` — added `@type {any}` cast on `express()` to suppress Express v5 type inference issues
 
 ### Removed
+
 - `scaffolder/` directory — flattened into repo root
 - `scaffolder/package.json` — replaced by root `package.json`
 - `scaffolder/tests/scaffolder.test.js` — needs rewrite for new structure
