@@ -23,7 +23,7 @@
     "test": "node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js",
     "spec": "node --env-file=.env scripts/spec.js",
     "lint": "eslint --config .configs/eslint.config.js . --fix",
-    "format": "prettier --config .configs/.prettierrc --write src scripts tests",
+    "format": "prettier --config .configs/.prettierrc --write src scripts tests templates/**/*.md templates/**/*.html templates/**/*.css templates/**/*.json",
     "typecheck": "tsc --project .configs/jsconfig.json",
     "release": "node scripts/release.js",
     "prepublishOnly": "node scripts/sync-docs.js"

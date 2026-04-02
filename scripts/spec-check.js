@@ -43,9 +43,10 @@ export function findFiles(dir, extensions, ignoreDirs, root = dir) {
  * @param {string[]} extensions - File extensions to check
  * @param {number} maxLines - Maximum allowed lines
  * @param {string[]} ignoreDirs - Directories to skip
- * @returns {{ violations: Violation[], checked: number }}
+ * @returns {{ violations: Violation[], checked: number, ms: number }}
  */
 export function checkFiles(root, extensions, maxLines, ignoreDirs) {
+  const start = performance.now();
   const files = findFiles(root, extensions, ignoreDirs);
   const violations = [];
 
@@ -57,20 +58,21 @@ export function checkFiles(root, extensions, maxLines, ignoreDirs) {
     }
   }
 
-  return { violations, checked: files.length };
+  return { violations, checked: files.length, ms: Math.round(performance.now() - start) };
 }
 
 /**
  * Print results in compact format.
  * @param {string} label - e.g. "Code" or "Docs"
- * @param {{ violations: Violation[], checked: number }} result
+ * @param {{ violations: Violation[], checked: number, ms: number }} result
  * @returns {boolean} true if all passed
  */
 export function printResults(label, result) {
-  const { violations, checked } = result;
+  const { violations, checked, ms } = result;
+  const time = ms < 1000 ? `${ms}ms` : `${(ms / 1000).toFixed(1)}s`;
 
   if (violations.length === 0) {
-    console.log(`  ✅ ${label} (${checked} files)`);
+    console.log(`  ✅ ${label} (${checked} files, ${time})`);
     return true;
   }
 

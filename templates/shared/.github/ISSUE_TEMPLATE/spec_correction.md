@@ -1,7 +1,7 @@
 ---
 name: Spec Correction
 about: The spec says one thing but implementation reveals another
-title: "[Spec] "
+title: '[Spec] '
 labels: spec
 ---
 

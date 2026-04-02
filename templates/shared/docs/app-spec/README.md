@@ -12,14 +12,14 @@ and architectural decisions live.
 
 ## What to Document
 
-| Document | Example content |
-|---|---|
-| `ENTITIES.md` | Your domain entities, their relationships, field descriptions |
-| `PATTERNS.md` | Project-specific component patterns, naming overrides |
-| `API.md` | Custom API endpoints beyond the generic CRUD |
-| `DEPLOYMENT.md` | How this project is built, deployed, and monitored |
-| `DECISIONS.md` | Architecture Decision Records — why you chose X over Y |
-| `OVERRIDES.md` | Where your project intentionally deviates from the base spec and why |
+| Document        | Example content                                                      |
+| --------------- | -------------------------------------------------------------------- |
+| `ENTITIES.md`   | Your domain entities, their relationships, field descriptions        |
+| `PATTERNS.md`   | Project-specific component patterns, naming overrides                |
+| `API.md`        | Custom API endpoints beyond the generic CRUD                         |
+| `DEPLOYMENT.md` | How this project is built, deployed, and monitored                   |
+| `DECISIONS.md`  | Architecture Decision Records — why you chose X over Y               |
+| `OVERRIDES.md`  | Where your project intentionally deviates from the base spec and why |
 
 ## Rules
 

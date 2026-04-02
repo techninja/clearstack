@@ -13,13 +13,6 @@
       "hybrids": ["../node_modules/hybrids/types/index.d.ts"]
     }
   },
-  "include": [
-    "../src/**/*.js",
-    "../scripts/**/*.js"
-  ],
-  "exclude": [
-    "../node_modules",
-    "../src/public/vendor",
-    "../**/*.test.js"
-  ]
+  "include": ["../src/**/*.js", "../scripts/**/*.js"],
+  "exclude": ["../node_modules", "../src/public/vendor", "../**/*.test.js"]
 }

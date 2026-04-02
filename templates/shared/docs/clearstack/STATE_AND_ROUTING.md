@@ -1,4 +1,5 @@
 # State & Routing
+
 ## Store, Routing, Unified App State & Realtime Sync
 
 > How data flows through the application.
@@ -19,7 +20,11 @@ export default define({
   tag: 'app-toggle',
   open: false,
   render: ({ open }) => html`
-    <button onclick="${host => { host.open = !host.open; }}">
+    <button
+      onclick="${(host) => {
+        host.open = !host.open;
+      }}"
+    >
       ${open ? 'Close' : 'Open'}
     </button>
   `,
@@ -85,9 +90,11 @@ export default define({
   tag: 'theme-toggle',
   state: store(AppState),
   render: ({ state }) => html`
-    <button onclick="${host => {
-      store.set(host.state, { theme: host.state.theme === 'light' ? 'dark' : 'light' });
-    }}">
+    <button
+      onclick="${(host) => {
+        store.set(host.state, { theme: host.state.theme === 'light' ? 'dark' : 'light' });
+      }}"
+    >
       Theme: ${state.theme}
     </button>
   `,
@@ -114,13 +121,14 @@ const UserModel = {
   lastName: '',
   email: '',
   [store.connect]: {
-    get: (id) => fetch(`/api/users/${id}`).then(r => r.json()),
-    set: (id, values) => fetch(`/api/users/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
-    }).then(r => r.json()),
-    list: (id) => fetch(`/api/users?${new URLSearchParams(id)}`).then(r => r.json()),
+    get: (id) => fetch(`/api/users/${id}`).then((r) => r.json()),
+    set: (id, values) =>
+      fetch(`/api/users/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      }).then((r) => r.json()),
+    list: (id) => fetch(`/api/users?${new URLSearchParams(id)}`).then((r) => r.json()),
   },
 };
 
@@ -129,19 +137,19 @@ export default UserModel;
 
 #### Store API Quick Reference
 
-| Method | Purpose |
-|---|---|
-| `store(Model)` | Descriptor — binds model to a component property |
-| `store.get(Model, id)` | Get a cached instance (triggers fetch if needed) |
-| `store.set(model, values)` | Update (async, returns Promise) |
-| `store.sync(model, values)` | Update (sync, immediate) |
-| `store.pending(model)` | `false` or `Promise` while loading |
-| `store.ready(model)` | `true` when loaded and valid |
-| `store.error(model)` | `false` or `Error` |
-| `store.clear(Model)` | Invalidate singular model cache |
-| `store.clear([Model])` | Invalidate list cache — **required for list stores** |
-| `store.submit(draft)` | Submit draft mode changes |
-| `store.resolve(Model, id)` | Returns Promise that resolves when ready |
+| Method                      | Purpose                                              |
+| --------------------------- | ---------------------------------------------------- |
+| `store(Model)`              | Descriptor — binds model to a component property     |
+| `store.get(Model, id)`      | Get a cached instance (triggers fetch if needed)     |
+| `store.set(model, values)`  | Update (async, returns Promise)                      |
+| `store.sync(model, values)` | Update (sync, immediate)                             |
+| `store.pending(model)`      | `false` or `Promise` while loading                   |
+| `store.ready(model)`        | `true` when loaded and valid                         |
+| `store.error(model)`        | `false` or `Error`                                   |
+| `store.clear(Model)`        | Invalidate singular model cache                      |
+| `store.clear([Model])`      | Invalidate list cache — **required for list stores** |
+| `store.submit(draft)`       | Submit draft mode changes                            |
+| `store.resolve(Model, id)`  | Returns Promise that resolves when ready             |
 
 #### Decision Tree: Local vs Shared State
 
@@ -161,13 +169,12 @@ clear triggers re-fetch). Always guard property access on list items:
 
 ```javascript
 // ❌ BAD — task may be pending, accessing .title throws
-tasks.map((task) => html`<span>${task.title}</span>`)
+tasks.map((task) => html`<span>${task.title}</span>`);
 
 // ✅ GOOD — guard each item, show fallback for pending items
-tasks.map((task) => store.ready(task)
-  ? html`<span>${task.title}</span>`
-  : html`<span class="spinner"></span>`
-)
+tasks.map((task) =>
+  store.ready(task) ? html`<span>${task.title}</span>` : html`<span class="spinner"></span>`,
+);
 ```
 
 This is especially important after batch operations (e.g. drag reorder)
@@ -189,11 +196,7 @@ import HomeView from '../pages/home/index.js';
 export default define({
   tag: 'app-router',
   stack: router(HomeView, { url: '/' }),
-  render: ({ stack }) => html`
-    <template layout="column height::100vh">
-      ${stack}
-    </template>
-  `,
+  render: ({ stack }) => html` <template layout="column height::100vh"> ${stack} </template> `,
 });
 ```
 
@@ -222,14 +225,14 @@ export default define({
 
 ### Routing Patterns
 
-| Pattern | Code |
-|---|---|
-| Navigate to view | `<a href="${router.url(View)}">` |
-| Navigate with params | `router.url(View, { id: '42' })` |
-| Back button | `<a href="${router.backUrl()}">Back</a>` |
-| Check active view | `router.active(View)` |
-| Guarded route | `guard: () => isAuthenticated()` |
-| Dialog overlay | `dialog: true` on the view config |
+| Pattern              | Code                                     |
+| -------------------- | ---------------------------------------- |
+| Navigate to view     | `<a href="${router.url(View)}">`         |
+| Navigate with params | `router.url(View, { id: '42' })`         |
+| Back button          | `<a href="${router.backUrl()}">Back</a>` |
+| Check active view    | `router.active(View)`                    |
+| Guarded route        | `guard: () => isAuthenticated()`         |
+| Dialog overlay       | `dialog: true` on the view config        |
 
 ---
 
@@ -253,12 +256,12 @@ DOM
 
 ### AppState vs Entity Models
 
-| Concern | Where |
-|---|---|
-| Theme, sidebar, UI flags | `AppState` (singleton) |
+| Concern                   | Where                                 |
+| ------------------------- | ------------------------------------- |
+| Theme, sidebar, UI flags  | `AppState` (singleton)                |
 | User records, posts, etc. | `UserModel`, `PostModel` (enumerable) |
-| Form draft state | `store(Model, { draft: true })` |
-| Route state | `router()` — managed by hybrids |
+| Form draft state          | `store(Model, { draft: true })`       |
+| Route state               | `router()` — managed by hybrids       |
 
 ---
 
@@ -280,7 +283,7 @@ export function connectRealtime(url, modelMap) {
   source.addEventListener('update', (event) => {
     const { type } = JSON.parse(event.data);
     const Model = modelMap[type];
-    if (Model) store.clear(Model);  // full clear triggers re-fetch
+    if (Model) store.clear(Model); // full clear triggers re-fetch
   });
 
   source.addEventListener('error', () => {
@@ -326,9 +329,7 @@ export default define({
       return disconnect;
     },
   },
-  render: ({ stack }) => html`
-    <template layout="column height::100vh">${stack}</template>
-  `,
+  render: ({ stack }) => html` <template layout="column height::100vh">${stack}</template> `,
 });
 ```
 
@@ -354,7 +355,7 @@ source.addEventListener('update', (event) => {
   const { type } = JSON.parse(event.data);
   clearTimeout(timers[type]);
   timers[type] = setTimeout(() => {
-    store.clear([Model]);  // one clear after the batch settles
+    store.clear([Model]); // one clear after the batch settles
   }, 300);
 });
 ```
