@@ -31,8 +31,10 @@ jobs:
         run: npm ci
 
       - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ''
         run: |
-          sed -i '/_authToken/d' "$NPM_CONFIG_USERCONFIG"
+          echo "registry=https://registry.npmjs.org/" > "$NPM_CONFIG_USERCONFIG"
           npm publish --provenance --access public
 
       - name: Generate changelog from commits
