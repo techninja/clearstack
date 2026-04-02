@@ -22,7 +22,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org
+
+      - name: Configure npm for OIDC publishing
+        run: npm config set registry https://registry.npmjs.org/
 
       - name: Sync spec docs into templates
         run: node scripts/sync-docs.js
@@ -31,9 +33,7 @@ jobs:
         run: npm ci
 
       - name: Publish to npm
-        run: |
-          unset NODE_AUTH_TOKEN
-          npm publish --provenance --access public
+        run: npm publish --provenance --access public
 
       - name: Generate changelog from commits
         id: changelog
