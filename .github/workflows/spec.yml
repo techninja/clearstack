@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci
@@ -24,26 +24,5 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium --with-deps
 
-      - name: Code line counts (≤150)
-        run: node scripts/spec.js code
-
-      - name: Doc line counts (≤500)
-        run: node scripts/spec.js docs
-
-      - name: ESLint
-        run: npx eslint --config .configs/eslint.config.js .
-
-      - name: Prettier
-        run: npx prettier --config .configs/.prettierrc --check src scripts tests
-
-      - name: JSDoc types (tsc --checkJs)
-        run: |
-          OUTPUT=$(npx tsc --project .configs/jsconfig.json 2>&1 || true)
-          ERRORS=$(echo "$OUTPUT" | grep -v node_modules | grep error || true)
-          if [ -n "$ERRORS" ]; then echo "$ERRORS"; exit 1; fi
-
-      - name: Node tests
-        run: node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js
-
-      - name: Browser tests
-        run: npx web-test-runner --config .configs/web-test-runner.config.js
+      - name: Full spec compliance (7/7)
+        run: npm run spec all
