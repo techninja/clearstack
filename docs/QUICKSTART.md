@@ -42,33 +42,30 @@ If a `package.json` already exists, Clearstack merges into it — your existing 
 ```
 your-project/
 ├── .configs/              # ⟳ Managed — synced on update
-│   ├── eslint.config.js
-│   ├── .prettierrc
-│   ├── jsconfig.json
-│   └── web-test-runner.config.js
 ├── .github/               # CI workflow, PR + issue templates
 ├── docs/
 │   ├── clearstack/        # ⟳ Managed — spec docs, synced on update
 │   └── app-spec/          # ✏️ Yours — project-specific specs
-├── public/                # ✏️ Yours — static assets, index.html, import map
-├── scripts/               # ✏️ Yours — vendor-deps, build-icons
-├── src/
-│   ├── api/               # ✏️ Yours — server routes (fullstack only)
-│   ├── components/        # ✏️ Yours — atoms/, molecules/, organisms/
-│   ├── pages/             # ✏️ Yours — route-level views
-│   ├── store/             # ✏️ Yours — Hybrids store models
-│   ├── styles/            # ✏️ Yours — global CSS
-│   ├── router/            # ✏️ Yours — client-side routing
-│   ├── utils/             # ✏️ Yours — shared helpers
-│   └── server.js          # ✏️ Yours — Express entry (fullstack only)
-├── data/                  # ✏️ Yours — JSON DB seed (fullstack only)
-├── .env                   # ✏️ Yours — PORT, spec thresholds
-└── package.json           # ✏️ Yours (spec scripts merged in)
+├── scripts/               # ✏️ Yours — setup, test, vendor-deps, build-icons
+├── src/                   # ✏️ Yours — the app, served directly
+│   ├── index.html         # App shell with import map
+│   ├── vendor/            # Vendored ES modules (generated, gitignored)
+│   ├── icons.json         # Icon sprite (generated, gitignored)
+│   ├── components/        # atoms/, molecules/, organisms/
+│   ├── pages/             # Route-level views
+│   ├── store/             # Hybrids store models
+│   ├── styles/            # Global CSS
+│   ├── router/            # Client-side routing
+│   ├── utils/             # Shared helpers
+│   ├── api/               # Server routes (fullstack only)
+│   └── server.js          # Express entry point
+├── data/                  # JSON DB seed (fullstack only)
+├── .env                   # Defaults (committed)
+├── .env.local             # Overrides (gitignored)
+└── package.json
 ```
 
-**⟳ Managed** files are updated when you run `clearstack update`. Review changes via `git diff`.
-
-**✏️ Yours** files are scaffolded once and never touched by updates. They're your code.
+`src/` is the entire app. `node src/server.js` serves it. For static deploy, point your CDN at `src/`. No build step.
 
 ## 4. Install and Run
 
@@ -76,18 +73,12 @@ your-project/
 npm install
 ```
 
-`postinstall` runs `vendor-deps.js` (copies hybrids to `public/vendor/`) and `build-icons.js` (extracts Lucide SVGs to `public/icons.json`).
+`postinstall` runs `vendor-deps.js` (copies hybrids to `src/vendor/`) and `build-icons.js` (extracts Lucide SVGs to `src/icons.json`).
 
 ### Fullstack
 
 ```bash
-npm run dev            # node --watch --env-file=.env src/server.js
-```
-
-### Static
-
-```bash
-npx serve public       # or any static file server
+npm run dev
 ```
 
 ## 5. Development Rules
@@ -152,7 +143,7 @@ SPEC_CODE_MAX_LINES=150
 SPEC_DOCS_MAX_LINES=500
 SPEC_CODE_EXTENSIONS=.js,.css
 SPEC_DOCS_EXTENSIONS=.md
-SPEC_IGNORE_DIRS=node_modules,public/vendor,.git,.configs
+SPEC_IGNORE_DIRS=node_modules,src/vendor,.git,.configs
 ```
 
 ## 9. CI Pipeline
@@ -170,7 +161,7 @@ spec:code → spec:docs → lint → format → typecheck → test
 | Install Clearstack    | `npm install -D @techninja/clearstack` |
 | Scaffold a project    | `npx clearstack init`                  |
 | Install dependencies  | `npm install`                          |
-| Start dev server      | `npm run dev` / `npx serve public`     |
+| Start dev server      | `npm run dev`                          |
 | Lint + format         | `npm run lint:fix && npm run format`   |
 | Type check            | `npm run typecheck`                    |
 | Run tests             | `npm test`                             |

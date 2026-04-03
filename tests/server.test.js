@@ -27,7 +27,7 @@ describe('static serving', () => {
   });
 
   it('serves vendored hybrids', async () => {
-    const res = await fetch(`${BASE}/public/vendor/hybrids/index.js`);
+    const res = await fetch(`${BASE}/vendor/hybrids/index.js`);
     assert.equal(res.status, 200);
     assert.ok((await res.text()).includes('export'));
   });

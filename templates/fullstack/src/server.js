@@ -19,7 +19,7 @@ app.use(express.static('src'));
 // SPA fallback
 app.use((req, res, next) => {
   if (req.method === 'GET' && !req.path.includes('.') && !req.path.startsWith('/api')) {
-    return res.sendFile('index.html', { root: 'src/public' });
+    return res.sendFile('index.html', { root: 'src' });
   }
   next();
 });

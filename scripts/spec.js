@@ -2,7 +2,7 @@
 
 /**
  * Spec enforcement CLI for the POC app.
- * Imports shared check logic from lib/check.js and adds test runners.
+ * Fast code quality checks only — no tests. Run `npm test` separately.
  * @module scripts/spec
  */
 
@@ -14,20 +14,13 @@ const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const cfg = loadConfig(ROOT);
 const sub = process.argv[2];
 
-const POC_CMDS = {
-  testNode: 'node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js',
-  testBrowser: 'npx web-test-runner --config .configs/web-test-runner.config.js',
-};
-
-/** Run all spec checks — shared checks + POC test runners. */
+/** Run all spec quality checks. */
 async function runAll() {
   const jsFiles = countFiles(ROOT, ['.js'], cfg.ignore);
   const cssFiles = countFiles(ROOT, ['.css'], cfg.ignore);
   const mdFiles = countFiles(ROOT, ['.md'], cfg.ignore);
-  const testFiles = countFiles(ROOT, ['.js'], cfg.ignore, ['tests', 'src'], /\.test\.js$/);
-  const browserTests = countFiles(ROOT, ['.js'], cfg.ignore, ['src/components'], /\.test\.js$/);
 
-  console.log('Running full spec compliance check...\n');
+  console.log('Running spec compliance check...\n');
   const r = [
     checkFileLines(ROOT, cfg.codeExt, cfg.codeMax, cfg.ignore, `Code (max ${cfg.codeMax} lines)`),
     checkFileLines(ROOT, cfg.docsExt, cfg.docsMax, cfg.ignore, `Docs (max ${cfg.docsMax} lines)`),
@@ -42,8 +35,6 @@ async function runAll() {
     ),
     runCmd('Markdown', CMDS.mdlint, ROOT, `${mdFiles} files`),
     runCmd('JSDoc types', CMDS.types, ROOT, `${jsFiles} files`),
-    runCmd('Node tests', POC_CMDS.testNode, ROOT, `${testFiles} test files`),
-    runCmd('Browser tests', POC_CMDS.testBrowser, ROOT, `${browserTests} test files`),
   ];
   const passed = r.filter(Boolean).length;
   console.log(`\n${'='.repeat(40)}`);
@@ -64,9 +55,7 @@ async function interactive() {
       { name: 'Prettier', value: 'format' },
       { name: 'Markdown lint', value: 'mdlint' },
       { name: 'JSDoc types (tsc --checkJs)', value: 'types' },
-      { name: 'Node tests', value: 'test:node' },
-      { name: 'Browser tests', value: 'test:browser' },
-      { name: 'All (full spec compliance)', value: 'all' },
+      { name: 'All (full spec check)', value: 'all' },
     ],
   });
 
@@ -80,8 +69,6 @@ async function interactive() {
     format: () => runCmd('Prettier', CMDS.prettier, ROOT),
     mdlint: () => runCmd('Markdown', CMDS.mdlint, ROOT),
     types: () => runCmd('JSDoc types', CMDS.types, ROOT),
-    'test:node': () => runCmd('Node tests', POC_CMDS.testNode, ROOT),
-    'test:browser': () => runCmd('Browser tests', POC_CMDS.testBrowser, ROOT),
   };
 
   if (action === 'all') return runAll();

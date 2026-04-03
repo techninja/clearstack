@@ -45,7 +45,6 @@ describe('scaffold output', () => {
   it('creates expected directories', () => {
     for (const dir of [
       'src',
-      'src/public',
       'src/styles',
       'scripts',
       'docs/clearstack',
@@ -61,7 +60,7 @@ describe('scaffold output', () => {
   });
 
   it('replaces template variables', () => {
-    const html = readFileSync(join(dest, 'src/public/index.html'), 'utf-8');
+    const html = readFileSync(join(dest, 'src/index.html'), 'utf-8');
     assert.ok(html.includes('test-app'), 'index.html should contain project name');
     assert.ok(!html.includes('{{'), 'index.html should have no unresolved {{}}');
   });

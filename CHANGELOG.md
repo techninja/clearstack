@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Missed cleanup from scaffold fork
 
-
 ## [0.3.2] - 2026-04-03
 
 - Job level node 24

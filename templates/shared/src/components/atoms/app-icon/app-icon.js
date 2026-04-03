@@ -11,7 +11,7 @@ let iconCache = null;
 
 /** @type {Promise<Record<string, string>>} */
 const loading = fetch('/icons.json')
-  .then((r) => (r.ok ? r : fetch('/public/icons.json')))
+  .then((r) => { if (r.ok) return r; throw new Error('icons.json not found'); })
   .then((r) => r.json())
   .then((data) => {
     iconCache = data;

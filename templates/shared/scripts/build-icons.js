@@ -2,7 +2,7 @@
 
 /**
  * Extracts SVG path data from lucide-static for icons used in the app.
- * Generates public/icons.json — loaded by app-icon at runtime.
+ * Generates src/icons.json — loaded by app-icon at runtime.
  * Runs on `npm postinstall`.
  */
 
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const ICONS_DIR = resolve(ROOT, 'node_modules/lucide-static/icons');
-const OUT = resolve(ROOT, 'src/public/icons.json');
+const OUT = resolve(ROOT, 'src/icons.json');
 
 /** Icons used in the app — lucide name → app name */
 const ICON_MAP = {
@@ -83,4 +83,4 @@ for (const [lucideName, appName] of Object.entries(ICON_MAP)) {
 }
 
 writeFileSync(OUT, JSON.stringify(icons, null, 2));
-console.log(`✓ Built ${count} icons → src/public/icons.json`);
+console.log(`✓ Built ${count} icons → src/icons.json`);

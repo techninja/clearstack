@@ -117,12 +117,12 @@ import {
 
 ```
 project-root/
-├── public/                          # Static assets served at /
+├── src/                             # The app — served directly, no build
 │   ├── index.html                   # App shell with import map
-│   └── vendor/                      # Vendored ES module deps (generated)
-│       └── hybrids/                 # Copied from node_modules at install
-│
-├── src/                             # Application source (served at /src/)
+│   ├── vendor/                      # Vendored ES modules (generated, gitignored)
+│   │   └── hybrids/                 # Copied from node_modules at install
+│   ├── icons.json                   # Icon sprite (generated, gitignored)
+│   │
 │   ├── components/                  # UI components (atomic design)
 │   │   ├── atoms/                   # Smallest UI primitives
 │   │   │   └── app-button/
@@ -130,39 +130,47 @@ project-root/
 │   │   │       ├── app-button.css   # Scoped styles
 │   │   │       └── index.js         # Re-export
 │   │   ├── molecules/               # Compositions of atoms
-│   │   │   └── search-bar/
 │   │   ├── organisms/               # Complex UI sections
-│   │   │   └── app-header/
 │   │   └── templates/               # Page-level layout shells
-│   │       └── page-layout/
 │   │
 │   ├── pages/                       # Route-bound view components
-│   │   ├── home/
-│   │   │   ├── home-view.js
-│   │   │   └── index.js
-│   │   └── about/
+│   │   └── home/
+│   │       └── home-view.js
 │   │
 │   ├── store/                       # Hybrids store model definitions
 │   │   ├── AppState.js              # Singleton: global app state
-│   │   └── UserModel.js             # Enumerable: user records
+│   │   └── UserPrefs.js             # Singleton: user preferences
 │   │
 │   ├── router/                      # Router shell component
 │   │   └── index.js
 │   │
 │   ├── styles/                      # Shared CSS
 │   │   ├── tokens.css               # Design tokens (colors, spacing)
-│   │   └── reset.css                # Minimal CSS reset
+│   │   ├── reset.css                # Minimal CSS reset
+│   │   └── components.css           # Aggregates component CSS imports
 │   │
-│   └── utils/                       # Pure helper functions
-│       └── formatDate.js
+│   ├── utils/                       # Pure helper functions
+│   │   └── formatDate.js
+│   │
+│   ├── api/                         # Server routes (fullstack only)
+│   │   ├── entities.js              # Generic CRUD router
+│   │   └── schemas.js               # JSON Schema registry
+│   │
+│   └── server.js                    # Express entry point
 │
-├── scripts/                         # Build/install scripts
-│   └── vendor-deps.js               # Copies deps to public/vendor/
+├── scripts/                         # Install/setup scripts
+│   ├── vendor-deps.js               # Copies deps to src/vendor/
+│   └── build-icons.js               # Extracts Lucide SVGs to src/icons.json
 │
-├── src/server.js                    # Express entry point
-├── package.json                     # type: "module", postinstall hook
-├── README.md                        # Project overview
-└── FRONTEND_IMPLEMENTATION_RULES.md # This file
+├── .configs/                        # Linter/formatter/type configs
+├── docs/
+│   ├── clearstack/                  # Spec docs (synced on update)
+│   └── app-spec/                    # Project-specific specs (yours)
+│
+├── data/                            # JSON DB seed (fullstack only)
+├── .env                             # Defaults (committed)
+├── .env.local                       # Overrides (gitignored)
+└── package.json
 ```
 
 ### Key Conventions
@@ -170,7 +178,7 @@ project-root/
 - **One component per directory.** Each gets its own folder with `.js`, `.css`,
   and `index.js` (re-export).
 - **`src/` is served as-is** — the browser loads these files directly.
-- **`public/vendor/`** is gitignored and regenerated on `npm install` via the
+- **`src/vendor/`** is gitignored and regenerated on `npm install` via the
   `postinstall` script.
 - **No barrel files** beyond the per-component `index.js`. Import from the
   component directory, not from a giant `components/index.js`.

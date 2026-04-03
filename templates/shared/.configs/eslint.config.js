@@ -58,7 +58,7 @@ export default [
     },
   },
   {
-    ignores: ['node_modules/', 'src/public/vendor/'],
+    ignores: ['node_modules/', 'src/vendor/'],
   },
   prettier,
 ];

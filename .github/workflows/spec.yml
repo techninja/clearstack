@@ -1,4 +1,4 @@
-name: Spec Check
+name: CI
 
 on:
   push:
@@ -8,7 +8,26 @@ on:
 
 jobs:
   spec:
-    name: Full Spec Compliance
+    name: Spec Compliance
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - run: npm ci
+
+      - name: Setup (vendor deps + icons)
+        run: npm run setup
+
+      - name: Spec check (lint, format, types, line counts)
+        run: npm run spec all
+
+  test:
+    name: Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -26,5 +45,5 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium --with-deps
 
-      - name: Full spec compliance (7/7)
-        run: npm run spec all
+      - name: Tests
+        run: npm test

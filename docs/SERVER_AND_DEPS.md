@@ -16,8 +16,8 @@
 
 | Route         | Serves                                 |
 | ------------- | -------------------------------------- |
-| `/`           | `public/index.html` (app shell)        |
-| `/vendor/*`   | `public/vendor/` (vendored ES modules) |
+| `/`           | `src/index.html` (app shell)        |
+| `/vendor/*`   | `src/vendor/` (vendored ES modules) |
 | `/src/*`      | `src/` (application source, as-is)     |
 | `/api/*`      | REST endpoints (see BACKEND_API_SPEC)  |
 | `/api/events` | SSE stream for realtime sync           |
@@ -38,7 +38,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Static: vendored deps and app shell
-app.use(express.static('public'));
+app.use(express.static('src'));
 
 // Static: application source (ES modules served directly)
 app.use('/src', express.static('src'));
@@ -57,7 +57,7 @@ app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 ## Vendor Dependency Loading
 
 Third-party ES module packages are copied from `node_modules/` into
-`public/vendor/` at install time. This makes them servable as static files.
+`src/vendor/` at install time. This makes them servable as static files.
 
 ### scripts/vendor-deps.js
 
@@ -65,7 +65,7 @@ Third-party ES module packages are copied from `node_modules/` into
 import { cpSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const VENDOR_DIR = resolve('public/vendor');
+const VENDOR_DIR = resolve('src/vendor');
 const DEPS = [{ name: 'hybrids', src: 'node_modules/hybrids/src' }];
 
 mkdirSync(VENDOR_DIR, { recursive: true });
@@ -89,7 +89,7 @@ In `package.json`:
 }
 ```
 
-Running `npm install` automatically vendors dependencies. The `public/vendor/`
+Running `npm install` automatically vendors dependencies. The `src/vendor/`
 directory should be in `.gitignore`.
 
 ### Adding a New Dependency
@@ -104,9 +104,9 @@ directory should be in `.gitignore`.
 ## Import Map
 
 The browser resolves bare specifiers like `'hybrids'` via an import map
-declared in `public/index.html`.
+declared in `src/index.html`.
 
-### public/index.html
+### src/index.html
 
 ```html
 <!DOCTYPE html>
@@ -137,7 +137,7 @@ declared in `public/index.html`.
 
 1. Browser encounters `import { html } from 'hybrids'` in any ES module.
 2. Import map resolves `'hybrids'` → `/vendor/hybrids/index.js`.
-3. Server serves the file from `public/vendor/hybrids/index.js`.
+3. Server serves the file from `src/vendor/hybrids/index.js`.
 4. Hybrids' internal imports use relative paths — they resolve naturally.
 
 ### Rules

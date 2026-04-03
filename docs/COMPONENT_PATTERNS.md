@@ -292,7 +292,7 @@ handler resolves `host` to the page component as expected.
 Because components use light DOM, styles flow naturally:
 
 ```
-public/index.html
+src/index.html
   ├── <link> src/styles/reset.css      ← base reset
   ├── <link> src/styles/tokens.css     ← :root custom properties
   ├── <link> src/styles/shared.css     ← error states, icons, utilities
