@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.18] - 2026-04-03
+
+- Doc fixes, package lock
+
+
 ## [0.2.17] - 2026-04-02
 
 - Add Style and Markdown linting, templates, fixes
