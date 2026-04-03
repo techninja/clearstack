@@ -1,0 +1,30 @@
+/**
+ * Static dev server — serves src/ for the browser with SPA fallback.
+ * @module server
+ */
+
+import express from 'express';
+
+/** @type {any} */
+const app = express();
+
+app.use(express.static('src'));
+
+app.use((req, res, next) => {
+  if (req.method === 'GET' && !req.path.includes('.')) {
+    return res.sendFile('index.html', { root: 'src/public' });
+  }
+  next();
+});
+
+/** @param {number} [port] */
+export function start(port = {{port}}) {
+  const server = app.listen(port, () => console.log(`http://localhost:${port}`));
+  return server;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  start(parseInt(process.env.PORT) || {{port}});
+}
+
+export default app;

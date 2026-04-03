@@ -103,17 +103,17 @@ describe('scaffold static mode', () => {
     rmSync(staticDest, { recursive: true, force: true });
   });
 
-  it('has no server.js', () => {
-    assert.ok(!existsSync(join(staticDest, 'src/server.js')));
+  it('has a static server.js', () => {
+    assert.ok(existsSync(join(staticDest, 'src/server.js')));
   });
 
   it('has dev script for static serving', () => {
     const pkg = JSON.parse(readFileSync(join(staticDest, 'package.json'), 'utf-8'));
-    assert.ok(pkg.scripts.dev.includes('serve'));
+    assert.ok(pkg.scripts.dev.includes('server.js'));
   });
 
-  it('has no express dependency', () => {
+  it('has no ws dependency', () => {
     const pkg = JSON.parse(readFileSync(join(staticDest, 'package.json'), 'utf-8'));
-    assert.ok(!pkg.dependencies.express);
+    assert.ok(!pkg.dependencies.ws);
   });
 });
