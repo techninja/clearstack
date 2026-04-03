@@ -1,4 +1,9 @@
 {
-  "snyk.advanced.organization": "24d3bf57-faf1-47c8-9eab-312ab8d9100f",
-  "snyk.advanced.autoSelectOrganization": true
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#063466",
+    "activityBar.foreground": "#c6f2f1",
+    "activityBar.inactiveForeground": "#4a8ab5",
+    "activityBarBadge.background": "#00c0e0",
+    "activityBarBadge.foreground": "#002040"
+  }
 }
