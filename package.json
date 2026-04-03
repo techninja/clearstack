@@ -1,6 +1,6 @@
 {
   "name": "@techninja/clearstack",
-  "version": "0.2.21",
+  "version": "0.3.0",
   "type": "module",
   "description": "A no-build web component framework specification — scaffold, validate, and evolve spec-compliant projects",
   "bin": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch --env-file=.env src/server.js",
+    "dev": "node --watch --env-file=.env --env-file=.env.local src/server.js",
     "setup": "node scripts/vendor-deps.js && node scripts/build-icons.js",
     "test": "node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js",
     "spec": "node --env-file=.env scripts/spec.js",
