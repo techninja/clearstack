@@ -34,7 +34,9 @@ function save() {
 
 /** Reload from disk — call after external edits to db.json. */
 export function reload() {
-  data = loadFromDisk();
+  const seed = existsSync(SEED_PATH) ? readFileSync(SEED_PATH, 'utf-8') : '{}';
+  writeFileSync(DB_PATH, seed);
+  data = JSON.parse(seed);
 }
 
 /** @type {{ get(entity: string): Record<string, object> | undefined }} */

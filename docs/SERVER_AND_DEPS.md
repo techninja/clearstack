@@ -14,13 +14,13 @@
 
 ### Responsibilities
 
-| Route         | Serves                                 |
-| ------------- | -------------------------------------- |
-| `/`           | `src/index.html` (app shell)        |
-| `/vendor/*`   | `src/vendor/` (vendored ES modules) |
-| `/src/*`      | `src/` (application source, as-is)     |
-| `/api/*`      | REST endpoints (see BACKEND_API_SPEC)  |
-| `/api/events` | SSE stream for realtime sync           |
+| Route         | Serves                                |
+| ------------- | ------------------------------------- |
+| `/`           | `src/index.html` (app shell)          |
+| `/vendor/*`   | `src/vendor/` (vendored ES modules)   |
+| `/src/*`      | `src/` (application source, as-is)    |
+| `/api/*`      | REST endpoints (see BACKEND_API_SPEC) |
+| `/api/events` | SSE stream for realtime sync          |
 
 ### Key Rules
 

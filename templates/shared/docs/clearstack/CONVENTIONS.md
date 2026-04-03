@@ -273,13 +273,13 @@ multiple keys.
 
 `spec` and `test` answer different questions and run at different times.
 
-| | `npm run spec` | `npm test` |
-|---|---|---|
-| Asks | Is my code clean? | Does my code work? |
-| Checks | Line counts, lint, format, types, markdown | Unit, integration, browser tests |
-| Speed | Fast (~10s) | Slower (varies) |
-| When | Every save, every change | Before commit, in CI |
-| Auto-fixes | Yes (lint, format, markdown) | No |
+|            | `npm run spec`                             | `npm test`                       |
+| ---------- | ------------------------------------------ | -------------------------------- |
+| Asks       | Is my code clean?                          | Does my code work?               |
+| Checks     | Line counts, lint, format, types, markdown | Unit, integration, browser tests |
+| Speed      | Fast (~10s)                                | Slower (varies)                  |
+| When       | Every save, every change                   | Before commit, in CI             |
+| Auto-fixes | Yes (lint, format, markdown)               | No                               |
 
 Spec is the inner dev loop — run it constantly. Tests are the commit gate —
 run them before pushing. CI runs both, in parallel.
