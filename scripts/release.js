@@ -21,6 +21,16 @@ if (!['patch', 'minor', 'major'].includes(bump)) {
 const run = (cmd) => execSync(cmd, { cwd: ROOT, stdio: 'inherit' });
 const out = (cmd) => execSync(cmd, { cwd: ROOT, encoding: 'utf-8' }).trim();
 
+// Gate: no uncommitted lockfile changes
+const dirty = out('git diff --name-only HEAD').split('\n').filter(Boolean);
+const lockDirty = dirty.filter((f) => f.includes('lock'));
+if (lockDirty.length > 0) {
+  console.error(`\n❌ Uncommitted lockfile changes — commit or revert first:\n`);
+  lockDirty.forEach((f) => console.error(`   ${f}`));
+  console.error('');
+  process.exit(1);
+}
+
 // Bump version
 const pkgPath = resolve(ROOT, 'package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
