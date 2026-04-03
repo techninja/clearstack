@@ -19,7 +19,8 @@ function findTests(dir) {
   if (!existsSync(dir)) return results;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = resolve(dir, entry.name);
-    if (entry.name === 'node_modules' || entry.name === 'vendor') continue;
+    if (entry.name === 'node_modules' || entry.name === 'vendor' || entry.name === 'templates')
+      continue;
     if (entry.isDirectory()) results.push(...findTests(full));
     else if (entry.name.endsWith('.test.js')) results.push(full);
   }
