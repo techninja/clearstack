@@ -6,17 +6,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.6] - 2026-04-03
+
+- Unify test runner
+
+
 ## [0.3.5] - 2026-04-03
 
 - Update lock
-
 
 ## [0.3.4] - 2026-04-03
 
 - More cleanup, better tests
 - Extend linting, add dead import detection, npm audit
 - Flatten static structure for simple serving Remove tests from spec check
-
 
 ## [0.3.3] - 2026-04-03
 
