@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.20] - 2026-04-03
+
+- Move to basic express static for simplicity
+
+
 ## [0.2.19] - 2026-04-03
 
 - Unify spec util
