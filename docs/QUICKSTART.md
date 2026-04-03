@@ -28,12 +28,12 @@ npx clearstack init -y     # non-interactive (defaults)
 
 The interactive prompt asks for:
 
-| Prompt | Default | Notes |
-|---|---|---|
-| Project name | current directory name | Used in package.json and templates |
-| Description | `A Clearstack project` | Goes into package.json |
-| Mode | — | **Fullstack**: Express + WebSocket + JSON DB + SSE. **Static**: localStorage only |
-| Port | `3000` | Fullstack only. Set in `.env` |
+| Prompt       | Default                | Notes                                                                             |
+| ------------ | ---------------------- | --------------------------------------------------------------------------------- |
+| Project name | current directory name | Used in package.json and templates                                                |
+| Description  | `A Clearstack project` | Goes into package.json                                                            |
+| Mode         | —                      | **Fullstack**: Express + WebSocket + JSON DB + SSE. **Static**: localStorage only |
+| Port         | `3000`                 | Fullstack only. Set in `.env`                                                     |
 
 If a `package.json` already exists, Clearstack merges into it — your existing fields (`author`, `license`, `engines`, `keywords`, etc.) are preserved.
 
@@ -165,15 +165,15 @@ spec:code → spec:docs → lint → format → typecheck → test
 
 ## Summary
 
-| Task | Command |
-|---|---|
-| Install Clearstack | `npm install -D @techninja/clearstack` |
-| Scaffold a project | `npx clearstack init` |
-| Install dependencies | `npm install` |
-| Start dev server | `npm run dev` / `npx serve public` |
-| Lint + format | `npm run lint:fix && npm run format` |
-| Type check | `npm run typecheck` |
-| Run tests | `npm test` |
-| Full spec check | `npm run spec` |
-| Update spec + configs | `npm run spec:update` |
-| Review spec changes | `git diff docs/ .configs/` |
+| Task                  | Command                                |
+| --------------------- | -------------------------------------- |
+| Install Clearstack    | `npm install -D @techninja/clearstack` |
+| Scaffold a project    | `npx clearstack init`                  |
+| Install dependencies  | `npm install`                          |
+| Start dev server      | `npm run dev` / `npx serve public`     |
+| Lint + format         | `npm run lint:fix && npm run format`   |
+| Type check            | `npm run typecheck`                    |
+| Run tests             | `npm test`                             |
+| Full spec check       | `npm run spec`                         |
+| Update spec + configs | `npm run spec:update`                  |
+| Review spec changes   | `git diff docs/ .configs/`             |

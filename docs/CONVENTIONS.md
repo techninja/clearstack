@@ -14,37 +14,37 @@
 
 All custom element tags use **kebab-case** with an `app-` prefix:
 
-| Thing | Name | Tag |
-|---|---|---|
-| Button atom | `app-button` | `<app-button>` |
-| Header organism | `app-header` | `<app-header>` |
+| Thing                | Name          | Tag             |
+| -------------------- | ------------- | --------------- |
+| Button atom          | `app-button`  | `<app-button>`  |
+| Header organism      | `app-header`  | `<app-header>`  |
 | Page layout template | `page-layout` | `<page-layout>` |
-| Home page view | `home-view` | `<home-view>` |
+| Home page view       | `home-view`   | `<home-view>`   |
 
 The `app-` prefix prevents collisions with native elements and third-party
 components. Page views and templates may drop the prefix when unambiguous.
 
 ### Files & Directories
 
-| Type | Convention | Example |
-|---|---|---|
-| Component file | Match tag name | `app-button.js` |
-| Component CSS | Match tag name | `app-button.css` |
-| Component dir | Match tag name | `app-button/` |
-| Re-export | Always `index.js` | `index.js` |
-| Store model | PascalCase | `UserModel.js` |
-| Utility function | camelCase | `formatDate.js` |
-| Shared CSS | Descriptive kebab | `tokens.css`, `reset.css` |
+| Type             | Convention        | Example                   |
+| ---------------- | ----------------- | ------------------------- |
+| Component file   | Match tag name    | `app-button.js`           |
+| Component CSS    | Match tag name    | `app-button.css`          |
+| Component dir    | Match tag name    | `app-button/`             |
+| Re-export        | Always `index.js` | `index.js`                |
+| Store model      | PascalCase        | `UserModel.js`            |
+| Utility function | camelCase         | `formatDate.js`           |
+| Shared CSS       | Descriptive kebab | `tokens.css`, `reset.css` |
 
 ### JavaScript
 
-| Type | Convention | Example |
-|---|---|---|
-| Event handlers | `handle` + action | `handleClick`, `handleSubmit` |
-| Store models | PascalCase noun | `UserModel`, `AppState` |
-| Utility functions | camelCase verb | `formatDate`, `parseQuery` |
-| Constants | UPPER_SNAKE | `MAX_RETRIES`, `API_BASE` |
-| JSDoc typedefs | PascalCase | `@typedef {Object} User` |
+| Type              | Convention        | Example                       |
+| ----------------- | ----------------- | ----------------------------- |
+| Event handlers    | `handle` + action | `handleClick`, `handleSubmit` |
+| Store models      | PascalCase noun   | `UserModel`, `AppState`       |
+| Utility functions | camelCase verb    | `formatDate`, `parseQuery`    |
+| Constants         | UPPER_SNAKE       | `MAX_RETRIES`, `API_BASE`     |
+| JSDoc typedefs    | PascalCase        | `@typedef {Object} User`      |
 
 ---
 
@@ -117,14 +117,14 @@ let everything else propagate.
 
 ### Boundary Rules
 
-| Layer | Responsibility | Example |
-|---|---|---|
-| **Utils** | Never catch. Return error values or throw. Caller decides. | `formatDate(null)` returns `''` |
-| **Store connectors** | Let fetch failures propagate. Hybrids' `store.error()` catches them. | Don't wrap fetch in try/catch |
-| **Components** | Display `store.pending()` / `store.error()` states. Never try/catch in render. | `${store.error(model) && html`<div class="error-message">...</div>`}` |
-| **Event handlers** | Guard with `store.ready()` before accessing store properties. | `if (!store.ready(host.state)) return;` |
-| **Server routes** | Return HTTP status + JSON error body. Never crash the process. | `res.status(404).json({ error: 'Not found' })` |
-| **Server infra** | Handle process-level errors with clear messages and exit codes. | Port conflict → log message → `process.exit(1)` |
+| Layer                | Responsibility                                                                 | Example                                                               |
+| -------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| **Utils**            | Never catch. Return error values or throw. Caller decides.                     | `formatDate(null)` returns `''`                                       |
+| **Store connectors** | Let fetch failures propagate. Hybrids' `store.error()` catches them.           | Don't wrap fetch in try/catch                                         |
+| **Components**       | Display `store.pending()` / `store.error()` states. Never try/catch in render. | `${store.error(model) && html`<div class="error-message">...</div>`}` |
+| **Event handlers**   | Guard with `store.ready()` before accessing store properties.                  | `if (!store.ready(host.state)) return;`                               |
+| **Server routes**    | Return HTTP status + JSON error body. Never crash the process.                 | `res.status(404).json({ error: 'Not found' })`                        |
+| **Server infra**     | Handle process-level errors with clear messages and exit codes.                | Port conflict → log message → `process.exit(1)`                       |
 
 ### Why This Matters
 
@@ -149,7 +149,7 @@ next layer up to handle what it can't.
 // BAD — accesses store properties without ready guard
 function toggle(host) {
   const next = host.state.theme === 'light' ? 'dark' : 'light';
-  store.set(host.state, { theme: next });  // crashes if model is in error state
+  store.set(host.state, { theme: next }); // crashes if model is in error state
 }
 ```
 
@@ -178,7 +178,7 @@ function toggle(host) {
 **Declarative event binding:**
 
 ```javascript
-html`<button onclick="${handleClick}">Go</button>`
+html`<button onclick="${handleClick}">Go</button>`;
 ```
 
 **Store for shared state:**

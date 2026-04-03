@@ -11,9 +11,9 @@ all served as raw ES modules with zero build tools.
 
 ## Features
 
-| Feature | Entities | Patterns Exercised |
-|---|---|---|
-| Project management | Project | CRUD, schema discovery, validation, SSE sync |
-| Task tracking | Task | Filtered lists, drag reorder, status enums |
+| Feature            | Entities | Patterns Exercised                           |
+| ------------------ | -------- | -------------------------------------------- |
+| Project management | Project  | CRUD, schema discovery, validation, SSE sync |
+| Task tracking      | Task     | Filtered lists, drag reorder, status enums   |
 
 See [ENTITIES.md](./ENTITIES.md) for field definitions and relationships.

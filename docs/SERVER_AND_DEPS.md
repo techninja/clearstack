@@ -14,13 +14,13 @@
 
 ### Responsibilities
 
-| Route | Serves |
-|---|---|
-| `/` | `public/index.html` (app shell) |
-| `/vendor/*` | `public/vendor/` (vendored ES modules) |
-| `/src/*` | `src/` (application source, as-is) |
-| `/api/*` | REST endpoints (see BACKEND_API_SPEC) |
-| `/api/events` | SSE stream for realtime sync |
+| Route         | Serves                                 |
+| ------------- | -------------------------------------- |
+| `/`           | `public/index.html` (app shell)        |
+| `/vendor/*`   | `public/vendor/` (vendored ES modules) |
+| `/src/*`      | `src/` (application source, as-is)     |
+| `/api/*`      | REST endpoints (see BACKEND_API_SPEC)  |
+| `/api/events` | SSE stream for realtime sync           |
 
 ### Key Rules
 
@@ -66,9 +66,7 @@ import { cpSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const VENDOR_DIR = resolve('public/vendor');
-const DEPS = [
-  { name: 'hybrids', src: 'node_modules/hybrids/src' },
-];
+const DEPS = [{ name: 'hybrids', src: 'node_modules/hybrids/src' }];
 
 mkdirSync(VENDOR_DIR, { recursive: true });
 
@@ -113,25 +111,25 @@ declared in `public/index.html`.
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App</title>
-  <link rel="stylesheet" href="/src/styles/reset.css">
-  <link rel="stylesheet" href="/src/styles/tokens.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App</title>
+    <link rel="stylesheet" href="/src/styles/reset.css" />
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
 
-  <script type="importmap">
-  {
-    "imports": {
-      "hybrids": "/vendor/hybrids/index.js"
-    }
-  }
-  </script>
-</head>
-<body>
-  <app-router></app-router>
-  <script type="module" src="/src/router/index.js"></script>
-</body>
+    <script type="importmap">
+      {
+        "imports": {
+          "hybrids": "/vendor/hybrids/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <app-router></app-router>
+    <script type="module" src="/src/router/index.js"></script>
+  </body>
 </html>
 ```
 

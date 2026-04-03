@@ -34,13 +34,13 @@ See the Light DOM section below for why.
 
 Properties are declared as default values. Hybrids infers the type:
 
-| Declaration | Type | Reflected to attribute |
-|---|---|---|
-| `count: 0` | Number | Yes |
-| `label: ''` | String | Yes |
-| `active: false` | Boolean | Yes |
-| `items: []` | Array/Object | No |
-| `onClick: () => {}` | Function | No |
+| Declaration         | Type         | Reflected to attribute |
+| ------------------- | ------------ | ---------------------- |
+| `count: 0`          | Number       | Yes                    |
+| `label: ''`         | String       | Yes                    |
+| `active: false`     | Boolean      | Yes                    |
+| `items: []`         | Array/Object | No                     |
+| `onClick: () => {}` | Function     | No                     |
 
 ### Property Descriptors
 
@@ -52,8 +52,10 @@ export default define({
   elapsed: {
     value: 0,
     connect(host, key, invalidate) {
-      const id = setInterval(() => { host.elapsed++; }, 1000);
-      return () => clearInterval(id);  // cleanup on disconnect
+      const id = setInterval(() => {
+        host.elapsed++;
+      }, 1000);
+      return () => clearInterval(id); // cleanup on disconnect
     },
     observe(host, value) {
       if (value >= 60) dispatch(host, 'timeout');
@@ -63,12 +65,12 @@ export default define({
 });
 ```
 
-| Descriptor field | Purpose |
-|---|---|
-| `value` | Default value or factory function |
-| `connect(host, key, invalidate)` | Runs on DOM connect. Return cleanup fn. |
-| `observe(host, value, lastValue)` | Runs when value changes |
-| `reflect` | `true` or `(value) => string` — sync to attribute |
+| Descriptor field                  | Purpose                                           |
+| --------------------------------- | ------------------------------------------------- |
+| `value`                           | Default value or factory function                 |
+| `connect(host, key, invalidate)`  | Runs on DOM connect. Return cleanup fn.           |
+| `observe(host, value, lastValue)` | Runs when value changes                           |
+| `reflect`                         | `true` or `(value) => string` — sync to attribute |
 
 ### Event Handling
 
@@ -82,9 +84,7 @@ function handleClick(host, event) {
 export default define({
   tag: 'app-counter',
   count: 0,
-  render: ({ count }) => html`
-    <button onclick="${handleClick}">Count: ${count}</button>
-  `,
+  render: ({ count }) => html` <button onclick="${handleClick}">Count: ${count}</button> `,
 });
 ```
 
@@ -149,12 +149,12 @@ Custom events from atoms can be unreliable when templates are passed as
 properties through intermediate components (e.g. `page-layout`'s `content`).
 The host context and event bubbling path may not resolve as expected.
 
-| Context | Use | Why |
-|---|---|---|
-| Inside a component's own template | `app-button` | Host context is correct, events bubble normally |
+| Context                              | Use                          | Why                                              |
+| ------------------------------------ | ---------------------------- | ------------------------------------------------ |
+| Inside a component's own template    | `app-button`                 | Host context is correct, events bubble normally  |
 | Inside a `content` template property | Plain `<button class="btn">` | Direct `onclick` handler, no custom event needed |
-| Reusable molecule/organism | `app-button` | Encapsulated, predictable host |
-| Page-level actions | Plain `<button class="btn">` | Simplest, most reliable |
+| Reusable molecule/organism           | `app-button`                 | Encapsulated, predictable host                   |
+| Page-level actions                   | Plain `<button class="btn">` | Simplest, most reliable                          |
 
 The `.btn` classes are global (defined in `buttons.css`), so plain buttons
 look identical to `app-button`. Use the atom when you need its component
@@ -214,11 +214,11 @@ tree. CSS scoping is achieved through **native CSS nesting** on the tag name
 
 Shadow DOM is the exception, not the rule. Enable it only when:
 
-| Situation | Why shadow DOM |
-|---|---|
-| Wrapping a third-party widget | Prevent its styles from leaking out |
+| Situation                           | Why shadow DOM                      |
+| ----------------------------------- | ----------------------------------- |
+| Wrapping a third-party widget       | Prevent its styles from leaking out |
 | Distributing a standalone component | Consumer's styles must not break it |
-| Embedding untrusted content | Hard style boundary needed |
+| Embedding untrusted content         | Hard style boundary needed          |
 
 For an internal application where you control all the CSS, shadow DOM
 creates more problems than it solves — you end up fighting it to inject
@@ -303,11 +303,11 @@ Every component automatically inherits all shared styles. No injection needed.
 
 ### Three Layers of CSS
 
-| Layer | File(s) | What goes here |
-|---|---|---|
-| **Tokens** | `tokens.css` | `:root` custom properties — colors, spacing, type, radii, shadows |
-| **Shared** | `shared.css` | Error states, loading states, icon base, screen-reader utils, transitions |
-| **Components** | `components.css` + per-component `.css` | Styles scoped to tag names via native CSS nesting |
+| Layer          | File(s)                                 | What goes here                                                            |
+| -------------- | --------------------------------------- | ------------------------------------------------------------------------- |
+| **Tokens**     | `tokens.css`                            | `:root` custom properties — colors, spacing, type, radii, shadows         |
+| **Shared**     | `shared.css`                            | Error states, loading states, icon base, screen-reader utils, transitions |
+| **Components** | `components.css` + per-component `.css` | Styles scoped to tag names via native CSS nesting                         |
 
 ### Per-Component CSS with Native Nesting
 
@@ -327,17 +327,22 @@ app-button {
     color: white;
     font: inherit;
 
-    &:hover { background: var(--color-primary-hover); }
-    &:disabled { opacity: 0.5; cursor: not-allowed; }
+    &:hover {
+      background: var(--color-primary-hover);
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
-  &[variant="secondary"] button {
+  &[variant='secondary'] button {
     background: var(--color-surface);
     color: var(--color-text);
     border: 1px solid var(--color-border);
   }
 
-  &[variant="ghost"] button {
+  &[variant='ghost'] button {
     background: transparent;
     color: var(--color-primary);
   }
@@ -394,7 +399,7 @@ Components reference tokens, never hardcode values.
 All templates use `html` from hybrids:
 
 ```javascript
-html`<div>${expression}</div>`
+html`<div>${expression}</div>`;
 ```
 
 Expressions can be: strings, numbers, booleans, other templates, arrays of
@@ -414,14 +419,14 @@ render: () => html`
 `,
 ```
 
-| Attribute | Effect |
-|---|---|
-| `layout="row"` | Flexbox row |
-| `layout="column"` | Flexbox column |
-| `layout="grid:1\|max"` | CSS grid with defined tracks |
-| `layout="grow"` | `flex-grow: 1` |
-| `layout="center"` | Center content |
-| `layout="gap:2"` | Gap using spacing scale |
+| Attribute               | Effect                         |
+| ----------------------- | ------------------------------ |
+| `layout="row"`          | Flexbox row                    |
+| `layout="column"`       | Flexbox column                 |
+| `layout="grid:1\|max"`  | CSS grid with defined tracks   |
+| `layout="grow"`         | `flex-grow: 1`                 |
+| `layout="center"`       | Center content                 |
+| `layout="gap:2"`        | Gap using spacing scale        |
 | `layout@768px="hidden"` | Responsive — applies at ≥768px |
 
 ### Keyed Lists
@@ -456,12 +461,12 @@ render: ({ dataPromise }) => html`
 
 ### When a file grows too large
 
-| Situation | Action |
-|---|---|
-| Component logic exceeds 150 lines | Extract helpers to `src/utils/` |
-| Template is too complex | Split into child sub-components |
-| CSS exceeds 150 lines | Extract shared patterns to `src/styles/` |
-| Store model has many relations | Split related models into own files |
+| Situation                         | Action                                   |
+| --------------------------------- | ---------------------------------------- |
+| Component logic exceeds 150 lines | Extract helpers to `src/utils/`          |
+| Template is too complex           | Split into child sub-components          |
+| CSS exceeds 150 lines             | Extract shared patterns to `src/styles/` |
+| Store model has many relations    | Split related models into own files      |
 
 ### What counts toward the limit
 

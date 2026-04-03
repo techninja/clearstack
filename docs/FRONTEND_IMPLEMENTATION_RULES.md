@@ -18,15 +18,15 @@
 
 **Sub-specifications:**
 
-| Document | Covers |
-|---|---|
-| [COMPONENT_PATTERNS.md](./COMPONENT_PATTERNS.md) | Authoring, light DOM, styling, layout engine, file size rules |
-| [JSDOC_TYPING.md](./JSDOC_TYPING.md) | JSDoc typing strategy, tsc validation, component/model/handler patterns |
-| [STATE_AND_ROUTING.md](./STATE_AND_ROUTING.md) | Store, routing, unified app state, realtime sync |
-| [CONVENTIONS.md](./CONVENTIONS.md) | Naming conventions, anti-patterns |
-| [SERVER_AND_DEPS.md](./SERVER_AND_DEPS.md) | Express server, import maps, vendor dependency loading |
-| [BACKEND_API_SPEC.md](./BACKEND_API_SPEC.md) | REST endpoints, JSON Schema via HEAD, entity CRUD, realtime sync |
-| [TESTING.md](./TESTING.md) | Testing philosophy, tools, patterns, build-phase checkpoints |
+| Document                                         | Covers                                                                  |
+| ------------------------------------------------ | ----------------------------------------------------------------------- |
+| [COMPONENT_PATTERNS.md](./COMPONENT_PATTERNS.md) | Authoring, light DOM, styling, layout engine, file size rules           |
+| [JSDOC_TYPING.md](./JSDOC_TYPING.md)             | JSDoc typing strategy, tsc validation, component/model/handler patterns |
+| [STATE_AND_ROUTING.md](./STATE_AND_ROUTING.md)   | Store, routing, unified app state, realtime sync                        |
+| [CONVENTIONS.md](./CONVENTIONS.md)               | Naming conventions, anti-patterns                                       |
+| [SERVER_AND_DEPS.md](./SERVER_AND_DEPS.md)       | Express server, import maps, vendor dependency loading                  |
+| [BACKEND_API_SPEC.md](./BACKEND_API_SPEC.md)     | REST endpoints, JSON Schema via HEAD, entity CRUD, realtime sync        |
+| [TESTING.md](./TESTING.md)                       | Testing philosophy, tools, patterns, build-phase checkpoints            |
 
 ---
 
@@ -37,16 +37,16 @@ no transpiler, no compile step. Code runs exactly as written.
 
 ### Core Principles
 
-| Principle | Rule |
-|---|---|
-| No build tools | No Webpack, Vite, Rollup, esbuild, or Babel |
-| ES modules only | All `.js` files are native ES modules served to the browser |
-| Import maps | Bare specifiers (e.g. `"hybrids"`) resolved via `<script type="importmap">` |
-| Small files | Every file ≤ **150 lines** before extracting shared logic |
-| Explicit over implicit | Name things clearly; avoid magic strings and hidden conventions |
-| Readable over clever | Optimize for comprehension by humans and LLMs alike |
-| Declarative over imperative | Use framework patterns, not raw DOM manipulation |
-| Composition over inheritance | Build complex UIs by composing small components |
+| Principle                    | Rule                                                                        |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| No build tools               | No Webpack, Vite, Rollup, esbuild, or Babel                                 |
+| ES modules only              | All `.js` files are native ES modules served to the browser                 |
+| Import maps                  | Bare specifiers (e.g. `"hybrids"`) resolved via `<script type="importmap">` |
+| Small files                  | Every file ≤ **150 lines** before extracting shared logic                   |
+| Explicit over implicit       | Name things clearly; avoid magic strings and hidden conventions             |
+| Readable over clever         | Optimize for comprehension by humans and LLMs alike                         |
+| Declarative over imperative  | Use framework patterns, not raw DOM manipulation                            |
+| Composition over inheritance | Build complex UIs by composing small components                             |
 
 ### What This Means in Practice
 
@@ -73,15 +73,15 @@ web component framework built on plain objects and pure functions.
 
 ### Why Hybrids
 
-| Need | Hybrids Provides |
-|---|---|
-| Components | `define()` — plain object definitions, no classes |
-| Templating | `html``` — tagged template literals with reactive bindings |
-| State | `store()` — global state with async storage, caching, relations |
-| Routing | `router()` — view-graph-based routing with guards and dialogs |
-| Layout | `layout=""` attribute — CSS layout engine in templates |
-| Localization | `localize()` — automatic template translation |
-| ES modules | Ships as raw ES modules in `src/` — no build needed |
+| Need         | Hybrids Provides                                                |
+| ------------ | --------------------------------------------------------------- |
+| Components   | `define()` — plain object definitions, no classes               |
+| Templating   | `html``` — tagged template literals with reactive bindings      |
+| State        | `store()` — global state with async storage, caching, relations |
+| Routing      | `router()` — view-graph-based routing with guards and dialogs   |
+| Layout       | `layout=""` attribute — CSS layout engine in templates          |
+| Localization | `localize()` — automatic template translation                   |
+| ES modules   | Ships as raw ES modules in `src/` — no build needed             |
 
 ### API Surface (v9.1)
 
@@ -89,27 +89,27 @@ These are the only imports you need:
 
 ```javascript
 import {
-  define,       // Register a component
-  html,         // Template tagged literal
-  store,        // State management
-  router,       // Routing
-  mount,        // Mount component on existing element
-  parent,       // Access parent component
-  children,     // Access child components
-  dispatch,     // Dispatch custom events
-  msg,          // Localization messages
-  localize,     // Register translations
+  define, // Register a component
+  html, // Template tagged literal
+  store, // State management
+  router, // Routing
+  mount, // Mount component on existing element
+  parent, // Access parent component
+  children, // Access child components
+  dispatch, // Dispatch custom events
+  msg, // Localization messages
+  localize, // Register translations
 } from 'hybrids';
 ```
 
 ### Why Not Alternatives
 
-| Alternative | Reason to pass |
-|---|---|
-| **Lit** | Class-based, heavier API surface, decorators encourage build tools |
-| **Stencil** | Requires a compiler — violates no-build constraint |
-| **Vanilla** | No state management, no templating — too much boilerplate |
-| **React/Vue/Svelte** | Require build steps, not native web components |
+| Alternative          | Reason to pass                                                     |
+| -------------------- | ------------------------------------------------------------------ |
+| **Lit**              | Class-based, heavier API surface, decorators encourage build tools |
+| **Stencil**          | Requires a compiler — violates no-build constraint                 |
+| **Vanilla**          | No state management, no templating — too much boilerplate          |
+| **React/Vue/Svelte** | Require build steps, not native web components                     |
 
 ---
 
@@ -186,12 +186,12 @@ import direction: **higher tiers import from lower tiers, never the reverse.**
 
 ### Tiers
 
-| Tier | Location | Scope | Examples |
-|---|---|---|---|
-| **Atom** | `components/atoms/` | Single-purpose UI primitive. One element, one job. | `app-button`, `app-icon`, `app-input` |
-| **Molecule** | `components/molecules/` | Small composition of 2–4 atoms that form a reusable unit. | `nav-link`, `search-bar`, `form-field` |
+| Tier         | Location                | Scope                                                              | Examples                                |
+| ------------ | ----------------------- | ------------------------------------------------------------------ | --------------------------------------- |
+| **Atom**     | `components/atoms/`     | Single-purpose UI primitive. One element, one job.                 | `app-button`, `app-icon`, `app-input`   |
+| **Molecule** | `components/molecules/` | Small composition of 2–4 atoms that form a reusable unit.          | `nav-link`, `search-bar`, `form-field`  |
 | **Organism** | `components/organisms/` | Complex UI section. May contain molecules, atoms, and local state. | `app-header`, `app-footer`, `user-card` |
-| **Template** | `components/templates/` | Page-level layout shell. Defines slot regions, no business logic. | `page-layout`, `dashboard-layout` |
+| **Template** | `components/templates/` | Page-level layout shell. Defines slot regions, no business logic.  | `page-layout`, `dashboard-layout`       |
 
 **Pages** (`src/pages/`) sit outside the component hierarchy. They are
 route-bound views that compose templates and organisms.
@@ -215,13 +215,13 @@ Pages → Templates → Organisms → Molecules → Atoms
 
 Use this checklist to decide if a component belongs at a higher tier:
 
-| Signal | Action |
-|---|---|
-| It renders a single HTML element with props | Keep as **atom** |
-| It composes 2–4 atoms into a reusable group | Make it a **molecule** |
-| It has its own local state or fetches data | Promote to **organism** |
-| It defines layout regions via slots, no logic | Make it a **template** |
-| It's bound to a route and composes a full page | Put it in **pages/** |
+| Signal                                         | Action                  |
+| ---------------------------------------------- | ----------------------- |
+| It renders a single HTML element with props    | Keep as **atom**        |
+| It composes 2–4 atoms into a reusable group    | Make it a **molecule**  |
+| It has its own local state or fetches data     | Promote to **organism** |
+| It defines layout regions via slots, no logic  | Make it a **template**  |
+| It's bound to a route and composes a full page | Put it in **pages/**    |
 
 ### File Anatomy (All Tiers)
 
