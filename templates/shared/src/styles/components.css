@@ -7,25 +7,3 @@
 @import '../components/atoms/app-badge/app-badge.css';
 @import '../components/atoms/app-icon/app-icon.css';
 @import '../components/atoms/theme-toggle/theme-toggle.css';
-@import '../components/atoms/canvas-toolbar/canvas-toolbar.css';
-
-/* Molecules */
-@import '../components/molecules/task-card/task-card.css';
-@import '../components/molecules/project-card/project-card.css';
-@import '../components/molecules/form-field/form-field.css';
-
-/* Organisms */
-@import '../components/organisms/task-list/task-list.css';
-@import '../components/organisms/project-header/project-header.css';
-@import '../components/organisms/schema-form/schema-form.css';
-@import '../components/organisms/project-canvas/project-canvas.css';
-
-/* Templates */
-@import '../components/templates/page-layout/page-layout.css';
-
-/* Pages */
-@import '../pages/home/home-view.css';
-@import '../pages/project/project-view.css';
-
-/* Router */
-@import '../router/router.css';

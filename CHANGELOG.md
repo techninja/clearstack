@@ -10,26 +10,21 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Job level node 24
 
-
 ## [0.3.1] - 2026-04-03
 
 - I'll believe it when I see it
-
 
 ## [0.3.0] - 2026-04-03
 
 - Initial release
 
-
 ## [0.2.21] - 2026-04-03
 
 - Logo and vscode colors
 
-
 ## [0.2.20] - 2026-04-03
 
 - Move to basic express static for simplicity
-
 
 ## [0.2.19] - 2026-04-03
 
