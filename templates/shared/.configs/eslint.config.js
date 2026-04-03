@@ -1,10 +1,11 @@
 import prettier from 'eslint-config-prettier';
 import jsdoc from 'eslint-plugin-jsdoc';
+import unusedImports from 'eslint-plugin-unused-imports';
 
 export default [
   {
     files: ['**/*.js'],
-    plugins: { jsdoc },
+    plugins: { jsdoc, 'unused-imports': unusedImports },
     languageOptions: {
       ecmaVersion: 2024,
       sourceType: 'module',
@@ -34,7 +35,9 @@ export default [
       'no-var': 'error',
       'prefer-const': 'error',
       eqeqeq: ['error', 'always'],
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'no-console': 'off',
 
       // JSDoc enforcement
@@ -55,6 +58,7 @@ export default [
     rules: {
       'jsdoc/require-jsdoc': 'off',
       'no-unused-vars': 'off',
+      'unused-imports/no-unused-vars': 'off',
     },
   },
   {

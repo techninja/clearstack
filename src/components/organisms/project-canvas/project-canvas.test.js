@@ -1,4 +1,4 @@
-import { fixture, expect, waitUntil } from '@open-wc/testing';
+import { fixture, expect } from '@open-wc/testing';
 import '../project-canvas/project-canvas.js';
 
 const frame = () => new Promise((r) => requestAnimationFrame(r));

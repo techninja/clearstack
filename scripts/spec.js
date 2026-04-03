@@ -35,6 +35,7 @@ async function runAll() {
     ),
     runCmd('Markdown', CMDS.mdlint, ROOT, `${mdFiles} files`),
     runCmd('JSDoc types', CMDS.types, ROOT, `${jsFiles} files`),
+    runCmd('Security audit', CMDS.audit, ROOT),
   ];
   const passed = r.filter(Boolean).length;
   console.log(`\n${'='.repeat(40)}`);
@@ -55,6 +56,7 @@ async function interactive() {
       { name: 'Prettier', value: 'format' },
       { name: 'Markdown lint', value: 'mdlint' },
       { name: 'JSDoc types (tsc --checkJs)', value: 'types' },
+      { name: 'Security audit', value: 'audit' },
       { name: 'All (full spec check)', value: 'all' },
     ],
   });
@@ -69,6 +71,7 @@ async function interactive() {
     format: () => runCmd('Prettier', CMDS.prettier, ROOT),
     mdlint: () => runCmd('Markdown', CMDS.mdlint, ROOT),
     types: () => runCmd('JSDoc types', CMDS.types, ROOT),
+    audit: () => runCmd('Security audit', CMDS.audit, ROOT),
   };
 
   if (action === 'all') return runAll();
