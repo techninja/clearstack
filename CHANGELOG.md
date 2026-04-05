@@ -6,10 +6,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.7] - 2026-04-05
+
+- Add detection to utilize correct package manager in check
+
+
 ## [0.3.6] - 2026-04-03
 
 - Unify test runner
-
 
 ## [0.3.5] - 2026-04-03
 
