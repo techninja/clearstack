@@ -342,6 +342,34 @@ This is especially important when render depends on external mutable state
 (e.g. an in-memory cache object) that the property change is meant to
 signal. Without the reset, the component renders with stale external state.
 
+#### `router.backUrl()` Serializes All Parent Properties
+
+`router.backUrl()` encodes the parent view's property values into query
+params so hybrids can restore them when navigating back. If the parent has
+properties holding complex objects (arrays of records, parsed data, etc.),
+the URL becomes enormous — potentially megabytes — and the browser locks
+up just rendering the `<a>` element.
+
+The `connect: () => {}` no-op prevents hybrids from *observing* a property,
+but the router still serializes it. The only way to fully exclude a
+property from URL serialization is to not define it on the routed view at
+all (use a module-level variable or a separate store).
+
+For child views that don't need to restore specific parent state, use a
+direct href instead of `router.backUrl()`:
+
+```javascript
+// ❌ BAD — serializes ALL parent properties into the href
+// If parent has a 700K-item array, the URL is megabytes
+html`<a href="${router.backUrl()}">← Back</a>`
+
+// ✅ GOOD — direct link, no serialization
+html`<a href="/dashboard">← Back</a>`
+```
+
+Use `router.backUrl()` only when the parent view has simple scalar
+properties (strings, numbers, booleans) that are cheap to serialize.
+
 ---
 
 ## Unified App State
