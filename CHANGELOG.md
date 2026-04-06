@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.10] - 2026-04-06
+
+- Fix upgrade templates
+- Fix argument bugs with scaffolded repos
+
+
 ## [0.3.9] - 2026-04-06
 
 - Better error handling
