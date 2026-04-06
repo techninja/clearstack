@@ -5,7 +5,7 @@
  * Usage:
  *   clearstack init [-y] [--mode fullstack|static] [--port 3000]
  *   clearstack update
- *   clearstack check [code|docs]
+ *   clearstack check [code|docs|imports|lint|lint es|format|types|audit|all]
  *   clearstack                   → interactive menu
  */
 
@@ -25,16 +25,21 @@ const yes = args.includes('-y') || args.includes('--yes');
 
 /** Show interactive menu. */
 async function interactive() {
-  const { select } = await import('@inquirer/prompts');
-  const action = await select({
-    message: 'clearstack — what do you want to do?',
-    choices: [
-      { name: 'Initialize a new project', value: 'init' },
-      { name: 'Update spec docs + configs', value: 'update' },
-      { name: 'Run spec compliance check', value: 'check' },
-    ],
-  });
-  await run(action);
+  try {
+    const { select } = await import('@inquirer/prompts');
+    const action = await select({
+      message: 'clearstack — what do you want to do?',
+      choices: [
+        { name: 'Initialize a new project', value: 'init' },
+        { name: 'Update spec docs + configs', value: 'update' },
+        { name: 'Run spec compliance check', value: 'check' },
+      ],
+    });
+    await run(action);
+  } catch (e) {
+    if (e?.name === 'ExitPromptError') process.exit(0);
+    throw e;
+  }
 }
 
 /**
@@ -49,9 +54,9 @@ async function run(action) {
     const { update } = await import('../lib/update.js');
     await update(PKG_ROOT);
   } else if (action === 'check') {
-    const sub = args.find((a) => a !== cmd && !a.startsWith('-'));
+    const subs = args.filter((a) => a !== cmd && !a.startsWith('-'));
     const { check } = await import('../lib/check.js');
-    await check(process.cwd(), sub);
+    await check(process.cwd(), subs.join(' ') || undefined);
   } else {
     console.log('Usage: clearstack [init|update|check] [-y]');
   }

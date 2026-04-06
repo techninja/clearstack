@@ -15,7 +15,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Another little hybrids gotcha
 - Add gotcha found on Asili
 
-
 ## [0.3.8] - 2026-04-06
 
 - Move to importmap preferred for appropriate code
