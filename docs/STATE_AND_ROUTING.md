@@ -217,6 +217,40 @@ tasks.map((task) =>
 This is especially important after batch operations (e.g. drag reorder)
 where multiple items are invalidated simultaneously.
 
+#### Async `connect` on Array Properties
+
+When a plain array property uses `connect` to load data asynchronously,
+the render function fires **before** the async load completes. Even though
+the default `value` is `[]`, hybrids may resolve the property as a
+non-array during the pending phase.
+
+Always guard with `Array.isArray()` before calling array methods:
+
+```javascript
+export default define({
+  tag: 'my-view',
+  items: {
+    value: [],
+    connect: (host, _key, invalidate) => {
+      fetchItems().then((list) => { host.items = list; invalidate(); });
+    },
+  },
+  render: ({ items }) => html`
+    // ❌ BAD — items may not be an array yet when render fires
+    ${items.filter((i) => i.active).map((i) => html`<span>${i.name}</span>`)}
+
+    // ✅ GOOD — guard before calling array methods
+    ${Array.isArray(items) && items.length > 0
+      ? items.filter((i) => i.active).map((i) => html`<span>${i.name}</span>`)
+      : html``}
+  `,
+});
+```
+
+This applies to any property with `value: []` and an async `connect`.
+The `connect` callback sets the value and calls `invalidate()`, but the
+first render happens before that resolves.
+
 ---
 
 ## Routing
