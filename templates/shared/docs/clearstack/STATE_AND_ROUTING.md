@@ -478,25 +478,11 @@ re-fetches automatically.
 ### Debouncing Batch Operations
 
 Operations like drag-to-reorder send multiple PUTs, each triggering an SSE
-event. Without debouncing, each event clears the store and triggers a
-re-render while the previous render is still pending — causing cascading
-errors.
+event. Without debouncing, each event clears the store mid-render.
 
 The `connectRealtime()` utility debounces by entity type: multiple SSE
-events within 300ms trigger only one `store.clear()`. This means a reorder
-of 5 tasks sends 5 PUTs → 5 SSE events → 1 store clear after 300ms.
+events within 300ms trigger only one `store.clear()`. A reorder of 5 tasks
+sends 5 PUTs → 5 SSE events → 1 store clear after the batch settles.
 
-```javascript
-// Inside connectRealtime — debounce per entity type
-const timers = {};
-source.addEventListener('update', (event) => {
-  const { type } = JSON.parse(event.data);
-  clearTimeout(timers[type]);
-  timers[type] = setTimeout(() => {
-    store.clear([Model]); // one clear after the batch settles
-  }, 300);
-});
-```
-
-For the local user, the UI should not call `store.clear()` explicitly
-after batch operations — let the debounced SSE handler do it once.
+For the local user, don't call `store.clear()` explicitly after batch
+operations — let the debounced SSE handler do it once.
