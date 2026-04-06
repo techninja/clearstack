@@ -33,6 +33,43 @@ export default define({
 
 Local state resets when the component disconnects from the DOM.
 
+#### Property Defaults: Never Use `undefined` or `null`
+
+Hybrids infers a property's type from its initial value. The router's cache
+observer calls `.toString()` on property values during state transitions.
+If a property is defined as `undefined` or later set to `null`, this crashes:
+
+```javascript
+// ❌ BAD — undefined has no type info, null crashes .toString()
+export default define({
+  tag: 'my-view',
+  _data: undefined,  // no type info for hybrids to work with
+  // ...
+});
+
+// Later in a handler:
+host._data = null;  // TypeError: Cannot read properties of null (reading 'toString')
+```
+
+Always provide a typed default value, and reset to the same type:
+
+```javascript
+// ✅ GOOD — array default, connect no-op prevents hybrids from observing it
+export default define({
+  tag: 'my-view',
+  _data: { value: [], connect: () => {} },
+  // ...
+});
+
+// Later in a handler:
+host._data = [];  // safe — same type as default
+```
+
+The `connect: () => {}` no-op prevents hybrids from doing anything special
+with the property — it's just internal state storage. This pattern is useful
+for "private" properties that hold transient data (parsed results, file
+contents, etc.) that shouldn't participate in the reactive render cycle.
+
 ### Shared State via Store
 
 For state shared across components or persisted beyond a component's lifetime,
