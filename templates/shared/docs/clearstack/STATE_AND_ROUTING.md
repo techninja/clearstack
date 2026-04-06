@@ -43,12 +43,12 @@ If a property is defined as `undefined` or later set to `null`, this crashes:
 // ❌ BAD — undefined has no type info, null crashes .toString()
 export default define({
   tag: 'my-view',
-  _data: undefined,  // no type info for hybrids to work with
+  _data: undefined, // no type info for hybrids to work with
   // ...
 });
 
 // Later in a handler:
-host._data = null;  // TypeError: Cannot read properties of null (reading 'toString')
+host._data = null; // TypeError: Cannot read properties of null (reading 'toString')
 ```
 
 Always provide a typed default value, and reset to the same type:
@@ -62,7 +62,7 @@ export default define({
 });
 
 // Later in a handler:
-host._data = [];  // safe — same type as default
+host._data = []; // safe — same type as default
 ```
 
 The `connect: () => {}` no-op prevents hybrids from doing anything special
@@ -232,14 +232,16 @@ export default define({
   items: {
     value: [],
     connect: (host, _key, invalidate) => {
-      fetchItems().then((list) => { host.items = list; invalidate(); });
+      fetchItems().then((list) => {
+        host.items = list;
+        invalidate();
+      });
     },
   },
   render: ({ items }) => html`
     // ❌ BAD — items may not be an array yet when render fires
-    ${items.filter((i) => i.active).map((i) => html`<span>${i.name}</span>`)}
-
-    // ✅ GOOD — guard before calling array methods
+    ${items.filter((i) => i.active).map((i) => html`<span>${i.name}</span>`)} // ✅ GOOD — guard
+    before calling array methods
     ${Array.isArray(items) && items.length > 0
       ? items.filter((i) => i.active).map((i) => html`<span>${i.name}</span>`)
       : html``}
@@ -350,7 +352,7 @@ properties holding complex objects (arrays of records, parsed data, etc.),
 the URL becomes enormous — potentially megabytes — and the browser locks
 up just rendering the `<a>` element.
 
-The `connect: () => {}` no-op prevents hybrids from *observing* a property,
+The `connect: () => {}` no-op prevents hybrids from _observing_ a property,
 but the router still serializes it. The only way to fully exclude a
 property from URL serialization is to not define it on the routed view at
 all (use a module-level variable or a separate store).
@@ -361,10 +363,10 @@ direct href instead of `router.backUrl()`:
 ```javascript
 // ❌ BAD — serializes ALL parent properties into the href
 // If parent has a 700K-item array, the URL is megabytes
-html`<a href="${router.backUrl()}">← Back</a>`
+html`<a href="${router.backUrl()}">← Back</a>`;
 
 // ✅ GOOD — direct link, no serialization
-html`<a href="/dashboard">← Back</a>`
+html`<a href="/dashboard">← Back</a>`;
 ```
 
 Use `router.backUrl()` only when the parent view has simple scalar

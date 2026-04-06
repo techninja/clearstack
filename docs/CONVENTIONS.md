@@ -117,15 +117,15 @@ relative paths like `../../../utils/foo.js`.
 
 ### Available Prefixes
 
-| Prefix          | Resolves to                    |
-| --------------- | ------------------------------ |
-| `#store/`       | `/store/`                      |
-| `#utils/`       | `/utils/`                      |
-| `#atoms/`       | `/components/atoms/`           |
-| `#molecules/`   | `/components/molecules/`       |
-| `#organisms/`   | `/components/organisms/`       |
-| `#templates/`   | `/components/templates/`       |
-| `#pages/`       | `/pages/`                      |
+| Prefix        | Resolves to              |
+| ------------- | ------------------------ |
+| `#store/`     | `/store/`                |
+| `#utils/`     | `/utils/`                |
+| `#atoms/`     | `/components/atoms/`     |
+| `#molecules/` | `/components/molecules/` |
+| `#organisms/` | `/components/organisms/` |
+| `#templates/` | `/components/templates/` |
+| `#pages/`     | `/pages/`                |
 
 ### Rules
 
