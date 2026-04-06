@@ -305,6 +305,43 @@ export default define({
 | Guarded route        | `guard: () => isAuthenticated()`         |
 | Dialog overlay       | `dialog: true` on the view config        |
 
+#### Router Property Cache: Same-Value Writes Are No-Ops
+
+The router caches component property values across navigations and page
+reloads. When a view reconnects, its properties are restored from cache
+**before** `connect` callbacks run.
+
+This means if a `connect` callback loads data asynchronously and then sets
+a property to the same value the cache already holds, hybrids sees no
+change and skips the re-render:
+
+```javascript
+// ❌ BAD — if router cache already has resultCount=22,
+// setting it to 22 again is a no-op. No re-render happens.
+connect: (host, _key, invalidate) => {
+  loadFromDB(host.userId).then((data) => {
+    populateMemoryCache(data);     // side effect: fills an external object
+    host.resultCount = data.length; // may equal cached value → no re-render
+    invalidate();
+  });
+},
+
+// ✅ GOOD — reset to a sentinel value first, then set the real value.
+// Hybrids sees 0 → 22, triggers re-render after data is loaded.
+connect: (host, _key, invalidate) => {
+  loadFromDB(host.userId).then((data) => {
+    populateMemoryCache(data);
+    host.resultCount = 0;           // force a change
+    host.resultCount = data.length; // now hybrids sees a real change
+    invalidate();
+  });
+},
+```
+
+This is especially important when render depends on external mutable state
+(e.g. an in-memory cache object) that the property change is meant to
+signal. Without the reset, the component renders with stale external state.
+
 ---
 
 ## Unified App State
