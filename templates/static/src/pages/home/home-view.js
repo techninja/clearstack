@@ -4,12 +4,12 @@
  */
 
 import { html, define, store } from 'hybrids';
-import AppState from '../../store/AppState.js';
-import '../../components/atoms/app-button/app-button.js';
+import AppState from '#store/AppState.js';
+import '#atoms/app-button/app-button.js';
 
 /**
  * @typedef {Object} HomeViewHost
- * @property {import('../../store/AppState.js').AppState} state
+ * @property {import('#store/AppState.js').AppState} state
  */
 
 /** @param {HomeViewHost & HTMLElement} host */

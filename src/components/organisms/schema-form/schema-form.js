@@ -5,10 +5,10 @@
  */
 
 import { html, define, dispatch } from 'hybrids';
-import { fetchSchema } from '../../../utils/fetchSchema.js';
-import { renderFormFields } from '../../../utils/renderFormFields.js';
-import { submitEntity } from '../../../utils/submitEntity.js';
-import '../../molecules/form-field/form-field.js';
+import { fetchSchema } from '#utils/fetchSchema.js';
+import { renderFormFields } from '#utils/renderFormFields.js';
+import { submitEntity } from '#utils/submitEntity.js';
+import '#molecules/form-field/form-field.js';
 
 /**
  * @typedef {Object} SchemaFormHost

@@ -6,7 +6,7 @@
  */
 
 import { html } from 'hybrids';
-import '../../atoms/theme-toggle/theme-toggle.js';
+import '#atoms/theme-toggle/theme-toggle.js';
 
 /**
  * Wrap content in the standard page layout (header + main).

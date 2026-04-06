@@ -9,7 +9,14 @@
     "strict": false,
     "skipLibCheck": true,
     "paths": {
-      "hybrids": ["../node_modules/hybrids/types/index.d.ts"]
+      "hybrids": ["../node_modules/hybrids/types/index.d.ts"],
+      "#store/*": ["../src/store/*"],
+      "#utils/*": ["../src/utils/*"],
+      "#atoms/*": ["../src/components/atoms/*"],
+      "#molecules/*": ["../src/components/molecules/*"],
+      "#organisms/*": ["../src/components/organisms/*"],
+      "#templates/*": ["../src/components/templates/*"],
+      "#pages/*": ["../src/pages/*"]
     }
   },
   "include": [

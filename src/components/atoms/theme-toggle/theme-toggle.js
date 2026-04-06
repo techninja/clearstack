@@ -5,11 +5,11 @@
  */
 
 import { html, define, store } from 'hybrids';
-import AppState from '../../../store/AppState.js';
+import AppState from '#store/AppState.js';
 
 /**
  * @typedef {Object} ThemeToggleHost
- * @property {import('../../../store/AppState.js').AppState} state
+ * @property {import('#store/AppState.js').AppState} state
  */
 
 /**

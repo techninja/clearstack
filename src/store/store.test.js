@@ -2,10 +2,10 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { store } from 'hybrids';
 
-import AppState from '../store/AppState.js';
-import UserPrefs from '../store/UserPrefs.js';
-import ProjectModel from '../store/ProjectModel.js';
-import TaskModel from '../store/TaskModel.js';
+import AppState from '#store/AppState.js';
+import UserPrefs from '#store/UserPrefs.js';
+import ProjectModel from '#store/ProjectModel.js';
+import TaskModel from '#store/TaskModel.js';
 
 describe('AppState (singleton)', () => {
   it('has no id field (singleton)', () => {

@@ -8,7 +8,14 @@
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadConfig, checkFileLines, runCmd, countFiles, CMDS } from '../lib/check.js';
+import {
+  loadConfig,
+  checkFileLines,
+  checkImports,
+  runCmd,
+  countFiles,
+  CMDS,
+} from '../lib/check.js';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const cfg = loadConfig(ROOT);
@@ -24,6 +31,7 @@ async function runAll() {
   const r = [
     checkFileLines(ROOT, cfg.codeExt, cfg.codeMax, cfg.ignore, `Code (max ${cfg.codeMax} lines)`),
     checkFileLines(ROOT, cfg.docsExt, cfg.docsMax, cfg.ignore, `Docs (max ${cfg.docsMax} lines)`),
+    checkImports(ROOT, cfg.ignore, 'Import map aliases (no ../ imports)'),
     runCmd('ESLint', CMDS.lint, ROOT, `${jsFiles} files`),
     runCmd('Stylelint', CMDS.stylelint, ROOT, `${cssFiles} files`),
     runCmd(
@@ -51,6 +59,7 @@ async function interactive() {
     choices: [
       { name: `Code line counts (≤${cfg.codeMax})`, value: 'code' },
       { name: `Doc line counts (≤${cfg.docsMax})`, value: 'docs' },
+      { name: 'Import map aliases (no ../ imports)', value: 'imports' },
       { name: 'ESLint', value: 'lint' },
       { name: 'Stylelint', value: 'stylelint' },
       { name: 'Prettier', value: 'format' },
@@ -66,6 +75,7 @@ async function interactive() {
       checkFileLines(ROOT, cfg.codeExt, cfg.codeMax, cfg.ignore, `Code (max ${cfg.codeMax} lines)`),
     docs: () =>
       checkFileLines(ROOT, cfg.docsExt, cfg.docsMax, cfg.ignore, `Docs (max ${cfg.docsMax} lines)`),
+    imports: () => checkImports(ROOT, cfg.ignore, 'Import map aliases (no ../ imports)'),
     lint: () => runCmd('ESLint', CMDS.lint, ROOT),
     stylelint: () => runCmd('Stylelint', CMDS.stylelint, ROOT),
     format: () => runCmd('Prettier', CMDS.prettier, ROOT),

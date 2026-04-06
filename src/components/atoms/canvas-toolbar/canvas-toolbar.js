@@ -4,8 +4,8 @@
  */
 
 import { html, define, dispatch } from 'hybrids';
-import { SHAPES } from '../../../utils/canvasShapes.js';
-import '../../atoms/app-icon/app-icon.js';
+import { SHAPES } from '#utils/canvasShapes.js';
+import '#atoms/app-icon/app-icon.js';
 
 const TOOLS = [
   { id: 'select', icon: 'pointer', title: 'Select' },

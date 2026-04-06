@@ -5,10 +5,10 @@
  */
 
 import { html, define, dispatch } from 'hybrids';
-import { statusColor, statusTitle } from '../../../utils/statusColors.js';
-import { timeAgo } from '../../../utils/formatDate.js';
-import '../../atoms/app-badge/app-badge.js';
-import '../../atoms/app-icon/app-icon.js';
+import { statusColor, statusTitle } from '#utils/statusColors.js';
+import { timeAgo } from '#utils/formatDate.js';
+import '#atoms/app-badge/app-badge.js';
+import '#atoms/app-icon/app-icon.js';
 
 /**
  * @typedef {Object} ProjectCardHost

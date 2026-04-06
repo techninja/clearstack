@@ -5,14 +5,9 @@
  */
 
 import { html, define, dispatch } from 'hybrids';
-import {
-  statusColor,
-  priorityColor,
-  statusTitle,
-  priorityTitle,
-} from '../../../utils/statusColors.js';
-import '../../atoms/app-badge/app-badge.js';
-import '../../atoms/app-icon/app-icon.js';
+import { statusColor, priorityColor, statusTitle, priorityTitle } from '#utils/statusColors.js';
+import '#atoms/app-badge/app-badge.js';
+import '#atoms/app-icon/app-icon.js';
 
 /**
  * @typedef {Object} TaskCardHost

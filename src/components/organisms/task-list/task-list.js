@@ -4,16 +4,16 @@
  */
 
 import { html, define, store } from 'hybrids';
-import TaskModel from '../../../store/TaskModel.js';
-import { reorderTasks } from '../../../utils/reorderTasks.js';
-import { onDragStart, onDragOver, onDragEnd, resolveDrop } from '../../../utils/dragReorder.js';
-import '../../molecules/task-card/task-card.js';
-import '../schema-form/schema-form.js';
+import TaskModel from '#store/TaskModel.js';
+import { reorderTasks } from '#utils/reorderTasks.js';
+import { onDragStart, onDragOver, onDragEnd, resolveDrop } from '#utils/dragReorder.js';
+import '#molecules/task-card/task-card.js';
+import '#organisms/schema-form/schema-form.js';
 
 /**
  * @typedef {Object} TaskListHost
  * @property {string} projectId
- * @property {import('../../../store/TaskModel.js').Task[]} tasks
+ * @property {import('#store/TaskModel.js').Task[]} tasks
  * @property {string} selectedId
  */
 

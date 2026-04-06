@@ -5,10 +5,10 @@
  */
 
 import { html, define, router } from 'hybrids';
-import { connectRealtime } from '../utils/realtimeSync.js';
-import ProjectModel from '../store/ProjectModel.js';
-import TaskModel from '../store/TaskModel.js';
-import HomeView from '../pages/home/home-view.js';
+import { connectRealtime } from '#utils/realtimeSync.js';
+import ProjectModel from '#store/ProjectModel.js';
+import TaskModel from '#store/TaskModel.js';
+import HomeView from '#pages/home/home-view.js';
 
 /**
  * @typedef {Object} AppRouterHost

@@ -5,12 +5,12 @@
  */
 
 import { html, define, store, router } from 'hybrids';
-import TaskModel from '../../store/TaskModel.js';
-import { pageLayout } from '../../components/templates/page-layout/page-layout.js';
-import '../../components/organisms/project-header/project-header.js';
-import '../../components/organisms/project-canvas/project-canvas.js';
-import '../../components/organisms/task-list/task-list.js';
-import '../../components/organisms/schema-form/schema-form.js';
+import TaskModel from '#store/TaskModel.js';
+import { pageLayout } from '#templates/page-layout/page-layout.js';
+import '#organisms/project-header/project-header.js';
+import '#organisms/project-canvas/project-canvas.js';
+import '#organisms/task-list/task-list.js';
+import '#organisms/schema-form/schema-form.js';
 
 /**
  * @typedef {Object} ProjectViewHost

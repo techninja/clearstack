@@ -4,13 +4,13 @@
  */
 
 import { html, define } from 'hybrids';
-import { connectCanvas } from '../../../utils/canvasSocket.js';
-import { svgMarkup } from '../../../utils/renderSvgObject.js';
-import { selectionHandles } from '../../../utils/selectionHandles.js';
-import { applyCanvasMessage } from '../../../utils/canvasMessages.js';
-import { onDown, onMove, onUp, deleteSelected } from '../../../utils/canvasEvents.js';
-import { setupTouch } from '../../../utils/canvasViewport.js';
-import '../../atoms/canvas-toolbar/canvas-toolbar.js';
+import { connectCanvas } from '#utils/canvasSocket.js';
+import { svgMarkup } from '#utils/renderSvgObject.js';
+import { selectionHandles } from '#utils/selectionHandles.js';
+import { applyCanvasMessage } from '#utils/canvasMessages.js';
+import { onDown, onMove, onUp, deleteSelected } from '#utils/canvasEvents.js';
+import { setupTouch } from '#utils/canvasViewport.js';
+import '#atoms/canvas-toolbar/canvas-toolbar.js';
 
 /**
  * @typedef {Object} ProjectCanvasHost

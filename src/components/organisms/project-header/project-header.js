@@ -4,16 +4,16 @@
  */
 
 import { html, define, store } from 'hybrids';
-import ProjectModel from '../../../store/ProjectModel.js';
-import { statusColor, statusTitle } from '../../../utils/statusColors.js';
-import { formatDate } from '../../../utils/formatDate.js';
-import '../../atoms/app-badge/app-badge.js';
-import '../schema-form/schema-form.js';
+import ProjectModel from '#store/ProjectModel.js';
+import { statusColor, statusTitle } from '#utils/statusColors.js';
+import { formatDate } from '#utils/formatDate.js';
+import '#atoms/app-badge/app-badge.js';
+import '#organisms/schema-form/schema-form.js';
 
 /**
  * @typedef {Object} ProjectHeaderHost
  * @property {string} projectId
- * @property {import('../../../store/ProjectModel.js').Project} project
+ * @property {import('#store/ProjectModel.js').Project} project
  * @property {boolean} editing
  */
 

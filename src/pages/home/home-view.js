@@ -5,15 +5,15 @@
  */
 
 import { html, define, store, router } from 'hybrids';
-import ProjectModel from '../../store/ProjectModel.js';
-import { pageLayout } from '../../components/templates/page-layout/page-layout.js';
-import '../../components/molecules/project-card/project-card.js';
-import '../../components/organisms/schema-form/schema-form.js';
-import ProjectView from '../project/project-view.js';
+import ProjectModel from '#store/ProjectModel.js';
+import { pageLayout } from '#templates/page-layout/page-layout.js';
+import '#molecules/project-card/project-card.js';
+import '#organisms/schema-form/schema-form.js';
+import ProjectView from '#pages/project/project-view.js';
 
 /**
  * @typedef {Object} HomeViewHost
- * @property {import('../../store/ProjectModel.js').Project[]} projects
+ * @property {import('#store/ProjectModel.js').Project[]} projects
  * @property {boolean} creating
  */
 
