@@ -6,6 +6,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.9] - 2026-04-06
+
+- Better error handling
+- Rework spec check for better running options
+- The dangers of backUrl!
+- Another rendering gotcha
+- Another little hybrids gotcha
+- Add gotcha found on Asili
+
+
 ## [0.3.8] - 2026-04-06
 
 - Move to importmap preferred for appropriate code
