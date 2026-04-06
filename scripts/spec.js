@@ -48,14 +48,19 @@ function menuChoices() {
 
 /** Show interactive menu. */
 async function interactive() {
-  const { select } = await import('@inquirer/prompts');
-  const action = await select({
-    message: 'Spec checker — what do you want to validate?',
-    choices: menuChoices(),
-  });
-  if (action === 'all') return runAll();
-  const matched = resolveChecks(checks, action);
-  if (!matched.every((c) => c.run())) process.exit(1);
+  try {
+    const { select } = await import('@inquirer/prompts');
+    const action = await select({
+      message: 'Spec checker — what do you want to validate?',
+      choices: menuChoices(),
+    });
+    if (action === 'all') return runAll();
+    const matched = resolveChecks(checks, action);
+    if (!matched.every((c) => c.run())) process.exit(1);
+  } catch (e) {
+    if (e?.name === 'ExitPromptError') process.exit(0);
+    throw e;
+  }
 }
 
 const scope = subsub ? `${sub} ${subsub}` : sub;
