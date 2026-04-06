@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Move to importmap preferred for appropriate code
 
-
 ## [0.3.7] - 2026-04-05
 
 - Add detection to utilize correct package manager in check
