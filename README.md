@@ -50,8 +50,9 @@ npm install -D @techninja/clearstack    # add to your project
 npx clearstack init                     # scaffold (interactive)
 npx clearstack init -y                  # scaffold (fullstack defaults)
 npx clearstack init --static            # scaffold (static, no server)
+npx clearstack update                   # sync docs (skip existing configs)
+npx clearstack update --force           # sync docs + overwrite configs
 npm run spec                            # check compliance
-npm run spec:update                     # sync docs + configs on upgrade
 ```
 
 Two modes: **fullstack** (Express + WebSocket + JSON DB + SSE) or **static** (localStorage, no server).
@@ -65,7 +66,7 @@ See [QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 - **Light DOM by default.** Shared styles just work.
 - **JSDoc over TypeScript.** Types without a compile step — validated by `tsc --checkJs`.
 - **Test at the boundary.** Each phase passes before the next begins.
-- **The spec checks itself.** `npm run spec:code` and `npm run spec:docs`.
+- **The spec checks itself.** `npm run spec code` and `npm run spec docs`.
 - **Lint and format.** ESLint + Prettier, semicolons, 2-space indent.
 
 ## Scripts
@@ -78,10 +79,11 @@ npm run lint        # ESLint check
 npm run lint:fix    # ESLint auto-fix
 npm run format      # Prettier auto-format
 npm run typecheck   # JSDoc type validation via tsc
-npm run spec        # Spec compliance check
-npm run spec:code   # Check code files ≤150 lines
-npm run spec:docs   # Check doc files ≤500 lines
-npm run spec:update # Sync docs + configs from upstream
+npm run spec        # Spec compliance (interactive)
+npm run spec all    # Full spec check
+npm run spec code   # Check code files ≤150 lines
+npm run spec docs   # Check doc files ≤500 lines
+npm run spec update # Sync docs from upstream
 ```
 
 ## License

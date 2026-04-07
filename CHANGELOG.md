@@ -13,7 +13,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Add findings from StatiCart
 - release: v0.3.13
 
-
 ## [0.3.14] - 2026-04-07
 
 - Add findings from StatiCart

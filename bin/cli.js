@@ -4,7 +4,7 @@
  * clearstack CLI — scaffold, update, and check spec-compliant projects.
  * Usage:
  *   clearstack init [-y] [--static|--fullstack] [--port 3000]
- *   clearstack update
+ *   clearstack update [--force]
  *   clearstack check [code|docs|imports|lint|lint es|format|types|audit|all]
  *   clearstack                   → interactive menu
  */
@@ -54,7 +54,7 @@ async function run(action) {
     await init(PKG_ROOT, { yes, ...flags });
   } else if (action === 'update') {
     const { update } = await import('../lib/update.js');
-    await update(PKG_ROOT);
+    await update(PKG_ROOT, { force: !!flags.force });
   } else if (action === 'check') {
     const subs = args.filter((a) => a !== cmd && !a.startsWith('-'));
     const { check } = await import('../lib/check.js');
