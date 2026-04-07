@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.13] - 2026-04-07
+
+- Spec linting
+- Allow passing --static for serverless builds
+
 ## [0.3.12] - 2026-04-07
 
 - Fix ordering of spec check to account for auto lint fixes Also add convention around splitting vs compressing for big files
