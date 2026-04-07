@@ -48,7 +48,8 @@ Install as a dev dependency, scaffold, and keep in sync:
 ```bash
 npm install -D @techninja/clearstack    # add to your project
 npx clearstack init                     # scaffold (interactive)
-npx clearstack init -y                  # scaffold (defaults)
+npx clearstack init -y                  # scaffold (fullstack defaults)
+npx clearstack init --static            # scaffold (static, no server)
 npm run spec                            # check compliance
 npm run spec:update                     # sync docs + configs on upgrade
 ```

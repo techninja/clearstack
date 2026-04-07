@@ -3,7 +3,7 @@
 /**
  * clearstack CLI — scaffold, update, and check spec-compliant projects.
  * Usage:
- *   clearstack init [-y] [--mode fullstack|static] [--port 3000]
+ *   clearstack init [-y] [--static|--fullstack] [--port 3000]
  *   clearstack update
  *   clearstack check [code|docs|imports|lint|lint es|format|types|audit|all]
  *   clearstack                   → interactive menu
@@ -22,6 +22,8 @@ const flags = Object.fromEntries(
   }),
 );
 const yes = args.includes('-y') || args.includes('--yes');
+if (flags.static) flags.mode = 'static';
+if (flags.fullstack) flags.mode = 'fullstack';
 
 /** Show interactive menu. */
 async function interactive() {
