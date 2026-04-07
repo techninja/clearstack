@@ -71,7 +71,7 @@ describe('scaffold output', () => {
     assert.equal(pkg.type, 'module');
     assert.ok(pkg.devDependencies['@techninja/clearstack']);
     assert.ok(pkg.dependencies.express);
-    assert.equal(pkg.scripts.spec, 'clearstack');
+    assert.equal(pkg.scripts.spec, 'node scripts/spec.js');
   });
 
   it('passes prettier on all scaffolded files', () => {

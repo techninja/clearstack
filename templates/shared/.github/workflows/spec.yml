@@ -24,20 +24,8 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium --with-deps
 
-      - name: Code line counts (≤150)
-        run: node scripts/spec.js code
-
-      - name: Doc line counts (≤500)
-        run: node scripts/spec.js docs
-
-      - name: ESLint
-        run: npx eslint --config .configs/eslint.config.js .
-
-      - name: Prettier
-        run: npx prettier --config .configs/.prettierrc --check src scripts server.js tests
-
-      - name: JSDoc types (tsc --checkJs)
-        run: npx tsc --project .configs/jsconfig.json
+      - name: Spec compliance
+        run: node scripts/spec.js all
 
       - name: Node tests
         run: node --test tests/*.test.js src/utils/*.test.js src/store/*.test.js

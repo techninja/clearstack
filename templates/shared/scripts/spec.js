@@ -2,11 +2,18 @@
 
 /**
  * Spec enforcement — interactive menu + CLI shortcuts.
- * Delegates all check logic to lib/check.js.
+ * Delegates all check logic to @techninja/clearstack.
  * @module scripts/spec
  */
 
-import { loadConfig, buildChecks, buildCmds, check } from '../lib/check.js';
+import {
+  loadConfig,
+  buildChecks,
+  buildCmds,
+  resolveChecks,
+  parentKeys,
+  check,
+} from '@techninja/clearstack/lib/check.js';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const [sub, subsub] = process.argv.slice(2);
