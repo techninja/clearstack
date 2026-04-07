@@ -4,6 +4,10 @@
     "activityBar.foreground": "#c6f2f1",
     "activityBar.inactiveForeground": "#4a8ab5",
     "activityBarBadge.background": "#00c0e0",
-    "activityBarBadge.foreground": "#002040"
+    "activityBarBadge.foreground": "#002040",
+    "titleBar.activeBackground": "#063466",
+    "titleBar.activeForeground": "#c6f2f1",
+    "titleBar.inactiveBackground": "#042a52",
+    "titleBar.inactiveForeground": "#4a8ab5"
   }
 }
