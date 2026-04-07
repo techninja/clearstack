@@ -22,8 +22,10 @@ pnpm add -D @techninja/clearstack
 From your project root:
 
 ```bash
-npx clearstack init        # interactive
-npx clearstack init -y     # non-interactive (defaults)
+npx clearstack init            # interactive
+npx clearstack init -y         # non-interactive (fullstack defaults)
+npx clearstack init --static   # non-interactive, static mode
+npx clearstack init -y --static # same as above
 ```
 
 The interactive prompt asks for:
@@ -159,7 +161,8 @@ spec:code → spec:docs → lint → format → typecheck → test
 | Task                  | Command                                |
 | --------------------- | -------------------------------------- |
 | Install Clearstack    | `npm install -D @techninja/clearstack` |
-| Scaffold a project    | `npx clearstack init`                  |
+| Scaffold (fullstack)  | `npx clearstack init`                  |
+| Scaffold (static)     | `npx clearstack init --static`         |
 | Install dependencies  | `npm install`                          |
 | Start dev server      | `npm run dev`                          |
 | Lint + format         | `npm run lint:fix && npm run format`   |
