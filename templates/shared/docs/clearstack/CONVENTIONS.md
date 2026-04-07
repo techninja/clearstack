@@ -267,6 +267,25 @@ This prevents premature extraction while keeping the eventual split obvious.
 function moveObj(o, dx, dy) { ... }
 ```
 
+### When a File Exceeds 150 Lines
+
+The **only correct response** is to split the file into two or more files.
+Never do any of the following to reduce line count:
+
+- Remove or shorten JSDoc comments
+- Collapse multi-line expressions onto one line
+- Remove blank lines between logical sections
+- Combine unrelated functions into one
+- Delete code that is still needed
+
+These make the code harder to read, which defeats the purpose of the limit.
+The limit exists to force decomposition, not compression.
+
+The spec checker runs formatters (Prettier, ESLint `--fix`) **before**
+counting lines, so the line count always reflects the formatted result.
+Write code in its natural readable form, run `npm run spec all`, and if
+a file is over the limit, split it.
+
 ---
 
 ## npm Scripts: One Entry Point Per Domain
