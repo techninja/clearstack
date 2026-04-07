@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.14] - 2026-04-07
+
+- Add findings from StatiCart
+
+
 ## [0.3.13] - 2026-04-07
 
 - Spec linting
