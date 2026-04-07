@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.16] - 2026-04-07
+
+- Fix colon vs spaces, better spec checks
+- No pnpm here thx
+
+
 ## [0.3.15] - 2026-04-07
 
 - Unify spec checker, add branding 💙
