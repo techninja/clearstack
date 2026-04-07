@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.12] - 2026-04-07
+
+- Fix ordering of spec check to account for auto lint fixes Also add convention around splitting vs compressing for big files
+- Update conventions to prevent filtering spec checks
+
+
 ## [0.3.11] - 2026-04-06
 
 - Did I forget to run my own spec check? SHHHHHHHHHH
