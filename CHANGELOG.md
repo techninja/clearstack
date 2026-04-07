@@ -6,6 +6,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.15] - 2026-04-07
+
+- Unify spec checker, add branding 💙
+- release: v0.3.14
+- Add findings from StatiCart
+- release: v0.3.13
+
+
 ## [0.3.14] - 2026-04-07
 
 - Add findings from StatiCart
