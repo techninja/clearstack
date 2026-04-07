@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Did I forget to run my own spec check? SHHHHHHHHHH
 
-
 ## [0.3.10] - 2026-04-06
 
 - Fix upgrade templates

@@ -328,6 +328,53 @@ multiple keys.
 Spec is the inner dev loop — run it constantly. Tests are the commit gate —
 run them before pushing. CI runs both, in parallel.
 
+### Spec Output Contract
+
+The spec checker is designed for **minimal, complete output**. Every check
+prints exactly one line: ✅ on pass, ❌ on fail with the violating file and
+reason. The final summary is 2 lines (`N/N checks passed`).
+
+Total output for a passing run is ~12 lines. A failing run adds one line
+per violation with the exact file path and what to fix.
+
+**Do not pipe, grep, tail, or filter spec output.** It is already the
+minimal actionable result. Filtering it discards the violation details
+that tell you which file to fix, forcing redundant re-runs.
+
+To narrow scope, run a targeted check instead of filtering `all`:
+
+```bash
+# Run everything
+npm run spec all
+
+# Run one check by key
+npm run spec code          # line counts (code files ≤150)
+npm run spec docs          # line counts (doc files ≤500)
+npm run spec imports       # import map aliases (no ../)
+npm run spec types         # JSDoc types (tsc --checkJs)
+npm run spec audit         # security audit
+
+# Parent keys run all children
+npm run spec lint           # ESLint + Stylelint + Markdown lint
+npm run spec format         # Prettier (all formatters)
+
+# Child keys run one
+npm run spec lint es        # ESLint only
+npm run spec lint css       # Stylelint only
+npm run spec lint md        # Markdown lint only
+npm run spec format prettier
+```
+
+```bash
+# ❌ Wrong — discards violation file paths
+npm run spec all 2>&1 | tail -3
+npm run spec all 2>&1 | grep -E "pass|fail"
+```
+
+This matters especially for LLM-assisted development: the spec output is
+structured so an LLM can read it in one pass, identify the failing file,
+and fix it without re-running the check. Filtering breaks that loop.
+
 ---
 
 ## Session Retrospective
