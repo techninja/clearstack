@@ -204,6 +204,14 @@ These are the significant corrections:
 - **Fix:** Cast params to `any` before accessing custom properties
 - **Documented in:** JSDOC_TYPING.md → `list` Connector Params
 
+### Array model prototype items persist as real data
+
+- **Expected:** `items: [{ sku: '', quantity: 0 }]` only defines the schema
+- **Actual:** The prototype item exists as a real entry in the array at runtime
+- **Impact:** Cart showed a ghost item with empty sku and 0 quantity; Stripe rejected the 0-price line item
+- **Fix:** Always filter array model data with `.filter(i => i.sku)` before use
+- **Documented in:** STATE_AND_ROUTING.md → Store Array Properties
+
 ---
 
 ## Metrics
@@ -316,8 +324,10 @@ Five new hybrids gotchas were found and documented:
 3. **Enumerable models need `@type {any}`** — tsc can't type `id: true`
 4. **List store descriptors need 3 casts** — descriptor, ready(), and map()
 5. **`list` connector params need cast** — `ModelIdentifier` not plain object
+6. **Array prototype items persist as real data** — the prototype item
+   used to define the array shape is included in the actual data
 
-All five are hybrids type system friction, not architectural issues. The
+All six are hybrids type system friction, not architectural issues. The
 runtime behavior is correct — it's the JSDoc/tsc layer that struggles.
 Each was fixed in under 2 minutes once identified.
 
