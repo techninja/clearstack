@@ -6,6 +6,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.19] - 2026-04-11
+
+- Way too much from 3 project learnings - Project stacking - Larger limits for test files - No swallowed silent errors -
+- Initial work toward platform stacking
+- More Staticart findings
+
+
 ## [0.3.17] - 2026-04-08
 
 - Phase 3 build log for Staticart
