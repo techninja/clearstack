@@ -22,8 +22,8 @@ export function objCenter(obj, svg) {
         try {
           const b = el.getBBox();
           return { x: b.x + b.width / 2, y: b.y + b.height / 2 };
-        } catch {
-          /* not rendered */
+        } catch (e) {
+          console.warn('[canvas] getBBox failed:', e.message);
         }
       }
     }

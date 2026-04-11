@@ -24,8 +24,8 @@ export function selectionHandles(obj, svg) {
         const bb = el.getBBox();
         b = { x: bb.x, y: bb.y, w: bb.width, h: bb.height };
         if (obj.shapeTransform) b = applyShapeTransform(b, obj.shapeTransform);
-      } catch {
-        /* not rendered */
+      } catch (e) {
+        console.warn('[canvas] selection handles failed:', e.message);
       }
     }
   }

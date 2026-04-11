@@ -33,13 +33,13 @@ export function connectRealtime(url, modelMap) {
       console.log(`[SSE] ${type} ${action} — clearing store cache`);
       try {
         store.clear([Model]);
-      } catch {
-        /* list may not exist */
+      } catch (e) {
+        console.warn(`[SSE] clear list failed for ${type}:`, e.message);
       }
       try {
         store.clear(Model);
-      } catch {
-        /* singular may not exist */
+      } catch (e) {
+        console.warn(`[SSE] clear singular failed for ${type}:`, e.message);
       }
     }, 300);
   });

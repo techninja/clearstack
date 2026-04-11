@@ -66,17 +66,17 @@ A Clearstack project becomes a platform by adding a `platform` key to its
 
 ### Manifest Fields
 
-| Field | Required | Purpose |
-| --- | --- | --- |
-| `prefix` | Yes | Import map prefix (`#staticart/`). Must be unique per platform. |
-| `vendorDir` | Yes | Where platform files land in the child project. Gitignored. |
-| `configFile` | Yes | Project-level config file name. Never overwritten on update. |
-| `configSchema` | No | JSON Schema for the config file. Used for validation. |
-| `templates` | Yes | Directory in the npm package containing scaffold templates. |
-| `vendor` | Yes | Directory in the npm package containing vendorable source files. |
-| `docs` | No | Platform docs synced to child project on update. |
-| `scripts` | No | Build/admin scripts copied on init, skipped on update. |
-| `api` | No | API handler templates copied on init, skipped on update. |
+| Field          | Required | Purpose                                                          |
+| -------------- | -------- | ---------------------------------------------------------------- |
+| `prefix`       | Yes      | Import map prefix (`#staticart/`). Must be unique per platform.  |
+| `vendorDir`    | Yes      | Where platform files land in the child project. Gitignored.      |
+| `configFile`   | Yes      | Project-level config file name. Never overwritten on update.     |
+| `configSchema` | No       | JSON Schema for the config file. Used for validation.            |
+| `templates`    | Yes      | Directory in the npm package containing scaffold templates.      |
+| `vendor`       | Yes      | Directory in the npm package containing vendorable source files. |
+| `docs`         | No       | Platform docs synced to child project on update.                 |
+| `scripts`      | No       | Build/admin scripts copied on init, skipped on update.           |
+| `api`          | No       | API handler templates copied on init, skipped on update.         |
 
 ### The `prefix` Contract
 
@@ -86,13 +86,13 @@ It follows the same `#prefix/` convention Clearstack uses for `#store/`,
 
 ```html
 <script type="importmap">
-{
-  "imports": {
-    "#staticart/": "/vendor/staticart/",
-    "#store/": "/store/",
-    "#atoms/": "/components/atoms/"
+  {
+    "imports": {
+      "#staticart/": "/vendor/staticart/",
+      "#store/": "/store/",
+      "#atoms/": "/components/atoms/"
+    }
   }
-}
 </script>
 ```
 
@@ -101,12 +101,12 @@ path before the wildcard:
 
 ```html
 <script type="importmap">
-{
-  "imports": {
-    "#staticart/product-card": "/components/my-product-card.js",
-    "#staticart/": "/vendor/staticart/"
+  {
+    "imports": {
+      "#staticart/product-card": "/components/my-product-card.js",
+      "#staticart/": "/vendor/staticart/"
+    }
   }
-}
 </script>
 ```
 
@@ -121,11 +121,11 @@ determines who creates it, who updates it, and who must never touch it.
 
 ### Ownership Table
 
-| Owner | Creates | Updates | Examples |
-| --- | --- | --- | --- |
-| **Clearstack** | `init` | `update` (always) | `docs/clearstack/`, `.configs/` |
-| **Platform** | `init` | `update` (vendor + docs only) | `src/vendor/<prefix>/`, `docs/<prefix>/` |
-| **Project** | `init` (from template) | Never (project owns it) | `src/components/`, config file, `tokens.css`, data files |
+| Owner          | Creates                | Updates                       | Examples                                                 |
+| -------------- | ---------------------- | ----------------------------- | -------------------------------------------------------- |
+| **Clearstack** | `init`                 | `update` (always)             | `docs/clearstack/`, `.configs/`                          |
+| **Platform**   | `init`                 | `update` (vendor + docs only) | `src/vendor/<prefix>/`, `docs/<prefix>/`                 |
+| **Project**    | `init` (from template) | Never (project owns it)       | `src/components/`, config file, `tokens.css`, data files |
 
 ### The Three Update Behaviors
 
@@ -163,29 +163,20 @@ platforms hook into the existing `init` and `update` flow.
 ### `clearstack init`
 
 Current behavior (unchanged):
+
 1. Scaffold Clearstack project structure
 2. Create `.configs/`, `docs/clearstack/`, `scripts/`, `src/`
 
-New behavior when a platform is detected in `devDependencies`:
-3. Read the platform's manifest from its `package.json`
-4. Copy `templates/` → project root (respecting ownership rules)
-5. Vendor `vendor/` → `src/vendor/<prefix>/`
-6. Copy `docs/` → `docs/<prefix>/`
-7. Copy `scripts/` → `scripts/` (skip existing)
-8. Copy `api/` → `api/` (skip existing)
-9. Generate import map entries for `#<prefix>/`
-10. Create config file from template (if not exists)
+New behavior when a platform is detected in `devDependencies`: 3. Read the platform's manifest from its `package.json` 4. Copy `templates/` → project root (respecting ownership rules) 5. Vendor `vendor/` → `src/vendor/<prefix>/` 6. Copy `docs/` → `docs/<prefix>/` 7. Copy `scripts/` → `scripts/` (skip existing) 8. Copy `api/` → `api/` (skip existing) 9. Generate import map entries for `#<prefix>/` 10. Create config file from template (if not exists)
 
 ### `clearstack update`
 
 Current behavior (unchanged):
+
 1. Sync `docs/clearstack/` (always overwrite)
 2. Sync `.configs/` (skip existing, `--force` to overwrite)
 
-New behavior when a platform is detected:
-3. Re-vendor `vendor/` → `src/vendor/<prefix>/` (always overwrite)
-4. Sync `docs/<prefix>/` (always overwrite)
-5. Skip everything else (config, templates, scripts, api)
+New behavior when a platform is detected: 3. Re-vendor `vendor/` → `src/vendor/<prefix>/` (always overwrite) 4. Sync `docs/<prefix>/` (always overwrite) 5. Skip everything else (config, templates, scripts, api)
 
 ### Platform CLI Passthrough
 
@@ -274,16 +265,17 @@ The child project replaces a platform component by remapping its import:
 
 ```html
 <script type="importmap">
-{
-  "imports": {
-    "#staticart/product-card": "/components/my-product-card.js",
-    "#staticart/": "/vendor/staticart/"
+  {
+    "imports": {
+      "#staticart/product-card": "/components/my-product-card.js",
+      "#staticart/": "/vendor/staticart/"
+    }
   }
-}
 </script>
 ```
 
 The override component can:
+
 - Replace the platform component entirely
 - Import and wrap the original (decorator pattern)
 - Import the original's helpers and compose differently
@@ -297,7 +289,7 @@ vendored `tokens.css`. The child project overrides them in its own
 ```css
 /* src/styles/tokens.css — project overrides */
 :root {
-  --color-primary: #8b4513;  /* coffee brown, overrides platform blue */
+  --color-primary: #8b4513; /* coffee brown, overrides platform blue */
 }
 ```
 
@@ -310,12 +302,12 @@ this file entirely. The platform provides defaults for any missing keys.
 
 Four-layer cascade, split by responsibility:
 
-| Layer | Owner | File | Purpose |
-| --- | --- | --- | --- |
-| 1. Defaults | Platform | Hardcoded in `i18n.js` | English UI chrome |
-| 2. Locale | Platform | `locales/<lang>.json` | Translated UI chrome |
-| 3. Overrides | Project | `locales/overrides.json` | English project terms |
-| 4. Locale overrides | Project | `locales/overrides.<lang>.json` | Translated project terms |
+| Layer               | Owner    | File                            | Purpose                  |
+| ------------------- | -------- | ------------------------------- | ------------------------ |
+| 1. Defaults         | Platform | Hardcoded in `i18n.js`          | English UI chrome        |
+| 2. Locale           | Platform | `locales/<lang>.json`           | Translated UI chrome     |
+| 3. Overrides        | Project  | `locales/overrides.json`        | English project terms    |
+| 4. Locale overrides | Project  | `locales/overrides.<lang>.json` | Translated project terms |
 
 The platform translates its own UI strings (buttons, labels, status text).
 The project translates its own domain terms (category names, variant labels,
@@ -374,13 +366,13 @@ vendor directory, and config file.
 
 ```html
 <script type="importmap">
-{
-  "imports": {
-    "#staticart/": "/vendor/staticart/",
-    "#blogengine/": "/vendor/blogengine/",
-    "#store/": "/store/"
+  {
+    "imports": {
+      "#staticart/": "/vendor/staticart/",
+      "#blogengine/": "/vendor/blogengine/",
+      "#store/": "/store/"
+    }
   }
-}
 </script>
 ```
 
@@ -408,21 +400,21 @@ These integrate with the child project's build pipeline.
 
 ### Script Ownership
 
-| Script | Copied on | Updated on | Owner |
-| --- | --- | --- | --- |
-| `scripts/setup.js` | init | never | Project (may customize) |
-| `scripts/vendor-deps.js` | init | never | Project (adds platform vendor) |
-| `scripts/build-products.js` | init | never | Project (may customize) |
-| Platform-internal scripts | never copied | n/a | Platform (runs from node_modules) |
+| Script                      | Copied on    | Updated on | Owner                             |
+| --------------------------- | ------------ | ---------- | --------------------------------- |
+| `scripts/setup.js`          | init         | never      | Project (may customize)           |
+| `scripts/vendor-deps.js`    | init         | never      | Project (adds platform vendor)    |
+| `scripts/build-products.js` | init         | never      | Project (may customize)           |
+| Platform-internal scripts   | never copied | n/a        | Platform (runs from node_modules) |
 
 The child project's `setup.js` (run on `postinstall`) should vendor both
 Clearstack dependencies and platform files:
 
 ```javascript
 // scripts/setup.js
-await import('./vendor-deps.js');     // hybrids → src/vendor/hybrids/
+await import('./vendor-deps.js'); // hybrids → src/vendor/hybrids/
 await import('./vendor-platform.js'); // staticart → src/vendor/staticart/
-await import('./build-icons.js');     // lucide → icons.json
+await import('./build-icons.js'); // lucide → icons.json
 ```
 
 ### CI/CD
@@ -437,31 +429,15 @@ environment variables and secrets are required.
 
 ### Clearstack ↔ Platform
 
-The platform declares its required Clearstack version as a `peerDependency`:
-
-```json
-{
-  "peerDependencies": {
-    "@techninja/clearstack": ">=0.3.17"
-  }
-}
-```
+The platform declares its required Clearstack version as a `peerDependency`
+(e.g. `"@techninja/clearstack": ">=0.3.17"`).
 
 ### Platform ↔ Project
 
-The child project pins the platform version in `devDependencies` (or
-`dependencies` if the platform provides runtime code like API handlers):
-
-```json
-{
-  "dependencies": {
-    "@techninja/staticart": "^1.0.0"
-  }
-}
-```
-
-`npm update` + `clearstack update` brings in new vendor files. The project's
-config, overrides, and custom components are untouched.
+The child project pins the platform version in `dependencies` or
+`devDependencies`. `npm update` + `clearstack update` brings in new
+vendor files. The project's config, overrides, and custom components
+are untouched.
 
 ### Breaking Changes
 
@@ -476,87 +452,25 @@ component, changed store model shape):
 
 ---
 
-## 10. Example: StatiCart as a Platform
+## 10. Example
 
-### Package Structure
-
-```
-@techninja/staticart (npm)
-├── bin/
-│   └── cli.js                    # `staticart build` (platform-specific commands)
-├── vendor/
-│   ├── components/               # Default UI components
-│   │   ├── atoms/
-│   │   ├── molecules/
-│   │   └── organisms/
-│   ├── store/                    # Core store models
-│   ├── styles/                   # Default component CSS
-│   └── utils/                    # Shared utilities (formatPrice, i18n, etc.)
-├── templates/
-│   ├── index.html                # App shell with import map
-│   ├── staticart.config.json     # Default config
-│   ├── tokens.css                # Default design tokens
-│   └── products.json             # Seed product data
-├── locales/
-│   ├── es.json                   # Spanish UI chrome
-│   └── overrides.json            # Empty template for project overrides
-├── api/                          # Lambda handler templates
-├── scripts/                      # Build scripts
-├── docs/staticart/               # Platform docs
-└── package.json                  # With clearstack.platform manifest
-```
-
-### Child Project After `clearstack init`
-
-```
-my-coffee-shop/
-├── src/
-│   ├── index.html                # Import map with #staticart/ + local overrides
-│   ├── vendor/
-│   │   ├── hybrids/              # Clearstack-level vendor (gitignored)
-│   │   └── staticart/            # Platform vendor (gitignored)
-│   ├── components/               # Project overrides (optional)
-│   ├── styles/
-│   │   └── tokens.css            # Brand colors
-│   ├── data/
-│   │   └── products.json         # Project's product catalog
-│   └── locales/
-│       ├── overrides.json        # English project terms (category names, etc.)
-│       └── overrides.es.json     # Spanish project terms
-├── api/                          # Copied from platform, customizable
-├── scripts/                      # Copied from platform, customizable
-├── docs/
-│   ├── clearstack/               # Clearstack spec (managed)
-│   └── staticart/                # Platform docs (managed)
-├── staticart.config.json         # Project-owned config
-├── .env / .env.local
-└── package.json
-```
-
-### What Each Layer Translates
-
-| Term | Who translates | Where |
-| --- | --- | --- |
-| "Add to Cart" | Platform (StatiCart) | `i18n.js` defaults + `locales/es.json` |
-| "In Stock" | Platform (StatiCart) | `i18n.js` defaults + `locales/es.json` |
-| "Camisetas" (Shirts) | Project (My Coffee Shop) | `locales/overrides.es.json` |
-| "Tostado medio" (Medium Roast) | Project (My Coffee Shop) | `products.json` or overrides |
-| Product descriptions | Project (My Coffee Shop) | `products.json` |
+See `docs/app-spec/` for project-specific platform examples (e.g.
+StatiCart package structure, child project layout, i18n layer mapping).
 
 ---
 
 ## Summary
 
-| Concept | Mechanism |
-| --- | --- |
-| Platform declaration | `clearstack.platform` in `package.json` |
-| Component override | Import map specificity (`#prefix/component` before `#prefix/`) |
-| Style override | CSS custom properties in project `tokens.css` |
-| Config override | Project-owned config file, platform provides defaults |
-| i18n override | 4-layer cascade: platform defaults → locale → project overrides → project locale overrides |
-| Vendor sync | `postinstall` + `clearstack update` copies platform source to `src/vendor/<prefix>/` |
-| Spec checks | Clearstack checks compose automatically; vendor files excluded |
-| Version management | semver + `peerDependencies` + `clearstack update` warnings |
+| Concept              | Mechanism                                                                                  |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| Platform declaration | `clearstack.platform` in `package.json`                                                    |
+| Component override   | Import map specificity (`#prefix/component` before `#prefix/`)                             |
+| Style override       | CSS custom properties in project `tokens.css`                                              |
+| Config override      | Project-owned config file, platform provides defaults                                      |
+| i18n override        | 4-layer cascade: platform defaults → locale → project overrides → project locale overrides |
+| Vendor sync          | `postinstall` + `clearstack update` copies platform source to `src/vendor/<prefix>/`       |
+| Spec checks          | Clearstack checks compose automatically; vendor files excluded                             |
+| Version management   | semver + `peerDependencies` + `clearstack update` warnings                                 |
 
 ### Design Principles
 

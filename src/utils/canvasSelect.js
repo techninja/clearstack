@@ -26,7 +26,8 @@ function getBBox(svg, id, objects) {
     const box = { x: b.x, y: b.y, w: b.width, h: b.height };
     const obj = objects?.find((o) => o.id === id);
     return obj?.shapeTransform ? applyShapeTransform(box, obj.shapeTransform) : box;
-  } catch {
+  } catch (e) {
+    console.warn('[canvas] selection bounds failed:', e.message);
     return null;
   }
 }

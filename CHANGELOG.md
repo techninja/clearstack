@@ -11,7 +11,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Phase 3 build log for Staticart
 - Staticart learnings improvement for importmaps in tests
 
-
 ## [0.3.16] - 2026-04-07
 
 - Fix colon vs spaces, better spec checks

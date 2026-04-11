@@ -15,7 +15,8 @@ const dest = resolve(ROOT, 'templates/shared/docs/clearstack');
 
 mkdirSync(dest, { recursive: true });
 
-const files = readdirSync(src).filter((f) => f.endsWith('.md'));
+const SKIP = new Set(['BUILD_LOG.md', 'PLATFORM_STACKING.md']);
+const files = readdirSync(src).filter((f) => f.endsWith('.md') && !SKIP.has(f));
 let synced = 0;
 
 for (const file of files) {
