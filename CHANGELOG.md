@@ -12,7 +12,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Initial work toward platform stacking
 - More Staticart findings
 
-
 ## [0.3.17] - 2026-04-08
 
 - Phase 3 build log for Staticart
