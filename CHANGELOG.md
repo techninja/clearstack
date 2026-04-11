@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.21] - 2026-04-11
+
+- Fix command
+
+
 ## [0.3.20] - 2026-04-11
 
 - Add release helpers
