@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.24] - 2026-04-13
+
+- Fix scaffold test
+
+
 ## [0.3.23] - 2026-04-13
 
 - Platform sync upgrades
