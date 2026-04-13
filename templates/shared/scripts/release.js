@@ -36,7 +36,11 @@ const pkgPath = resolve(ROOT, 'package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
 const [ma, mi, pa] = pkg.version.split('.').map(Number);
 const next =
-  bump === 'major' ? `${ma + 1}.0.0` : bump === 'minor' ? `${ma}.${mi + 1}.0` : `${ma}.${mi}.${pa + 1}`;
+  bump === 'major'
+    ? `${ma + 1}.0.0`
+    : bump === 'minor'
+      ? `${ma}.${mi + 1}.0`
+      : `${ma}.${mi}.${pa + 1}`;
 pkg.version = next;
 writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 console.log(`\n📦 ${pkg.name} → v${next}\n`);
