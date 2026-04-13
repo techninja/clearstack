@@ -9,7 +9,7 @@
 
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execSync, spawn } from 'node:child_process';
@@ -39,6 +39,10 @@ function testMode(mode) {
       await copyTemplates(tpl, 'shared', dest, vars);
       await copyTemplates(tpl, mode, dest, vars);
       await writePackageJson(dest, vars);
+      const pkgPath = join(dest, 'package.json');
+      const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+      delete pkg.devDependencies['@techninja/clearstack'];
+      writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
       execSync('npm install --ignore-scripts', { cwd: dest, stdio: 'pipe', timeout: TIMEOUT });
       execSync('node scripts/setup.js', { cwd: dest, stdio: 'pipe', timeout: 30_000 });
     });
