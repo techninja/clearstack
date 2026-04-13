@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.23] - 2026-04-13
+
+- Platform sync upgrades
+
+
 - Platform update syncs new scripts and API files (not just vendor + docs)
 - Fix copySkipExisting to recurse into existing directories for nested new files
 - Fix prettier violation in scaffolded release.js template
@@ -14,16 +19,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Deploy with own version
 
-
 ## [0.3.21] - 2026-04-11
 
 - Fix command
 
-
 ## [0.3.20] - 2026-04-11
 
 - Add release helpers
-
 
 ## [0.3.19] - 2026-04-11
 
