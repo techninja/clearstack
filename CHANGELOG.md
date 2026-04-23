@@ -6,20 +6,22 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.26] - 2026-04-23
+
+- Allow inherited platform scripts
+
+
 ## [0.3.25] - 2026-04-15
 
 - Skip registry issues with pnpm for now
-
 
 ## [0.3.24] - 2026-04-13
 
 - Fix scaffold test
 
-
 ## [0.3.23] - 2026-04-13
 
 - Platform sync upgrades
-
 
 - Platform update syncs new scripts and API files (not just vendor + docs)
 - Fix copySkipExisting to recurse into existing directories for nested new files
