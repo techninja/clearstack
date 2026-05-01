@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="docs/clearstack_logo.png" alt="Clearstack" width="520">
+  <img src="docs/clearstack_logo.svg" alt="Clearstack" width="520">
 </p>
-
-# Clearstack
 
 A no-build web component framework specification — and its working proof — built entirely through LLM-human collaboration.
 
