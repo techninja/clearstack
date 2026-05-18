@@ -381,6 +381,54 @@ This is especially important when render depends on external mutable state
 (e.g. an in-memory cache object) that the property change is meant to
 signal. Without the reset, the component renders with stale external state.
 
+#### Router Cache Poisons Boolean Flags Across Reconnects
+
+When a routed view has a boolean property used as a fallback/error flag,
+the router cache can poison it across reconnects. If the flag is ever set
+to `true` (e.g. a failed fetch), the cached value persists. On the next
+navigation to that view, `connect` runs but the property is already `true`
+from cache — even though the default is `false`:
+
+```javascript
+// ❌ BAD — if fallback was ever true, it stays true on reconnect
+export default define({
+  tag: 'my-view',
+  data: {
+    value: undefined,
+    connect(host, _key, invalidate) {
+      loadData(host).then(() => invalidate());
+    },
+  },
+  fallback: false, // default is false, but cache may hold true
+  render: ({ data, fallback }) => {
+    if (fallback) return html`<p>Error</p>`; // stuck here forever
+    // ...
+  },
+});
+
+// ✅ GOOD — reset the flag in connect before the async load
+export default define({
+  tag: 'my-view',
+  data: {
+    value: undefined,
+    connect(host, _key, invalidate) {
+      host.fallback = false; // clear stale cache
+      loadData(host).then(() => invalidate());
+    },
+  },
+  fallback: false,
+  render: ({ data, fallback }) => {
+    if (fallback) return html`<p>Error</p>`;
+    // ...
+  },
+});
+```
+
+The general rule: any boolean flag that gates render output and is set
+by an async `connect` flow should be explicitly reset at the top of
+`connect`. This is especially common with fetch-or-fallback patterns
+where the fallback path sets the flag to `true` on network errors.
+
 #### `router.backUrl()` Serializes All Parent Properties
 
 `router.backUrl()` encodes the parent view's property values into query
