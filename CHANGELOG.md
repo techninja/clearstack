@@ -10,16 +10,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Fix big routing bug with direct URI landing
 
-
 ## [0.3.27] - 2026-05-01
 
 - Upgrade logo
 
-
 ## [0.3.26] - 2026-04-23
 
 - Allow inherited platform scripts
-
 
 ## [0.3.25] - 2026-04-15
 
