@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.28] - 2026-05-18
+
+- Fix big routing bug with direct URI landing
+
+
 ## [0.3.27] - 2026-05-01
 
 - Upgrade logo
