@@ -35,6 +35,7 @@ async function interactive() {
         { name: 'Initialize a new project', value: 'init' },
         { name: 'Update spec docs + configs', value: 'update' },
         { name: 'Run spec compliance check', value: 'check' },
+        { name: 'Build OG metadata pages', value: 'build' },
       ],
     });
     await run(action);
@@ -59,8 +60,18 @@ async function run(action) {
     const subs = args.filter((a) => a !== cmd && !a.startsWith('-'));
     const { check } = await import('../lib/check.js');
     await check(process.cwd(), subs.join(' ') || undefined);
+  } else if (action === 'build') {
+    const sub = args.find((a) => a !== 'build' && !a.startsWith('-'));
+    const { buildOG } = await import('../lib/build-og.js');
+    if (!sub || sub === 'og') {
+      buildOG({
+        projectDir: process.cwd(),
+        outDir: flags.out || 'dist',
+        baseUrl: flags.url || '',
+      });
+    }
   } else {
-    console.log('Usage: clearstack [init|update|check] [-y]');
+    console.log('Usage: clearstack [init|update|check|build] [-y]');
   }
 }
 

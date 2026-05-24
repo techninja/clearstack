@@ -1,0 +1,14 @@
+{
+  "/": {
+    "title": "Clearstack | No-Build Web Components",
+    "description": "A no-build web component framework specification and proof-of-concept."
+  },
+  "/projects": {
+    "title": "Projects | Clearstack",
+    "description": "Manage your projects with zero-build web components."
+  },
+  "/tasks": {
+    "title": "Tasks | Clearstack",
+    "description": "Track tasks across all your projects."
+  }
+}
