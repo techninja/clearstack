@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Chore
 
-
 ## [0.3.31] - 2026-05-19
 
 - `clearstack update` now syncs clearstack-owned scripts (vendor-deps.js patch auto-applies)
@@ -19,11 +18,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Upgrade update to apply patches
 
-
 ## [0.3.29] - 2026-05-18
 
 - Spec fix
-
 
 ## [0.3.28] - 2026-05-18
 
