@@ -6,22 +6,24 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.36] - 2026-05-25
+
+- Update OG build with context
+
+
 ## [0.3.35] - 2026-05-25
 
 - Fix template build for OG
 
-
 ## [0.3.34] - 2026-05-25
 
 - Spec linting
-
 
 ## [0.3.33] - 2026-05-24
 
 - Linting
 - OG metadata support
 - Extend icons list
-
 
 ## [0.3.32] - 2026-05-19
 
