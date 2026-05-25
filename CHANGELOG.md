@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.34] - 2026-05-25
+
+- Spec linting
+
+
 ## [0.3.33] - 2026-05-24
 
 - Linting
