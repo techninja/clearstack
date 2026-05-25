@@ -25,9 +25,9 @@ still handles rendering for real users.
    ```yaml
    routes:
      /traits/:id:
-       title: "{trait.emoji} {trait.name} | {app.name}"
-       description: "{trait.description}"
-       image: "{trait.cover_image.url}"
+       title: '{trait.emoji} {trait.name} | {app.name}'
+       description: '{trait.description}'
+       image: '{trait.cover_image.url}'
        data: trait_manifest.traits
    ```
 
