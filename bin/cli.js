@@ -6,6 +6,8 @@
  *   clearstack init [-y] [--static|--fullstack] [--port 3000]
  *   clearstack update [--force]
  *   clearstack check [code|docs|imports|lint|lint es|format|types|audit|all]
+ *   clearstack report            → entropy/drift summary (runs full pipeline)
+ *   clearstack report --json      → structured JSON output for tooling
  *   clearstack                   → interactive menu
  */
 
@@ -35,6 +37,7 @@ async function interactive() {
         { name: 'Initialize a new project', value: 'init' },
         { name: 'Update spec docs + configs', value: 'update' },
         { name: 'Run spec compliance check', value: 'check' },
+        { name: 'Entropy report (drift summary)', value: 'report' },
         { name: 'Build OG metadata pages', value: 'build' },
       ],
     });
@@ -60,6 +63,9 @@ async function run(action) {
     const subs = args.filter((a) => a !== cmd && !a.startsWith('-'));
     const { check } = await import('../lib/check.js');
     await check(process.cwd(), subs.join(' ') || undefined);
+  } else if (action === 'report') {
+    const { report } = await import('../lib/report.js');
+    report(process.cwd(), { json: !!flags.json });
   } else if (action === 'build') {
     const sub = args.find((a) => a !== 'build' && !a.startsWith('-'));
     const { buildOG } = await import('../lib/build-og.js');

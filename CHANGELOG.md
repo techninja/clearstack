@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Better cloudflare named path indexes
 
-
 ## [0.3.36] - 2026-05-25
 
 - Update OG build with context
