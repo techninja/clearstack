@@ -33,6 +33,7 @@ context. Fix this with a project-level rules file:
 ```
 
 This file should state:
+
 - The 150-line limit and what to do at 120 lines
 - Decomposition patterns (what to extract when)
 - Code style enforcement (so the LLM writes compliant code from the start)
@@ -52,6 +53,7 @@ When a file passes ~120 lines during development:
 ```
 
 These comments serve two purposes:
+
 1. Signal to the current session where to split if the file goes over
 2. Signal to a future session exactly how to decompose without re-reading
 
@@ -64,6 +66,7 @@ npm run spec --watch
 ```
 
 Displays a compact status board:
+
 ```
   ✅ code (67 files)
   ✅ lint (44 files)
