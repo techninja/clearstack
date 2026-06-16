@@ -5,8 +5,8 @@
  * Usage:
  *   clearstack init [-y] [--static|--fullstack] [--port 3000]
  *   clearstack update [--force]
- *   clearstack check [code|docs|imports|lint|lint es|format|types|audit|all]
- *   clearstack report            → entropy/drift summary (runs full pipeline)
+ *   clearstack build [og|og-images|all] → generate OG pages and/or images
+ *   clearstack check [code|docs|imports|lint|format|types|audit|all]
  *   clearstack report --json      → structured JSON output for tooling
  *   clearstack                   → interactive menu
  */
@@ -38,7 +38,7 @@ async function interactive() {
         { name: 'Update spec docs + configs', value: 'update' },
         { name: 'Run spec compliance check', value: 'check' },
         { name: 'Entropy report (drift summary)', value: 'report' },
-        { name: 'Build OG metadata pages', value: 'build' },
+        { name: 'Build OG pages + images', value: 'build' },
       ],
     });
     await run(action);
@@ -68,13 +68,27 @@ async function run(action) {
     report(process.cwd(), { json: !!flags.json });
   } else if (action === 'build') {
     const sub = args.find((a) => a !== 'build' && !a.startsWith('-'));
-    const { buildOG } = await import('../lib/build-og.js');
-    if (!sub || sub === 'og') {
+    if (sub === 'og-images' || sub === 'images') {
+      const mod = await import('../lib/build-og-images.js');
+      const common = { projectDir: process.cwd(), outDir: flags.out || 'dist', logo: flags.logo || '', siteName: flags.site || '' };
+      if (flags.slug) await mod.buildOneOGImage({ ...common, slug: flags.slug });
+      else await mod.buildOGImages(common);
+    } else {
+      const { buildOG } = await import('../lib/build-og.js');
       buildOG({
         projectDir: process.cwd(),
         outDir: flags.out || 'dist',
         baseUrl: flags.url || '',
       });
+      if (sub === 'all') {
+        const { buildOGImages } = await import('../lib/build-og-images.js');
+        await buildOGImages({
+          projectDir: process.cwd(),
+          outDir: flags.out || 'dist',
+          logo: flags.logo || '',
+          siteName: flags.site || '',
+        });
+      }
     }
   } else {
     console.log('Usage: clearstack [init|update|check|build] [-y]');
