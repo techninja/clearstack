@@ -104,13 +104,13 @@ keyboard handlers, and large template literals.
 
 Extraction priority (most reusable → most specific):
 
-| What to extract | Where to put it | When |
-|----------------|-----------------|------|
-| Data loading/caching | `src/utils/{feature}Loader.js` | >20 lines of fetch/transform |
-| Keyboard/event handlers | `src/utils/{feature}Keys.js` | >10 lines of handler logic |
-| Repeated template fragments | `src/utils/{feature}Template.js` | Used in 2+ views |
-| Render sub-sections | `src/utils/{feature}Render.js` | Single view, but >30 lines |
-| Shared UI (header, breadcrumb) | `src/components/` | Used site-wide |
+| What to extract                | Where to put it                  | When                         |
+| ------------------------------ | -------------------------------- | ---------------------------- |
+| Data loading/caching           | `src/utils/{feature}Loader.js`   | >20 lines of fetch/transform |
+| Keyboard/event handlers        | `src/utils/{feature}Keys.js`     | >10 lines of handler logic   |
+| Repeated template fragments    | `src/utils/{feature}Template.js` | Used in 2+ views             |
+| Render sub-sections            | `src/utils/{feature}Render.js`   | Single view, but >30 lines   |
+| Shared UI (header, breadcrumb) | `src/components/`                | Used site-wide               |
 
 The goal isn't to have zero logic in view files — it's to keep each
 file answerable with "what does this do?" in one pass.

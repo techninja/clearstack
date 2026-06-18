@@ -40,13 +40,13 @@ Both are driven by the same `clearstack.routes.json` config and data sources.
 
 ### Fields
 
-| Field          | Required | Description                                             |
-| -------------- | -------- | ------------------------------------------------------- |
-| `title`        | yes      | Template string with `{path.to.data}` interpolation     |
-| `description`  | yes      | Template string for meta description                    |
-| `image`        | no       | Template string for og:image URL                        |
-| `data`         | no       | Data source — `filepath:jsonPath` (supports arrays/objects) |
-| `ogTemplate`   | no       | Template name → resolves to `src/og-templates/{name}.html`  |
+| Field         | Required | Description                                                 |
+| ------------- | -------- | ----------------------------------------------------------- |
+| `title`       | yes      | Template string with `{path.to.data}` interpolation         |
+| `description` | yes      | Template string for meta description                        |
+| `image`       | no       | Template string for og:image URL                            |
+| `data`        | no       | Data source — `filepath:jsonPath` (supports arrays/objects) |
+| `ogTemplate`  | no       | Template name → resolves to `src/og-templates/{name}.html`  |
 
 ### Data Sources
 
@@ -75,15 +75,15 @@ Templates are HTML files at `src/og-templates/` rendered by Playwright at
 
 ### Available Context Variables
 
-| Variable             | Source                              |
-| -------------------- | ----------------------------------- |
-| `{title}`            | Resolved + truncated route title    |
-| `{description}`      | Resolved + truncated description    |
-| `{image}`            | Resolved image URL                  |
-| `{emoji}`            | From item data                      |
-| `{bg}`, `{primary}`  | From project CSS tokens             |
-| `{variantsFormatted}`| Formatted number (K/M suffix)       |
-| All item fields      | Spread directly (e.g. `{name}`, `{pgs_count}`) |
+| Variable              | Source                                         |
+| --------------------- | ---------------------------------------------- |
+| `{title}`             | Resolved + truncated route title               |
+| `{description}`       | Resolved + truncated description               |
+| `{image}`             | Resolved image URL                             |
+| `{emoji}`             | From item data                                 |
+| `{bg}`, `{primary}`   | From project CSS tokens                        |
+| `{variantsFormatted}` | Formatted number (K/M suffix)                  |
+| All item fields       | Spread directly (e.g. `{name}`, `{pgs_count}`) |
 
 ## CLI Commands
 
@@ -103,13 +103,13 @@ clearstack build all --url=https://mysite.com --site=MySite --out=dist
 
 ### Flags
 
-| Flag       | Description                          |
-| ---------- | ------------------------------------ |
-| `--out`    | Output directory (default: `dist`)   |
-| `--url`    | Base URL for og:url tags             |
-| `--site`   | Site name for badge/branding         |
-| `--logo`   | Logo path or URL                     |
-| `--slug`   | Single item slug (fast iteration)    |
+| Flag     | Description                        |
+| -------- | ---------------------------------- |
+| `--out`  | Output directory (default: `dist`) |
+| `--url`  | Base URL for og:url tags           |
+| `--site` | Site name for badge/branding       |
+| `--logo` | Logo path or URL                   |
+| `--slug` | Single item slug (fast iteration)  |
 
 ## Requirements
 
