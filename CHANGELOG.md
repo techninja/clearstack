@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Update base template with error handling shapes
 
-
 ## [0.3.43] - 2026-06-18
 
 - More OG image build fixes found
