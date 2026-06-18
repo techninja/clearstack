@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.45] - 2026-06-18
+
+- Bugfix for types
+
+
 ## [0.3.44] - 2026-06-18
 
 - Update base template with error handling shapes
