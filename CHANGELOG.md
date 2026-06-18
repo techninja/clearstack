@@ -10,11 +10,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - More OG image build fixes found
 
-
 ## [0.3.42] - 2026-06-18
 
 - Fix test, keep without index
-
 
 ## [0.3.41] - 2026-06-18
 

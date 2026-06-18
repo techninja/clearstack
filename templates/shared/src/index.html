@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{name}}</title>
+    <!-- FOUC prevention — matches --color-bg in tokens.css -->
+    <style>html,body{background:#0f172a;color:#e2e8f0;margin:0}</style>
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/shared.css" />
@@ -27,7 +29,22 @@
     </script>
   </head>
   <body>
+    <noscript>
+      <div style="font-family:system-ui;padding:2rem;max-width:40rem;margin:4rem auto;text-align:center">
+        <h1>JavaScript required</h1>
+        <p>{{name}} requires JavaScript to run. Please enable it in your browser settings.</p>
+      </div>
+    </noscript>
     <app-router></app-router>
     <script type="module" src="/router/index.js"></script>
+    <script>
+      // Global error boundary — catches unhandled promise rejections and JS errors
+      window.addEventListener('unhandledrejection', (e) => {
+        console.error('[app] Unhandled rejection:', e.reason);
+      });
+      window.addEventListener('error', (e) => {
+        console.error('[app] Uncaught error:', e.message, e.filename, e.lineno);
+      });
+    </script>
   </body>
 </html>

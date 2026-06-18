@@ -68,7 +68,13 @@ async function run(action) {
     report(process.cwd(), { json: !!flags.json });
   } else if (action === 'build') {
     const sub = args.find((a) => a !== 'build' && !a.startsWith('-'));
-    if (sub === 'og-images' || sub === 'images') {
+    if (sub === 'sitemap') {
+      const { buildSitemap } = await import('../lib/build-sitemap.js');
+      buildSitemap({ projectDir: process.cwd(), outDir: flags.out || 'dist', baseUrl: flags.url || '' });
+    } else if (sub === 'modulepreload' || sub === 'preload') {
+      const { buildModulePreload } = await import('../lib/build-modulepreload.js');
+      buildModulePreload({ projectDir: process.cwd(), outDir: flags.out || 'dist' });
+    } else if (sub === 'og-images' || sub === 'images') {
       const mod = await import('../lib/build-og-images.js');
       const common = { projectDir: process.cwd(), outDir: flags.out || 'dist', logo: flags.logo || '', siteName: flags.site || '' };
       if (flags.slug) await mod.buildOneOGImage({ ...common, slug: flags.slug });
@@ -80,7 +86,11 @@ async function run(action) {
         outDir: flags.out || 'dist',
         baseUrl: flags.url || '',
       });
+      const { buildSitemap } = await import('../lib/build-sitemap.js');
+      buildSitemap({ projectDir: process.cwd(), outDir: flags.out || 'dist', baseUrl: flags.url || '' });
       if (sub === 'all') {
+        const { buildModulePreload } = await import('../lib/build-modulepreload.js');
+        buildModulePreload({ projectDir: process.cwd(), outDir: flags.out || 'dist' });
         const { buildOGImages } = await import('../lib/build-og-images.js');
         await buildOGImages({
           projectDir: process.cwd(),
