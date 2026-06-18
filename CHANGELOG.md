@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.40] - 2026-06-18
+
+- Add price input, local or remote URI locations
+
+
 ## [0.3.39] - 2026-06-16
 
 - Fix for ogImage map from generated image
