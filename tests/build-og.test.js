@@ -123,7 +123,7 @@ describe('build-og', () => {
     const result = buildOG({ projectDir: dir, outDir: 'dist', baseUrl: 'https://example.com' });
     assert.equal(result.pages, 2);
     assert.equal(result.routes, 2);
-    const aboutHtml = readFileSync(join(dir, 'dist/about/index.html'), 'utf-8');
+    const aboutHtml = readFileSync(join(dir, 'dist/about.html'), 'utf-8');
     assert.ok(aboutHtml.includes('About Us'));
     assert.ok(aboutHtml.includes('og:url'));
     assert.ok(aboutHtml.includes('https://example.com/about'));
@@ -150,7 +150,7 @@ describe('build-og', () => {
     }));
     const result = buildOG({ projectDir: dir, baseUrl: 'https://x.com' });
     assert.equal(result.pages, 2);
-    const braveHtml = readFileSync(join(dir, 'dist/traits/brave/index.html'), 'utf-8');
+    const braveHtml = readFileSync(join(dir, 'dist/traits/brave.html'), 'utf-8');
     assert.ok(braveHtml.includes('Brave Trait'));
     assert.ok(braveHtml.includes('Courage trait'));
     rmSync(dir, { recursive: true, force: true });

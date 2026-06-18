@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Fix broken test and templated spec fixes
 
-
 ## [0.3.40] - 2026-06-18
 
 - Add price input, local or remote URI locations
