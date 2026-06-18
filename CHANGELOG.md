@@ -11,12 +11,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Fix for ogImage map from generated image
 - Longer truncation limit
 
-
 ## [0.3.38] - 2026-06-16
 
 - New feature: Template based OG image building via browser Supports custom template and data injection, see app.asili.dev for a cool one.
 - New spec workflow, new `clearstack report` command plus JSON output for tracking expanding entropy in spec check ignored sites.
-
 
 ## [0.3.37] - 2026-05-27
 
