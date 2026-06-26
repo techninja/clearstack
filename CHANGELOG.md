@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Even more type fixers!
 
-
 ## [0.3.45] - 2026-06-18
 
 - Bugfix for types

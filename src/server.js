@@ -5,6 +5,7 @@
  */
 
 import express from 'express';
+import { watch } from 'node:fs';
 import { entityRouter } from './api/entities.js';
 import { eventsRouter } from './api/events.js';
 import { attachCanvasWS } from './api/canvas-ws.js';
@@ -18,6 +19,25 @@ app.use(express.json());
 // API (before static so /api routes don't hit the SPA fallback)
 app.use('/api', eventsRouter);
 app.use('/api', entityRouter);
+
+// Hot-reload SSE endpoint — broadcasts when any file in src/ changes
+/** @type {Set<import('node:http').ServerResponse>} */
+const reloadClients = new Set();
+
+app.get('/_reload', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    Connection: 'keep-alive',
+  });
+  res.write(': connected\n\n');
+  reloadClients.add(res);
+  req.on('close', () => reloadClients.delete(res));
+});
+
+watch('src', { recursive: true }, () => {
+  for (const res of reloadClients) res.write('event: reload\ndata: {}\n\n');
+});
 
 // Static: serve src/ as root — public/, styles/, components/ all resolve
 app.use(express.static('src'));

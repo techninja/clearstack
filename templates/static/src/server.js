@@ -4,9 +4,24 @@
  */
 
 import express from 'express';
+import { watch } from 'node:fs';
 
 /** @type {any} */
 const app = express();
+
+/** @type {Set<import('node:http').ServerResponse>} */
+const reloadClients = new Set();
+
+app.get('/_reload', (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });
+  res.write(': connected\n\n');
+  reloadClients.add(res);
+  req.on('close', () => reloadClients.delete(res));
+});
+
+watch('src', { recursive: true }, () => {
+  for (const res of reloadClients) res.write('event: reload\ndata: {}\n\n');
+});
 
 app.use(express.static('src'));
 

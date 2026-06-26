@@ -29,5 +29,15 @@
   <body>
     <app-router></app-router>
     <script type="module" src="/router/index.js"></script>
+    <script>
+      (function () {
+        const es = new EventSource('/_reload');
+        es.addEventListener('reload', () => location.reload());
+        es.onerror = () => {
+          es.close();
+          setTimeout(() => location.reload(), 500);
+        };
+      })();
+    </script>
   </body>
 </html>
