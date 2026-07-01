@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.48] - 2026-07-01
+
+- Spec cleanup
+- Improve module preload base
+
+
 ## [0.3.47] - 2026-06-26
 
 - Let's go autoreload!
