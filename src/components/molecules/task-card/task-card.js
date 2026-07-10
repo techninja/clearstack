@@ -5,6 +5,7 @@
  */
 
 import { html, define, dispatch } from 'hybrids';
+import { t } from '#utils/i18n.js';
 import { statusColor, priorityColor, statusTitle, priorityTitle } from '#utils/statusColors.js';
 import '#atoms/app-badge/app-badge.js';
 import '#atoms/app-icon/app-icon.js';
@@ -67,9 +68,13 @@ export default define({
         ${confirming
           ? html`
               <span class="task-card-confirm">
-                Sure?
-                <button class="btn btn-danger btn-xs" onclick="${confirmDelete}">Delete</button>
-                <button class="btn btn-secondary btn-xs" onclick="${cancelDelete}">Keep</button>
+                ${t('task.deleteConfirm')}
+                <button class="btn btn-danger btn-xs" onclick="${confirmDelete}">
+                  ${t('task.deleteConfirmYes')}
+                </button>
+                <button class="btn btn-secondary btn-xs" onclick="${cancelDelete}">
+                  ${t('task.deleteConfirmNo')}
+                </button>
               </span>
             `
           : html`

@@ -4,6 +4,7 @@
  */
 
 import { html, define, store } from 'hybrids';
+import { t } from '#utils/i18n.js';
 import ProjectModel from '#store/ProjectModel.js';
 import { statusColor, statusTitle } from '#utils/statusColors.js';
 import { formatDate } from '#utils/formatDate.js';
@@ -27,7 +28,7 @@ export default define({
     value: ({ project, projectId, editing }) => html`
       <div class="project-header">
         ${store.pending(project) && html`<div class="loading"><span class="spinner"></span></div>`}
-        ${store.error(project) && html`<div class="error-message">Failed to load project.</div>`}
+        ${store.error(project) && html`<div class="error-message">${t('project.loadError')}</div>`}
         ${store.ready(project) &&
         !editing &&
         html`
@@ -46,7 +47,7 @@ export default define({
                 host.editing = true;
               }}"
             >
-              Edit
+              ${t('project.edit')}
             </button>
           </div>
         `}

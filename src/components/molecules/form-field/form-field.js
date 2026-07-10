@@ -5,6 +5,7 @@
  */
 
 import { html, define, dispatch } from 'hybrids';
+import { t } from '#utils/i18n.js';
 
 /**
  * @typedef {Object} FormFieldHost
@@ -80,7 +81,7 @@ export default define({
           onchange="${handleInput}"
           disabled="${readOnly}"
         >
-          <option value="" disabled selected="${!value}">Select...</option>
+          <option value="" disabled selected="${!value}">${t('form.selectPlaceholder')}</option>
           ${opts.map(
             (o, i) =>
               html`<option value="${o}" selected="${o === value}">${titles[i] || o}</option>`,

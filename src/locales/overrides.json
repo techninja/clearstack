@@ -1,0 +1,18 @@
+{
+  "app.brand": "Tracker",
+  "app.title": "Clearstack POC",
+  "nav.backToProjects": "← Back to projects",
+  "project.allProjects": "All Projects",
+  "project.newProject": "+ New Project",
+  "project.loadError": "Failed to load project.",
+  "project.edit": "Edit",
+  "task.tasks": "Tasks",
+  "task.addTask": "+ Add Task",
+  "task.loadError": "Failed to load tasks.",
+  "task.empty": "No tasks yet.",
+  "task.deleteConfirm": "Sure?",
+  "task.deleteConfirmYes": "Delete",
+  "task.deleteConfirmNo": "Keep",
+  "form.selectPlaceholder": "Select…",
+  "form.unknownError": "Unknown error"
+}

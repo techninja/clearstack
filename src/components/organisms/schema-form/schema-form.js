@@ -5,6 +5,7 @@
  */
 
 import { html, define, dispatch } from 'hybrids';
+import { t } from '#utils/i18n.js';
 import { fetchSchema } from '#utils/fetchSchema.js';
 import { renderFormFields } from '#utils/renderFormFields.js';
 import { submitEntity } from '#utils/submitEntity.js';
@@ -64,7 +65,10 @@ export default define({
     value: (host) => {
       const { schema, layout, values, error, fieldErrors } = host;
       if (error) return html`<div class="error-message">${error}</div>`;
-      if (!schema) return html`<div class="loading"><span class="spinner"></span> Loading...</div>`;
+      if (!schema)
+        return html`<div class="loading">
+          <span class="spinner"></span> ${t('general.loading')}
+        </div>`;
       const actionsAlign = layout?.actions?.align || 'left';
 
       return html`
@@ -74,10 +78,10 @@ export default define({
           </div>
           <div class="schema-form-actions schema-form-actions-${actionsAlign}">
             <button type="submit" class="btn btn-success">
-              ${host.entityId ? 'Save' : 'Create'}
+              ${host.entityId ? t('general.save') : t('general.confirm')}
             </button>
             <button type="button" class="btn btn-secondary" onclick="${handleCancel}">
-              Cancel
+              ${t('general.cancel')}
             </button>
           </div>
         </form>
@@ -102,7 +106,7 @@ function handleSubmit(host, event) {
   submitEntity(host.endpoint, host.entityId, { ...defaults, ...host.values }).then((result) => {
     if (result.ok) return dispatch(host, 'submit', { detail: result.data, bubbles: true });
     if (result.fields) host.fieldErrors = result.fields;
-    else host.error = result.error || 'Unknown error';
+    else host.error = result.error || t('form.unknownError');
   });
 }
 

@@ -6,6 +6,7 @@
  */
 
 import { html } from 'hybrids';
+import { t } from '#utils/i18n.js';
 import '#atoms/theme-toggle/theme-toggle.js';
 
 /**
@@ -18,7 +19,7 @@ export function pageLayout(pageTitle, content) {
   return html`
     <div class="page-layout">
       <header class="page-layout-header">
-        <a class="page-layout-brand" href="/">Tracker</a>
+        <a class="page-layout-brand" href="/">${t('app.brand')}</a>
         <span class="page-layout-title">${pageTitle}</span>
         <theme-toggle></theme-toggle>
       </header>

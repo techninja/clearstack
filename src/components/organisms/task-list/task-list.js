@@ -4,6 +4,7 @@
  */
 
 import { html, define, store } from 'hybrids';
+import { t } from '#utils/i18n.js';
 import TaskModel from '#store/TaskModel.js';
 import { reorderTasks } from '#utils/reorderTasks.js';
 import { onDragStart, onDragOver, onDragEnd, resolveDrop } from '#utils/dragReorder.js';
@@ -65,16 +66,16 @@ export default define({
       >
         ${
           /** @type {any} */ (store).pending(tasks) &&
-          html` <div class="loading"><span class="spinner"></span> Loading tasks...</div>`
+          html` <div class="loading"><span class="spinner"></span> ${t('general.loading')}</div>`
         }
         ${
           /** @type {any} */ (store).error(tasks) &&
-          html` <div class="error-message">Failed to load tasks.</div>`
+          html` <div class="error-message">${t('task.loadError')}</div>`
         }
         ${
           /** @type {any} */ (store).ready(tasks) &&
           tasks.length === 0 &&
-          html` <p class="task-list-empty">No tasks yet.</p>`
+          html` <p class="task-list-empty">${t('task.empty')}</p>`
         }
         ${
           /** @type {any} */ (store).ready(tasks) &&

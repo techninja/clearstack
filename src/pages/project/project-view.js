@@ -5,6 +5,7 @@
  */
 
 import { html, define, store, router } from 'hybrids';
+import { t } from '#utils/i18n.js';
 import TaskModel from '#store/TaskModel.js';
 import { pageLayout } from '#templates/page-layout/page-layout.js';
 import '#organisms/project-header/project-header.js';
@@ -38,18 +39,20 @@ export default define({
   render: {
     value: ({ projectId, addingTask }) =>
       pageLayout(
-        'Project',
+        t('task.tasks'),
         html`
           <div class="project-view">
             <div class="project-view-nav">
-              <a href="${router.backUrl()}">← Back to projects</a>
+              <a href="${router.backUrl()}">${t('nav.backToProjects')}</a>
             </div>
             <project-header project-id="${projectId}"></project-header>
             <project-canvas project-id="${projectId}"></project-canvas>
             <div class="project-view-tasks">
               <div class="project-view-tasks-header">
-                <h3>Tasks</h3>
-                <button class="btn btn-primary" onclick="${toggleAddTask}">+ Add Task</button>
+                <h3>${t('task.tasks')}</h3>
+                <button class="btn btn-primary" onclick="${toggleAddTask}">
+                  ${t('task.addTask')}
+                </button>
               </div>
               ${addingTask &&
               html`

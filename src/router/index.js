@@ -5,6 +5,7 @@
  */
 
 import { html, define, router } from 'hybrids';
+import { loadLocale } from '#utils/i18n.js';
 import { connectRealtime } from '#utils/realtimeSync.js';
 import ProjectModel from '#store/ProjectModel.js';
 import TaskModel from '#store/TaskModel.js';
@@ -13,6 +14,7 @@ import HomeView from '#pages/home/home-view.js';
 /**
  * @typedef {Object} AppRouterHost
  * @property {HTMLElement[]} stack - Router view stack
+ * @property {undefined} i18n - Locale loader (managed by connect)
  * @property {undefined} realtime - SSE connection (managed by connect)
  */
 
@@ -20,6 +22,12 @@ import HomeView from '#pages/home/home-view.js';
 export default define({
   tag: 'app-router',
   stack: router(HomeView, { url: '/' }),
+  i18n: {
+    value: undefined,
+    connect() {
+      loadLocale(navigator.language);
+    },
+  },
   realtime: {
     value: undefined,
     connect(_host) {

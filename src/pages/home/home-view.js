@@ -5,6 +5,7 @@
  */
 
 import { html, define, store, router } from 'hybrids';
+import { t } from '#utils/i18n.js';
 import ProjectModel from '#store/ProjectModel.js';
 import { pageLayout } from '#templates/page-layout/page-layout.js';
 import '#molecules/project-card/project-card.js';
@@ -37,12 +38,14 @@ export default define({
   render: {
     value: ({ projects, creating }) =>
       pageLayout(
-        'Projects',
+        t('project.allProjects'),
         html`
           <div class="home-view">
             <div class="home-view-header">
-              <h2>All Projects</h2>
-              <button class="btn btn-primary" onclick="${toggleCreate}">+ New Project</button>
+              <h2>${t('project.allProjects')}</h2>
+              <button class="btn btn-primary" onclick="${toggleCreate}">
+                ${t('project.newProject')}
+              </button>
             </div>
             ${creating &&
             html`
@@ -54,11 +57,13 @@ export default define({
             `}
             ${
               /** @type {any} */ (store).pending(projects) &&
-              html` <div class="loading"><span class="spinner"></span> Loading...</div> `
+              html`
+                <div class="loading"><span class="spinner"></span> ${t('general.loading')}</div>
+              `
             }
             ${
               /** @type {any} */ (store).error(projects) &&
-              html` <div class="error-message">Failed to load projects.</div> `
+              html` <div class="error-message">${t('project.loadError')}</div> `
             }
             ${
               /** @type {any} */ (store).ready(projects) &&
