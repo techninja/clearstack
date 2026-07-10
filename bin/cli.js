@@ -62,7 +62,7 @@ async function run(action) {
   } else if (action === 'check') {
     const subs = args.filter((a) => a !== cmd && !a.startsWith('-'));
     const { check } = await import('../lib/check.js');
-    await check(process.cwd(), subs.join(' ') || undefined);
+    await check(process.cwd(), subs.join(' ') || undefined, { verbose: !!flags.verbose });
   } else if (action === 'report') {
     const { report } = await import('../lib/report.js');
     report(process.cwd(), { json: !!flags.json });
