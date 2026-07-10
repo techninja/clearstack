@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-10
+
+- Translate base example app
+- Add basic i18n (backported from StatiCart)
+
+
 ## [0.3.49] - 2026-07-01
 
 - This isn't getting messy SHHH
