@@ -6,6 +6,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.4] - 2026-07-12
+
+- Spec updates
+- Battle harden i18n rules based on Asili localization
+- Spec Extensions: The solve for whatever your app is built with
+
+
 ## [0.4.3] - 2026-07-10
 
 - I18n improvements from Asili
