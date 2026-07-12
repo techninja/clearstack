@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - I18n improvements from Asili
 
-
 ## [0.4.1] - 2026-07-10
 
 - Add i18n non-required spec check for status

@@ -12,6 +12,10 @@
     "templates/",
     "docs/"
   ],
+  "exports": {
+    ".": "./lib/check.js",
+    "./lib/*": "./lib/*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/techninja/clearstack.git"

@@ -21,7 +21,7 @@ if (scope) {
 /** Show interactive menu, then run the selected check. */
 async function interactive(dir) {
   const cfg = loadConfig(dir);
-  const checks = buildChecks(dir, cfg, buildCmds(dir));
+  const checks = await buildChecks(dir, cfg, buildCmds(dir));
   try {
     const { select } = await import('@inquirer/prompts');
     const action = await select({
