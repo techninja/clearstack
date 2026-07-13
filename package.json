@@ -1,6 +1,6 @@
 {
   "name": "@techninja/clearstack",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "type": "module",
   "description": "A no-build web component framework specification — scaffold, validate, and evolve spec-compliant projects",
   "bin": {
