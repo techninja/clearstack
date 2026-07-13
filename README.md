@@ -18,8 +18,10 @@ This entire repository — the specification, the file structure, every componen
 npm install -D @techninja/clearstack
 npx clearstack init       # scaffold a spec-compliant project
 npm install
-npm run dev               # http://localhost:3000
+npm run spec watch        # start dev server + spec dashboard
 ```
+
+`npm run spec watch` is the recommended way to develop. It spawns your dev server, watches all source files, and runs spec checks continuously — linting, formatting, type checking, line limits, and i18n coverage all in one terminal. Violations surface instantly with file locations and split suggestions ready to copy into your LLM session.
 
 ## What's In The Box
 
@@ -71,8 +73,9 @@ See [QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 ## Scripts
 
 ```bash
-npm start           # Start server
-npm run dev         # Start with --watch
+npm run spec watch  # Dev server + continuous spec dashboard (recommended)
+npm start           # Start server only
+npm run dev         # Start server with --watch
 npm test            # Node + browser tests
 npm run lint        # ESLint check
 npm run lint:fix    # ESLint auto-fix
@@ -83,6 +86,14 @@ npm run spec all    # Full spec check
 npm run spec code   # Check code files ≤150 lines
 npm run spec docs   # Check doc files ≤500 lines
 npm run spec update # Sync docs from upstream
+```
+
+### Watch dashboard keys
+
+```
+q / Ctrl-C   quit
+↑ ↓           scroll violations
+c            copy violations to clipboard (paste into LLM)
 ```
 
 ## License

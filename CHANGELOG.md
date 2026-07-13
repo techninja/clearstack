@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.5] - 2026-07-13
+
+- Initial working spec watcher
+
+
 ## [0.4.4] - 2026-07-12
 
 - Spec updates
