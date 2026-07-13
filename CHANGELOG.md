@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Initial working spec watcher
 
-
 ## [0.4.4] - 2026-07-12
 
 - Spec updates
