@@ -12,7 +12,10 @@ const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const [sub, subsub] = process.argv.slice(2);
 const scope = subsub ? `${sub} ${subsub}` : sub;
 
-if (scope) {
+if (sub === 'watch') {
+  const { startWatch } = await import('../lib/watch.js');
+  await startWatch(ROOT);
+} else if (scope) {
   await check(ROOT, scope);
 } else {
   await interactive(ROOT);

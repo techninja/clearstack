@@ -1,0 +1,17 @@
+{
+  "general.loading": "Cargando…",
+  "general.error": "Algo salió mal.",
+  "general.retry": "Intentar de nuevo",
+  "general.back": "Atrás",
+  "general.close": "Cerrar",
+  "general.save": "Guardar",
+  "general.cancel": "Cancelar",
+  "general.confirm": "Confirmar",
+  "general.noResults": "No se encontraron resultados.",
+  "nav.home": "Inicio",
+  "error.notFound": "Página no encontrada.",
+  "error.offline": "Parece que estás sin conexión.",
+  "app.brand": "Rastreador",
+  "task.tasks": "Tareas",
+  "task.addTask": "+ Añadir tarea"
+}

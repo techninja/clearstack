@@ -54,7 +54,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@inquirer/prompts": "^8.3.2"
+    "@inquirer/prompts": "^8.3.2",
+    "blessed": "^0.1.81"
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",

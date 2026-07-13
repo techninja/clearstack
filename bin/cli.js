@@ -6,7 +6,7 @@
  *   clearstack init [-y] [--static|--fullstack] [--port 3000]
  *   clearstack update [--force]
  *   clearstack build [og|og-images|all] → generate OG pages and/or images
- *   clearstack check [code|docs|imports|lint|format|types|audit|all]
+ *   clearstack check [code|docs|imports|lint|format|types|audit|all|watch]
  *   clearstack report --json      → structured JSON output for tooling
  *   clearstack                   → interactive menu
  */
@@ -61,8 +61,13 @@ async function run(action) {
     await update(PKG_ROOT, { force: !!flags.force });
   } else if (action === 'check') {
     const subs = args.filter((a) => a !== cmd && !a.startsWith('-'));
-    const { check } = await import('../lib/check.js');
-    await check(process.cwd(), subs.join(' ') || undefined, { verbose: !!flags.verbose });
+    if (subs[0] === 'watch') {
+      const { startWatch } = await import('../lib/watch.js');
+      await startWatch(process.cwd());
+    } else {
+      const { check } = await import('../lib/check.js');
+      await check(process.cwd(), subs.join(' ') || undefined, { verbose: !!flags.verbose });
+    }
   } else if (action === 'report') {
     const { report } = await import('../lib/report.js');
     report(process.cwd(), { json: !!flags.json });
