@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.7] - 2026-07-16
+
+- Update package-lock.json
+- Watch improvements
+
+
 ## [0.4.6] - 2026-07-13
 
 - Show prettier warning details, allow fixing
