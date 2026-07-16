@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.10] - 2026-07-16
+
+- Don't watch trigger fix watch, ya know?
+- Step around tests in CI build for now
+
+
 ## [0.4.9] - 2026-07-16
 
 - More timeout on slow watch
