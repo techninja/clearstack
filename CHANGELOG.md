@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - More timeout on slow watch
 
-
 ## [0.4.8] - 2026-07-16
 
 - Spec watch refactor for spec 👓
