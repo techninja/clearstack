@@ -10,11 +10,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - feat(spec-scan): array exclude/include in checkFileLines, ignore option in checkImports
 
-
 ## [0.4.12] - 2026-07-16
 
 - Extend spec passthrough for filtering
-
 
 ## [0.4.11] - 2026-07-16
 
