@@ -6,10 +6,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.15] - 2026-07-25
+
+- Initial release
+
+
 ## [0.4.14] - 2026-07-18
 
 - Extend watch in projects with a watch widget/key command
-
 
 ## [0.4.13] - 2026-07-18
 

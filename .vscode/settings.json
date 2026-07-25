@@ -9,5 +9,6 @@
     "titleBar.activeForeground": "#c6f2f1",
     "titleBar.inactiveBackground": "#042a52",
     "titleBar.inactiveForeground": "#4a8ab5"
-  }
+  },
+  "snyk.advanced.autoSelectOrganization": true
 }
