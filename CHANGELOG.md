@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Allow cancel and advanced watch runner for DB migration management
 
-
 ## [0.4.15] - 2026-07-25
 
 - Initial release
