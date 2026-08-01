@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.17] - 2026-08-01
+
+- Update docs for better rewrite and metadata
+
+
 ## [0.4.16] - 2026-07-25
 
 - Allow cancel and advanced watch runner for DB migration management

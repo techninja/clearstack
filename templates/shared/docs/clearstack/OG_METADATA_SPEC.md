@@ -24,14 +24,14 @@ Both are driven by the same `clearstack.routes.json` config and data sources.
   "/trait/:slug": {
     "title": "{slug.name}",
     "description": "{slug.description}",
-    "image": "{slug.cover_image.url}",
-    "data": "src/data/trait_manifest.json:traits",
+    "image": "{slug.image}",
+    "data": "data/traits-og.json",
     "ogTemplate": "trait"
   },
   "/shop/product/:sku": {
     "title": "{sku.name} | {store.name}",
     "description": "{sku.description}",
-    "image": "{store.url}{sku.images.0}",
+    "image": "{sku.images.0}",
     "data": "src/data/products.json",
     "ogTemplate": "product"
   }
@@ -110,6 +110,53 @@ clearstack build all --url=https://mysite.com --site=MySite --out=dist
 | `--site` | Site name for badge/branding       |
 | `--logo` | Logo path or URL                   |
 | `--slug` | Single item slug (fast iteration)  |
+
+## Cloudflare Pages Routing
+
+Cloudflare Pages evaluates `_redirects` **before** checking the filesystem.
+The standard SPA catch-all `/* /index.html 200` will intercept all pre-rendered
+pages before they can be served. Since CF Pages serves `.html` files natively
+for extensionless URLs when a matching file exists on the filesystem, no extra
+rewrite rules are needed — just ensure the catch-all is the **only** rule and
+that it comes after any explicit redirects:
+
+```
+/old-path /new-path 301
+/* /index.html 200
+```
+
+The pre-rendered files (`shop/product/SM-TEE.html`) will be served directly by
+CF Pages' static file layer before the `_redirects` rules are evaluated.
+
+## Canonical Tags
+
+Inject `<link rel="canonical">` into every pre-rendered page so Google
+deduplicates the static HTML shell from the SPA view at the same URL. Do this
+as a post-processing step in `build.js` after `buildOG` runs:
+
+```js
+import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+function injectCanonicals(distDir, baseUrl) {
+  const prefixes = ['shop/product', 'trait', 'gene'];
+  for (const prefix of prefixes) {
+    const dir = resolve(distDir, prefix);
+    if (!existsSync(dir)) continue;
+    for (const file of readdirSync(dir)) {
+      if (!file.endsWith('.html')) continue;
+      const slug = file.slice(0, -5);
+      const url = `${baseUrl}/${prefix}/${slug}`;
+      const filePath = resolve(dir, file);
+      let html = readFileSync(filePath, 'utf-8');
+      if (!html.includes('rel="canonical"')) {
+        html = html.replace('</head>', `  <link rel="canonical" href="${url}" />\n  </head>`);
+        writeFileSync(filePath, html);
+      }
+    }
+  }
+}
+```
 
 ## Requirements
 
