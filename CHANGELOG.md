@@ -10,11 +10,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Sync docs from package
 
-
 ## [0.4.19] - 2026-08-06
 
 - Initial release
-
 
 ## [0.4.18] - 2026-08-06
 
