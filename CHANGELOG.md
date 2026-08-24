@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Missed some spots for global ignore inclusion
 
-
 ## [0.4.21] - 2026-08-10
 
 - Inherit ignore for watch
