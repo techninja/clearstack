@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.23] - 2026-08-24
+
+- More spec ignore inheritance cleanup
+
+
 ## [0.4.22] - 2026-08-24
 
 - Missed some spots for global ignore inclusion
