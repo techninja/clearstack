@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.25] - 2026-08-24
+
+- Ignore docs and ignore changelog
+
+
 ## [0.4.24] - 2026-08-24
 
 - Got it for sure this time
