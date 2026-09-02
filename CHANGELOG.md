@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.26] - 2026-09-02
+
+- Allow spec extension cmd running
+
+
 ## [0.4.25] - 2026-08-24
 
 - Ignore docs and ignore changelog
