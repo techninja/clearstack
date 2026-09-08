@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.29] - 2026-09-08
+
+- Add line filter option for spec util
+
+
 ## [0.4.28] - 2026-09-03
 
 - Initial release
