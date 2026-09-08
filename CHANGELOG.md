@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Add line filter option for spec util
 
-
 ## [0.4.28] - 2026-09-03
 
 - Initial release
