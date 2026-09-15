@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Extend default parsing to allow for ruff json output
 
-
 ## [0.4.30] - 2026-09-08
 
 - Use spawn for streamable exec

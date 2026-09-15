@@ -1,6 +1,7 @@
 import prettier from 'eslint-config-prettier';
 import jsdoc from 'eslint-plugin-jsdoc';
 import unusedImports from 'eslint-plugin-unused-imports';
+import globals from 'globals';
 
 export default [
   {
@@ -10,23 +11,9 @@ export default [
       ecmaVersion: 2024,
       sourceType: 'module',
       globals: {
-        console: 'readonly',
-        document: 'readonly',
-        window: 'readonly',
-        HTMLElement: 'readonly',
-        CustomEvent: 'readonly',
-        EventSource: 'readonly',
-        localStorage: 'readonly',
-        fetch: 'readonly',
-        setTimeout: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly',
-        requestAnimationFrame: 'readonly',
-        process: 'readonly',
-        URL: 'readonly',
-        URLSearchParams: 'readonly',
-        Event: 'readonly',
-        globalThis: 'readonly',
+        ...globals.browser,
+        ...globals.es2021,
+        ...globals.node,
       },
     },
     rules: {
@@ -35,6 +22,7 @@ export default [
       'no-var': 'error',
       'prefer-const': 'error',
       eqeqeq: ['error', 'always'],
+      'no-undef': 'error',
       'no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
@@ -55,9 +43,15 @@ export default [
     },
   },
   {
-    files: ['**/*.test.js'],
+    files: ['**/*.test.js', 'tests/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.mocha,
+      },
+    },
     rules: {
       'jsdoc/require-jsdoc': 'off',
+      'no-undef': 'off',
       'no-unused-vars': 'off',
       'unused-imports/no-unused-vars': 'off',
     },

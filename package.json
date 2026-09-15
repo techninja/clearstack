@@ -56,7 +56,8 @@
   "license": "MIT",
   "dependencies": {
     "@inquirer/prompts": "^8.3.2",
-    "blessed": "^0.1.81"
+    "blessed": "^0.1.81",
+    "globals": "^17.12.0"
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
@@ -68,6 +69,7 @@
     "eslint-plugin-jsdoc": "^62.8.1",
     "eslint-plugin-unused-imports": "^4.4.1",
     "express": "^5.2.1",
+    "globals": "^17.12.0",
     "hybrids": "^9.1.22",
     "lucide-static": "^1.7.0",
     "markdownlint-cli2": "^0.23.2",
