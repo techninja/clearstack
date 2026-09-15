@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.32] - 2026-09-15
+
+- Beef up the undefined protection and add globals
+
+
 ## [0.4.31] - 2026-09-08
 
 - Extend default parsing to allow for ruff json output
