@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.33] - 2026-09-16
+
+- Improve watch check list length
+
+
 ## [0.4.32] - 2026-09-15
 
 - Beef up the undefined protection and add globals
