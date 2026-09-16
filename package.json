@@ -54,6 +54,9 @@
     "hybrids"
   ],
   "license": "MIT",
+  "overrides": {
+    "smol-toml": "^1.8.0"
+  },
   "dependencies": {
     "@inquirer/prompts": "^8.3.2",
     "blessed": "^0.1.81",
@@ -62,7 +65,7 @@
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
     "@types/ws": "^8.18.1",
-    "@web/test-runner": "^0.20.0",
+    "@web/test-runner": "^1.0.0",
     "@web/test-runner-playwright": "^0.11.0",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
