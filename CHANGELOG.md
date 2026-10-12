@@ -10,11 +10,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Update deps for security
 
-
 ## [0.4.34] - 2026-09-16
 
 - Even better watch UI formatting for long log lines
-
 
 ## [0.4.33] - 2026-09-16
 
