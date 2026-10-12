@@ -6,6 +6,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.36] - 2026-10-12
+
+- chore: tighten api for more complete spec results
+
+
 ## [0.4.35] - 2026-09-16
 
 - Update deps for security
