@@ -6,10 +6,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.39] - 2026-10-16
+
+- chore: fix full env merge list
+
+
 ## [0.4.38] - 2026-10-16
 
 - feat: env injection (as it should have been!)
-
 
 ## [0.4.36] - 2026-10-12
 
