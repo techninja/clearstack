@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - chore: tighten api for more complete spec results
 
-
 ## [0.4.35] - 2026-09-16
 
 - Update deps for security
