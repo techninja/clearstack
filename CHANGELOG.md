@@ -10,7 +10,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - bugfix: tsc line issues for typing
 
-
 ## [0.4.39] - 2026-10-16
 
 - chore: fix full env merge list
